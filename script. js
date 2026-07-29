@@ -1,1 +1,297 @@
+// ========================================
+// Star Wars Galaxy Creations - script.js
+// ========================================
 
+// ========== PRODUCTS DATA ==========
+const products = [
+  {
+    id: 1,
+    name: "Galaxy Cutting Board",
+    price: 89,
+    category: "boards",
+    description: "Handcrafted wood board with Star Wars-inspired engraved design",
+    emoji: "🪵"
+  },
+  {
+    id: 2,
+    name: "Lightsaber Edge Board",
+    price: 95,
+    category: "boards",
+    description: "Premium cutting board featuring lightsaber-style detailing",
+    emoji: "⚔️"
+  },
+  {
+    id: 3,
+    name: "Rebel Alliance Jacket",
+    price: 149,
+    category: "jackets",
+    description: "Stylish custom jacket with subtle galactic embroidery",
+    emoji: "🧥"
+  },
+  {
+    id: 4,
+    name: "Imperial Style Jacket",
+    price: 159,
+    category: "jackets",
+    description: "Bold custom jacket inspired by the dark side aesthetic",
+    emoji: "🖤"
+  },
+  {
+    id: 5,
+    name: "Holocron Desk Light",
+    price: 79,
+    category: "lights",
+    description: "Unique ambient light with soft glowing effect",
+    emoji: "💡"
+  },
+  {
+    id: 6,
+    name: "Nebula Lamp",
+    price: 85,
+    category: "lights",
+    description: "Atmospheric light inspired by deep space",
+    emoji: "🌌"
+  },
+  {
+    id: 7,
+    name: "Galactic Wreath",
+    price: 65,
+    category: "wreaths",
+    description: "Handcrafted decorative wreath with space-themed elements",
+    emoji: "✨"
+  },
+  {
+    id: 8,
+    name: "Starfield Wreath",
+    price: 72,
+    category: "wreaths",
+    description: "Elegant wreath featuring star and constellation details",
+    emoji: "🌟"
+  }
+];
+
+// ========== CART STATE ==========
+let cart = JSON.parse(localStorage.getItem("swgc_cart")) || [];
+
+// ========== SAVE & UPDATE UI ==========
+function saveCart() {
+  localStorage.setItem("swgc_cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const count = cart.reduce((sum, item) => sum + item.qty, 0);
+  const badges = document.querySelectorAll("#cartCount");
+  badges.forEach(badge => {
+    badge.textContent = count;
+  });
+}
+
+// ========== ADD TO CART ==========
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+  saveCart();
+
+  // Visual feedback on button
+  if (event && event.target) {
+    const btn = event.target;
+    const original = btn.textContent;
+    btn.textContent = "Added ✓";
+    btn.style.background = "var(--gold)";
+    btn.style.color = "var(--bg-dark)";
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = "";
+      btn.style.color = "";
+    }, 900);
+  }
+}
+
+// ========== CHANGE QUANTITY ==========
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+
+  item.qty += delta;
+  if (item.qty <= 0) {
+    cart = cart.filter(i => i.id !== id);
+  }
+  saveCart();
+  renderCartPage();
+}
+
+// ========== REMOVE ITEM ==========
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart();
+  renderCartPage();
+}
+
+// ========== RENDER PRODUCTS (Shop page) ==========
+function renderProducts(filter = "all") {
+  const grid = document.getElementById("productGrid");
+  if (!grid) return;
+
+  const filtered = filter === "all"
+    ? products
+    : products.filter(p => p.category === filter);
+
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card">
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-body">
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div class="product-footer">
+          <span class="price">$${p.price}</span>
+          <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ========== RENDER FEATURED (Home page) ==========
+function renderFeatured() {
+  const grid = document.getElementById("featuredGrid");
+  if (!grid) return;
+
+  // Show first 4 products as featured
+  const featured = products.slice(0, 4);
+
+  grid.innerHTML = featured.map(p => `
+    <div class="product-card">
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-body">
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div class="product-footer">
+          <span class="price">$${p.price}</span>
+          <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ========== RENDER CART PAGE ==========
+function renderCartPage() {
+  const container = document.getElementById("cartContent");
+  if (!container) return;
+
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="cart-empty-msg">
+        <p>Your cart is empty</p>
+        <a href="products.html" class="btn" style="margin-top:1.5rem;">Continue Shopping</a>
+      </div>
+    `;
+    return;
+  }
+
+  let rows = cart.map(item => `
+    <tr>
+      <td>
+        <strong>${item.emoji} ${item.name}</strong>
+      </td>
+      <td>$${item.price}</td>
+      <td>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+      </td>
+      <td>$${item.price * item.qty}</td>
+      <td>
+        <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
+      </td>
+    </tr>
+  `).join("");
+
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+
+  container.innerHTML = `
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+
+    <div class="cart-summary">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span>$${total}</span>
+      </div>
+      <button class="checkout-btn" onclick="checkoutWhatsApp()">
+        💬 Checkout via WhatsApp
+      </button>
+    </div>
+  `;
+}
+
+// ========== WHATSAPP CHECKOUT ==========
+function checkoutWhatsApp() {
+  if (cart.length === 0) return;
+
+  let message = "Hello! I would like to place an order from *Star Wars Galaxy Creations*:%0A%0A";
+
+  cart.forEach(item => {
+    message += `• ${item.name} x${item.qty} — $${item.price * item.qty}%0A`;
+  });
+
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  message += `%0A*Total: $${total}*%0A%0APreferred payment method: (PayPal / Chime / Bitcoin / Bank Transfer / Card / Zelle / Gift Card)%0A%0AThank you!`;
+
+  window.open(`https://wa.me/15162884763?text=${message}`, "_blank");
+}
+
+// ========== MOBILE MENU ==========
+function initMobileMenu() {
+  const toggle = document.getElementById("menuToggle");
+  const nav = document.getElementById("mainNav");
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  }
+}
+
+// ========== CATEGORY TABS ==========
+function initCategoryTabs() {
+  const tabs = document.querySelectorAll(".tab-btn");
+  tabs.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabs.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderProducts(btn.dataset.category);
+    });
+  });
+}
+
+// ========== INIT ON PAGE LOAD ==========
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  initMobileMenu();
+  initCategoryTabs();
+  renderProducts();      // for products.html
+  renderFeatured();      // for index.html
+  renderCartPage();      // for cart.html
+});
