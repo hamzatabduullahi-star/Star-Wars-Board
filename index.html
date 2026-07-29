@@ -5,15 +5,245 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Star Wars Galaxy Creations | Handcrafted Galactic Products</title>
   <meta name="description" content="Handcrafted Star Wars-inspired cutting boards, jackets, lights, and wreaths for fans and collectors.">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --bg-dark: #0B0C10;
+      --bg-panel: #1A1A2E;
+      --bg-card: #16213E;
+      --gold: #C9A227;
+      --gold-hover: #E8C547;
+      --silver: #C5C6C7;
+      --text: #EAEAEA;
+      --text-muted: #A0A0A0;
+      --border: rgba(201, 162, 39, 0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 90px 40px, rgba(255,255,255,0.35), transparent);
+      background-size: 200px 100px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 12, 16, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--silver); font-weight: 400; }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover, nav a.active { color: var(--gold); }
+
+    .cart-btn {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .cart-count {
+      background: var(--gold);
+      color: var(--bg-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    .hero {
+      padding: 5rem 0 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--bg-dark);
+      padding: 0.85rem 1.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      margin-left: 0.75rem;
+    }
+
+    .section { padding: 4rem 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.9rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .step {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      background: var(--gold);
+      color: var(--bg-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .disclaimer { margin-top: 0.4rem; font-size: 0.8rem; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--bg-panel);
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 1rem;
+      }
+      nav.open { display: flex; }
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 0.75rem;
+        display: inline-block;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="container header-inner">
       <a href="index.html" class="logo">Star Wars <span>Galaxy Creations</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <button class="menu-toggle" id="menuToggle">☰</button>
       <nav id="mainNav">
         <a href="index.html" class="active">Home</a>
         <a href="products.html">Shop</a>
@@ -26,7 +256,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <h1>Bring the <span>Galaxy</span> Home</h1>
@@ -36,8 +265,7 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="section" id="how">
+  <section class="section">
     <div class="container">
       <h2 class="section-title">How It Works</h2>
       <p class="section-subtitle">Simple ordering process</p>
@@ -66,21 +294,17 @@
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS TEASER -->
   <section class="section">
     <div class="container">
       <h2 class="section-title">Featured Products</h2>
       <p class="section-subtitle">A taste of the galaxy</p>
-      <div class="product-grid" id="featuredGrid">
-        <!-- Filled by script.js -->
-      </div>
+      <div class="product-grid" id="featuredGrid"></div>
       <div style="text-align:center; margin-top:2.5rem;">
         <a href="products.html" class="btn">View All Products</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <p>© 2026 Star Wars Galaxy Creations. Handcrafted with passion.</p>
