@@ -4,80 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Products - Star Wars Galaxy Creations</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* === PRODUCTS PAGE SPECIFIC STYLES === */
+        .products-page {
+            padding-top: 140px;
+            min-height: 70vh;
         }
 
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.6;
-            background-image: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0a 70%);
-            min-height: 100vh;
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        /* Header / Nav */
-        header {
-            background: rgba(0, 0, 0, 0.85);
-            border-bottom: 1px solid #c9a227;
-            padding: 18px 30px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .product-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.4s;
+            box-shadow: var(--shadow);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 45px rgba(212, 175, 55, 0.15);
+        }
+
+        .product-image {
+            height: 240px;
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(10px);
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 60px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo {
-            font-size: 1.5rem;
+        .product-image .product-emoji {
+            font-size: 80px;
+            opacity: 0.6;
+            transition: 0.4s;
+        }
+
+        .product-card:hover .product-emoji {
+            transform: scale(1.15);
+            opacity: 1;
+        }
+
+        .product-image .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: #000;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 700;
-            color: #ffffff;
+            text-transform: uppercase;
         }
 
-        .logo span {
-            color: #c9a227;
+        .product-info {
+            padding: 25px;
         }
 
-        nav a {
-            color: #cccccc;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            color: var(--white);
         }
 
-        nav a:hover {
-            color: #c9a227;
-        }
-
-        .cart {
-            color: #c9a227;
-            font-weight: 600;
-        }
-
-        /* Page Title */
-        .page-header {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
-
-        .page-header h1 {
-            font-size: 2.8rem;
+        .stars {
+            color: var(--gold);
             margin-bottom: 12px;
-            color: #ffffff;
+            font-size: 1rem;
+            letter-spacing: 2px;
         }
 
-        .page-header p {
-            color: #aaaaaa;
-            font-size: 1.15rem;
-            max-width: 600px;
-            margin: 0 auto;
+        .product-info .description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 20px var(--gold-glow);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--gold2);
+            transform: scale(1.02);
+            box-shadow: 0 0 40px var(--gold-glow);
+        }
+
+        .add-to-cart-btn i {
+            margin-right: 8px;
+        }
+
+        .add-to-cart-btn.custom-btn {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            box-shadow: none;
+        }
+
+        .add-to-cart-btn.custom-btn:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 30px var(--gold-glow);
         }
 
         /* Category Filters */
@@ -86,212 +153,271 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 50px;
-            padding: 0 20px;
+            margin-bottom: 20px;
         }
 
         .filter-btn {
-            background: transparent;
-            border: 1px solid #444;
-            color: #cccccc;
-            padding: 8px 20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 24px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
 
         .filter-btn:hover,
         .filter-btn.active {
-            background: #c9a227;
+            background: var(--gold);
             color: #000;
-            border-color: #c9a227;
-        }
-
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
-        }
-
-        .product-card {
-            background: linear-gradient(145deg, #141414, #1c1c1c);
-            border: 1px solid #2a2a2a;
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(201, 162, 39, 0.15);
-            border-color: #c9a227;
-        }
-
-        .product-image {
-            height: 220px;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-size: 0.9rem;
-            border-bottom: 1px solid #2a2a2a;
-        }
-
-        .product-info {
-            padding: 25px;
-        }
-
-        .product-info h3 {
-            font-size: 1.35rem;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .stars {
-            color: #c9a227;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-        }
-
-        .product-info p {
-            color: #999;
-            font-size: 0.95rem;
-            margin-bottom: 18px;
-            line-height: 1.5;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #c9a227;
-            margin-bottom: 18px;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background: #c9a227;
-            color: #000;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #e0b83a;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid #222;
-            color: #666;
-            font-size: 0.9rem;
+            border-color: var(--gold);
+            box-shadow: 0 0 25px var(--gold-glow);
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
-            .page-header h1 {
-                font-size: 2.2rem;
+        @media (max-width: 768px) {
+            .products-page {
+                padding-top: 120px;
             }
-            header {
-                flex-direction: column;
-                gap: 15px;
+            .product-image {
+                height: 180px;
             }
-            nav a {
-                margin: 0 10px;
+            .product-image .product-emoji {
+                font-size: 50px;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filters {
+                gap: 8px;
+            }
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- HEADER -->
     <header>
-        <div class="logo">Star Wars <span>Galaxy Creations</span></div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="#" class="cart">🛒 0</a>
-        </nav>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                Star Wars <span>Galaxy Creations</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="products.html" class="active">Products</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </nav>
+        </div>
     </header>
 
-    <section class="page-header">
-        <h1>Our Products</h1>
-        <p>Choose from our handcrafted Star Wars-inspired creations.</p>
+    <!-- PRODUCTS PAGE -->
+    <section class="section products-page">
+        <div class="container">
+            <h1 class="section-title">
+                <i class="fa-solid fa-cube" style="color: var(--gold);"></i>
+                Our Products
+            </h1>
+            <p class="section-subtitle">
+                Choose from our handcrafted Star Wars-inspired creations.
+            </p>
+
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="board">Cutting Boards</button>
+                <button class="filter-btn" data-filter="serving">Serving Boards</button>
+                <button class="filter-btn" data-filter="custom">Custom Orders</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="board">
+                    <div class="product-image">
+                        <span class="product-emoji">🪵</span>
+                        <span class="badge">Bestseller</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Galaxy Resin Board</h3>
+                        <div class="stars">★★★★★</div>
+                        <p class="description">Premium handcrafted walnut cutting board with beautiful blue epoxy resin.</p>
+                        <div class="price">£120</div>
+                        <button class="add-to-cart-btn" data-product-id="1">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="board">
+                    <div class="product-image">
+                        <span class="product-emoji">🛸</span>
+                        <span class="badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Death Star Board</h3>
+                        <div class="stars">★★★★★</div>
+                        <p class="description">Handmade hardwood serving board inspired by the Death Star.</p>
+                        <div class="price">£95</div>
+                        <button class="add-to-cart-btn" data-product-id="2">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="serving">
+                    <div class="product-image">
+                        <span class="product-emoji">⚡</span>
+                        <span class="badge">Premium</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Lightsaber Cutting Board</h3>
+                        <div class="stars">★★★★★</div>
+                        <p class="description">Elegant long board with lightsaber-inspired resin inlays.</p>
+                        <div class="price">£140</div>
+                        <button class="add-to-cart-btn" data-product-id="3">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="custom">
+                    <div class="product-image">
+                        <span class="product-emoji">🎨</span>
+                        <span class="badge">Custom</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Custom Order</h3>
+                        <div class="stars">★★★★★</div>
+                        <p class="description">Tell us your vision — we create unique Star Wars pieces just for you.</p>
+                        <div class="price">From £150</div>
+                        <button class="add-to-cart-btn custom-btn" data-product-id="4">
+                            <i class="fa-solid fa-pencil"></i> Request Custom
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card" data-category="board">
+                    <div class="product-image">
+                        <span class="product-emoji">🌌</span>
+                        <span class="badge">Limited</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Millennium Falcon Board</h3>
+                        <div class="stars">★★★★★</div>
+                        <p class="description">Unique shaped board inspired by the fastest ship in the galaxy.</p>
+                        <div class="price">£165</div>
+                        <button class="add-to-cart-btn" data-product-id="5">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card" data-category="serving">
+                    <div class="product-image">
+                        <span class="product-emoji">🌟</span>
+                        <span class="badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>Jedi Master Serving Set</h3>
+                        <div class="stars">★★★★★</div>
+                        <p class="description">Complete serving set with Jedi-inspired engravings.</p>
+                        <div class="price">£110</div>
+                        <button class="add-to-cart-btn" data-product-id="6">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <div class="filters">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Cutting Boards</button>
-        <button class="filter-btn">Serving Boards</button>
-        <button class="filter-btn">Custom Orders</button>
-    </div>
-
-    <div class="products-grid">
-        <!-- Product 1 -->
-        <div class="product-card">
-            <div class="product-image">[Product Image]</div>
-            <div class="product-info">
-                <h3>Galaxy Resin Board</h3>
-                <div class="stars">★★★★★</div>
-                <p>Premium handcrafted walnut cutting board with beautiful blue epoxy resin.</p>
-                <div class="price">£120</div>
-                <button class="add-to-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-card">
-            <div class="product-image">[Product Image]</div>
-            <div class="product-info">
-                <h3>Death Star Board</h3>
-                <div class="stars">★★★★★</div>
-                <p>Handmade hardwood serving board inspired by the Death Star.</p>
-                <div class="price">£95</div>
-                <button class="add-to-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card">
-            <div class="product-image">[Product Image]</div>
-            <div class="product-info">
-                <h3>Lightsaber Cutting Board</h3>
-                <div class="stars">★★★★★</div>
-                <p>Elegant long board with lightsaber-inspired resin inlays.</p>
-                <div class="price">£140</div>
-                <button class="add-to-cart">🛒 Add to Cart</button>
-            </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="product-card">
-            <div class="product-image">[Product Image]</div>
-            <div class="product-info">
-                <h3>Custom Order</h3>
-                <div class="stars">★★★★★</div>
-                <p>Tell us your vision — we create unique Star Wars pieces just for you.</p>
-                <div class="price">From £150</div>
-                <button class="add-to-cart">Request Custom</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- FOOTER -->
     <footer>
-        © 2026 Star Wars Galaxy Creations • Handcrafted with passion
+        <div class="container">
+            <h2>Star Wars Galaxy Creations</h2>
+            <p>Handcrafted Star Wars-inspired products made with premium craftsmanship.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top: 25px;">© 2026 Star Wars Galaxy Creations. All Rights Reserved.</p>
+        </div>
     </footer>
+
+    <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="script.js"></script>
+
+    <!-- PRODUCT FILTER SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Product Filter
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    productCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                            card.style.animation = 'fade 0.5s ease';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add to Cart buttons - connected to script.js
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productId = parseInt(this.dataset.productId);
+                    if (productId && typeof window.addToCart === 'function') {
+                        window.addToCart(productId);
+                    } else {
+                        // Fallback if script.js hasn't loaded
+                        alert('Product added to cart! (Update script.js for full functionality)');
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
