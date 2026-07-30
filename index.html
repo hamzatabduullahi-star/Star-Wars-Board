@@ -108,15 +108,6 @@
         .step h3{color:var(--white);margin-bottom:10px}
         .step p{color:var(--text-muted);font-size:14px;line-height:1.7}
 
-        /* FEATURED PRODUCTS */
-        .featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
-        .featured-card{background:var(--bg-card);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:.4s;box-shadow:var(--shadow)}
-        .featured-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 8px 35px rgba(212,175,55,0.12)}
-        .featured-card .image{height:200px;background:linear-gradient(145deg,#1a1a2e,#0f0f1a);display:flex;align-items:center;justify-content:center;font-size:60px;border-bottom:1px solid var(--border)}
-        .featured-card .info{padding:20px}
-        .featured-card .info h3{font-size:18px;color:var(--white);margin-bottom:5px}
-        .featured-card .info .price{color:var(--gold);font-size:20px;font-weight:700}
-
         footer{margin-top:80px;padding:60px 0;background:rgba(0,0,0,0.9);text-align:center;border-top:1px solid var(--border)}
         footer h2{color:var(--gold);margin-bottom:20px;text-shadow:0 0 30px var(--gold-glow)}
         footer p{color:var(--text-muted);margin-top:10px}
@@ -149,7 +140,6 @@
             .logo i{font-size:20px}
             .hero h1{font-size:28px}
             .steps-grid{grid-template-columns:1fr}
-            .featured-grid{grid-template-columns:1fr}
             .admin-access{bottom:8px;right:8px;padding:4px 8px 4px 6px}
             .admin-access .icon{font-size:11px}
             #topBtn{bottom:55px;width:45px;height:45px;font-size:18px}
@@ -224,40 +214,6 @@
         </div>
     </section>
 
-    <!-- FEATURED PRODUCTS -->
-    <section class="section" style="padding-top:0;">
-        <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <p class="section-subtitle">A taste of the galaxy</p>
-            <div class="featured-grid">
-                <div class="featured-card">
-                    <div class="image">🪵</div>
-                    <div class="info">
-                        <h3>Galaxy Resin Board</h3>
-                        <div class="price">$120+</div>
-                        <a href="products.html" class="btn" style="width:100%;text-align:center;padding:10px;font-size:14px;margin-top:10px;">View Product</a>
-                    </div>
-                </div>
-                <div class="featured-card">
-                    <div class="image">🌊</div>
-                    <div class="info">
-                        <h3>Death Star River</h3>
-                        <div class="price">$50+</div>
-                        <a href="products.html" class="btn" style="width:100%;text-align:center;padding:10px;font-size:14px;margin-top:10px;">View Product</a>
-                    </div>
-                </div>
-                <div class="featured-card">
-                    <div class="image">🚀</div>
-                    <div class="info">
-                        <h3>Falcon Escape</h3>
-                        <div class="price">$50+</div>
-                        <a href="products.html" class="btn" style="width:100%;text-align:center;padding:10px;font-size:14px;margin-top:10px;">View Product</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FOOTER -->
     <footer>
         <div class="container">
@@ -279,7 +235,6 @@
 
     <!-- ===================================
          ADMIN ACCESS - BOTTOM-RIGHT
-         Looks like a security badge
     =================================== -->
     <a href="admin.html" class="admin-access" aria-label="Admin Panel">
         <span class="icon">🔐</span>
