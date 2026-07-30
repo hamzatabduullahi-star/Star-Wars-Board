@@ -2,295 +2,497 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Star Wars Galaxy Creations</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* === CHECKOUT PAGE SPECIFIC STYLES === */
+        .checkout-page {
+            padding-top: 140px;
+            min-height: 70vh;
+        }
 
-<title>Checkout | Star Wars Galaxy Creations</title>
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-top: 30px;
+        }
 
-<link rel="stylesheet" href="style.css">
+        .checkout-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+        .checkout-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08);
+        }
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        .checkout-card h3 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        .checkout-card h3 i {
+            font-size: 1.2rem;
+        }
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        .checkout-card label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
 
+        .checkout-card input,
+        .checkout-card textarea,
+        .checkout-card select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--white);
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .checkout-card input:focus,
+        .checkout-card textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .checkout-card input::placeholder,
+        .checkout-card textarea::placeholder {
+            color: #666;
+        }
+
+        .checkout-card textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Radio buttons */
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            background: rgba(212, 175, 55, 0.06);
+            border-color: var(--border);
+        }
+
+        .payment-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .payment-option label {
+            margin: 0;
+            cursor: pointer;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .payment-option .icon {
+            font-size: 20px;
+            color: var(--gold);
+            opacity: 0.6;
+        }
+
+        /* Order items in checkout */
+        .checkout-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checkout-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkout-item .item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkout-item .item-info .name {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .checkout-item .item-info .qty {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .checkout-item .item-price {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .checkout-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            padding: 15px 0;
+        }
+
+        .checkout-total-row.grand-total {
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-top: 2px solid var(--gold);
+            margin-top: 10px;
+            padding-top: 20px;
+            color: var(--white);
+        }
+
+        .checkout-total-row.grand-total span:last-child {
+            color: var(--gold);
+        }
+
+        .empty-checkout-msg {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-checkout-msg i {
+            font-size: 50px;
+            color: var(--gold);
+            opacity: 0.3;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .checkout-page {
+                padding-top: 120px;
+            }
+            .checkout-card {
+                padding: 25px;
+            }
+            .checkout-card h3 {
+                font-size: 1.1rem;
+            }
+            .checkout-total-row.grand-total {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .checkout-card {
+                padding: 18px;
+            }
+            .checkout-card input,
+            .checkout-card textarea {
+                padding: 12px;
+                font-size: 14px;
+            }
+            .payment-option {
+                padding: 10px 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-
-<div class="container header-inner">
-
-<a href="index.html" class="logo">
-
-Star Wars <span>Galaxy Creations</span>
-
-</a>
-
-<nav>
-
-<a href="index.html">Home</a>
-
-<a href="products.html">Products</a>
-
-<a href="about.html">About</a>
-
-<a href="contact.html">Contact</a>
-
-<a href="cart.html" class="cart-btn">
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-<span class="cart-count">0</span>
-
-</a>
-
-</nav>
-
-</div>
-
-</header>
-
-<section class="section">
-
-<div class="container">
-
-<h1 class="section-title">
-
-Secure Checkout
-
-</h1>
-
-<p class="section-subtitle">
-
-Complete your order below.
-
-</p>
-
-<div class="checkout-grid">
-  <!-- Customer Information -->
-
-<div class="contact-card">
-
-<h3>Customer Information</h3>
-
-<form id="checkout-form">
-
-<label>Full Name</label>
-
-<input
-type="text"
-id="fullname"
-placeholder="Enter your full name"
-required>
-
-<label>Email Address</label>
-
-<input
-type="email"
-id="email"
-placeholder="Enter your email"
-required>
-
-<label>Phone Number</label>
-
-<input
-type="tel"
-id="phone"
-placeholder="Enter your phone number"
-required>
-
-<h3 style="margin-top:30px;">Shipping Address</h3>
-
-<label>Country</label>
-
-<input
-type="text"
-id="country"
-placeholder="Country"
-required>
-
-<label>State / Province</label>
-
-<input
-type="text"
-id="state"
-placeholder="State"
-required>
-
-<label>City</label>
-
-<input
-type="text"
-id="city"
-placeholder="City"
-required>
-
-<label>Street Address</label>
-
-<textarea
-id="address"
-placeholder="House number, street name..."
-rows="4"
-required></textarea>
-
-<label>ZIP / Postal Code</label>
-
-<input
-type="text"
-id="zip"
-placeholder="ZIP Code">
-
-</div>
-
-
-<!-- Order Summary -->
-
-<div class="contact-card">
-
-<h3>Your Order</h3>
-
-<div id="checkout-items">
-
-<p>Your selected products will appear here.</p>
-
-</div>
-
-<hr style="margin:20px 0;">
-
-<div class="cart-total-row">
-
-<span>Subtotal</span>
-
-<strong id="checkout-total">£0.00</strong>
-
-</div>
-
-<hr style="margin:20px 0;">
-
-<h3>Payment Method</h3>
-
-<label>
-
-<input type="radio" name="payment" value="PayPal" required>
-
-PayPal
-
-</label>
-
-<br><br>
-
-<label>
-
-<input type="radio" name="payment" value="Cash App">
-
-Cash App
-
-</label>
-
-<br><br>
-
-<label>
-
-<input type="radio" name="payment" value="Bank Transfer">
-
-Bank Transfer
-
-</label>
-
-<br><br>
-
-<label>
-
-<input type="radio" name="payment" value="Email Payment Instructions">
-
-Email Payment Instructions
-
-</label>
-
-<br><br><br>
-
-<button
-type="submit"
-class="checkout-btn">
-
-<i class="fa-solid fa-lock"></i>
-
-Place Order
-
-</button>
-
-<p style="margin-top:20px;color:#999;font-size:14px;">
-
-🔒 Secure Checkout • Your order details are protected.
-
-</p>
-
-</form>
-
-</div>
-</div>
-
-</div>
-
-</section>
-
-<!-- Footer -->
-
-<footer>
-
-<div class="container">
-
-<h2>Star Wars Galaxy Creations</h2>
-
-<p>
-
-Handcrafted Star Wars-inspired cutting boards made with premium craftsmanship.
-
-</p>
-
-<div class="social-icons">
-
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-
-<a href="#"><i class="fab fa-instagram"></i></a>
-
-<a href="#"><i class="fab fa-tiktok"></i></a>
-
-<a href="#"><i class="fab fa-whatsapp"></i></a>
-
-</div>
-
-<p style="margin-top:25px;">
-
-Email: info@starwarsgalaxycreations.com
-
-</p>
-
-<p>
-
-© 2026 Star Wars Galaxy Creations. All Rights Reserved.
-
-</p>
-
-</div>
-
-</footer>
-
-<button id="topBtn">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-<script src="script.js"></script>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                Star Wars <span>Galaxy Creations</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CHECKOUT PAGE -->
+    <section class="section checkout-page">
+        <div class="container">
+            <h1 class="section-title">
+                <i class="fa-solid fa-lock" style="color: var(--gold);"></i>
+                Secure Checkout
+            </h1>
+            <p class="section-subtitle">
+                Complete your order below.
+            </p>
+
+            <div class="checkout-grid">
+                <!-- Customer Information -->
+                <div class="checkout-card">
+                    <h3><i class="fa-solid fa-user"></i> Customer Information</h3>
+                    <form id="checkout-form">
+                        <label>Full Name</label>
+                        <input type="text" id="fullname" placeholder="Enter your full name" required>
+
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+                        <h3 style="margin-top:30px;"><i class="fa-solid fa-location-dot"></i> Shipping Address</h3>
+
+                        <label>Country</label>
+                        <input type="text" id="country" placeholder="Country" required>
+
+                        <label>State / Province</label>
+                        <input type="text" id="state" placeholder="State" required>
+
+                        <label>City</label>
+                        <input type="text" id="city" placeholder="City" required>
+
+                        <label>Street Address</label>
+                        <textarea id="address" placeholder="House number, street name..." rows="4" required></textarea>
+
+                        <label>ZIP / Postal Code</label>
+                        <input type="text" id="zip" placeholder="ZIP Code">
+
+                        <h3 style="margin-top:30px;"><i class="fa-solid fa-credit-card"></i> Payment Method</h3>
+
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="PayPal" id="paypal" required>
+                            <label for="paypal"><i class="fa-brands fa-paypal icon"></i> PayPal</label>
+                        </div>
+
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="Cash App" id="cashapp">
+                            <label for="cashapp"><i class="fa-solid fa-dollar-sign icon"></i> Cash App</label>
+                        </div>
+
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="Bank Transfer" id="bank">
+                            <label for="bank"><i class="fa-solid fa-building-columns icon"></i> Bank Transfer</label>
+                        </div>
+
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="Email Payment Instructions" id="emailpay">
+                            <label for="emailpay"><i class="fa-solid fa-envelope icon"></i> Email Payment Instructions</label>
+                        </div>
+
+                        <button type="submit" class="checkout-btn" style="margin-top:25px;">
+                            <i class="fa-solid fa-lock"></i>
+                            Place Order
+                        </button>
+
+                        <p style="margin-top:20px; color: var(--text-muted); font-size:14px; text-align:center;">
+                            <i class="fa-solid fa-shield-halved" style="color: var(--gold);"></i>
+                            Secure Checkout • Your order details are protected.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout-card">
+                    <h3><i class="fa-solid fa-receipt"></i> Your Order</h3>
+
+                    <div id="checkout-items-container">
+                        <!-- Cart items will be rendered here by JavaScript -->
+                    </div>
+
+                    <hr style="margin:20px 0; border-color: var(--border);">
+
+                    <div class="checkout-total-row">
+                        <span>Subtotal</span>
+                        <span id="checkout-subtotal">£0.00</span>
+                    </div>
+
+                    <div class="checkout-total-row" style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span>Shipping</span>
+                        <span>Calculated at checkout</span>
+                    </div>
+
+                    <div class="checkout-total-row grand-total">
+                        <span>Total</span>
+                        <span id="checkout-total">£0.00</span>
+                    </div>
+
+                    <p style="margin-top:15px; color: var(--text-muted); font-size: 13px; text-align:center;">
+                        <i class="fa-solid fa-truck" style="color: var(--gold);"></i>
+                        Free shipping on orders over £100
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h2>Star Wars Galaxy Creations</h2>
+            <p>Handcrafted Star Wars-inspired products made with premium craftsmanship.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top:25px;">Email: info@starwarsgalaxycreations.com</p>
+            <p>© 2026 Star Wars Galaxy Creations. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="script.js"></script>
+
+    <!-- CHECKOUT SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('starWarsCart')) || [];
+            const container = document.getElementById('checkout-items-container');
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const totalEl = document.getElementById('checkout-total');
+
+            function renderCheckoutItems() {
+                if (cart.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-checkout-msg">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <p>Your cart is empty.</p>
+                            <a href="products.html" class="btn" style="display: inline-block; width: auto; margin-top: 15px;">
+                                <i class="fa-solid fa-shop"></i> Continue Shopping
+                            </a>
+                        </div>
+                    `;
+                    subtotalEl.textContent = '£0.00';
+                    totalEl.textContent = '£0.00';
+                    return;
+                }
+
+                // Render items
+                let html = '';
+                let subtotal = 0;
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    html += `
+                        <div class="checkout-item">
+                            <div class="item-info">
+                                <span style="font-size: 24px;">🪵</span>
+                                <div>
+                                    <div class="name">${item.name}</div>
+                                    <div class="qty">Qty: ${item.quantity}</div>
+                                </div>
+                            </div>
+                            <div class="item-price">£${itemTotal.toFixed(2)}</div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+                subtotalEl.textContent = `£${subtotal.toFixed(2)}`;
+                totalEl.textContent = `£${subtotal.toFixed(2)}`;
+            }
+
+            // Render on load
+            renderCheckoutItems();
+
+            // Handle form submission
+            document.getElementById('checkout-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (cart.length === 0) {
+                    alert('Your cart is empty! Please add items before checking out.');
+                    return;
+                }
+
+                // Get payment method
+                const paymentMethod = document.querySelector('input[name="payment"]:checked');
+                if (!paymentMethod) {
+                    alert('Please select a payment method.');
+                    return;
+                }
+
+                // Gather customer info
+                const customerInfo = {
+                    fullname: document.getElementById('fullname').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    country: document.getElementById('country').value,
+                    state: document.getElementById('state').value,
+                    city: document.getElementById('city').value,
+                    address: document.getElementById('address').value,
+                    zip: document.getElementById('zip').value,
+                    payment: paymentMethod.value,
+                    items: cart,
+                    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+                };
+
+                // Save order to localStorage (for demo)
+                localStorage.setItem('lastOrder', JSON.stringify(customerInfo));
+
+                // Success message
+                const orderTotal = customerInfo.total.toFixed(2);
+                alert(`✅ Order placed successfully!\n\nTotal: £${orderTotal}\nPayment: ${paymentMethod.value}\n\nThank you for your order! We'll contact you shortly.`);
+
+                // Clear cart
+                localStorage.setItem('starWarsCart', JSON.stringify([]));
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
 
 </body>
-
 </html>
