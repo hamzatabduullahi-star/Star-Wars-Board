@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | Star Wars Galaxy Creations</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="container header-inner">
+
+<a href="index.html" class="logo">
+
+Star Wars <span>Galaxy Creations</span>
+
+</a>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="products.html">Products</a>
+
+<a href="about.html">About</a>
+
+<a href="contact.html">Contact</a>
+
+<a href="cart.html" class="cart-btn">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+<span class="cart-count">0</span>
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<section class="section">
+
+<div class="container">
+
+<h1 class="section-title">
+
+Secure Checkout
+
+</h1>
+
+<p class="section-subtitle">
+
+Complete your order below.
+
+</p>
+
+<div class="checkout-grid">
+  <!-- Customer Information -->
+
+<div class="contact-card">
+
+<h3>Customer Information</h3>
+
+<form id="checkout-form">
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="fullname"
+placeholder="Enter your full name"
+required>
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
+
+<label>Phone Number</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="Enter your phone number"
+required>
+
+<h3 style="margin-top:30px;">Shipping Address</h3>
+
+<label>Country</label>
+
+<input
+type="text"
+id="country"
+placeholder="Country"
+required>
+
+<label>State / Province</label>
+
+<input
+type="text"
+id="state"
+placeholder="State"
+required>
+
+<label>City</label>
+
+<input
+type="text"
+id="city"
+placeholder="City"
+required>
+
+<label>Street Address</label>
+
+<textarea
+id="address"
+placeholder="House number, street name..."
+rows="4"
+required></textarea>
+
+<label>ZIP / Postal Code</label>
+
+<input
+type="text"
+id="zip"
+placeholder="ZIP Code">
+
+</div>
+
+
+<!-- Order Summary -->
+
+<div class="contact-card">
+
+<h3>Your Order</h3>
+
+<div id="checkout-items">
+
+<p>Your selected products will appear here.</p>
+
+</div>
+
+<hr style="margin:20px 0;">
+
+<div class="cart-total-row">
+
+<span>Subtotal</span>
+
+<strong id="checkout-total">£0.00</strong>
+
+</div>
+
+<hr style="margin:20px 0;">
+
+<h3>Payment Method</h3>
+
+<label>
+
+<input type="radio" name="payment" value="PayPal" required>
+
+PayPal
+
+</label>
+
+<br><br>
+
+<label>
+
+<input type="radio" name="payment" value="Cash App">
+
+Cash App
+
+</label>
+
+<br><br>
+
+<label>
+
+<input type="radio" name="payment" value="Bank Transfer">
+
+Bank Transfer
+
+</label>
+
+<br><br>
+
+<label>
+
+<input type="radio" name="payment" value="Email Payment Instructions">
+
+Email Payment Instructions
+
+</label>
+
+<br><br><br>
+
+<button
+type="submit"
+class="checkout-btn">
+
+<i class="fa-solid fa-lock"></i>
+
+Place Order
+
+</button>
+
+<p style="margin-top:20px;color:#999;font-size:14px;">
+
+🔒 Secure Checkout • Your order details are protected.
+
+</p>
+
+</form>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- Footer -->
+
+<footer>
+
+<div class="container">
+
+<h2>Star Wars Galaxy Creations</h2>
+
+<p>
+
+Handcrafted Star Wars-inspired cutting boards made with premium craftsmanship.
+
+</p>
+
+<div class="social-icons">
+
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+
+<a href="#"><i class="fab fa-instagram"></i></a>
+
+<a href="#"><i class="fab fa-tiktok"></i></a>
+
+<a href="#"><i class="fab fa-whatsapp"></i></a>
+
+</div>
+
+<p style="margin-top:25px;">
+
+Email: info@starwarsgalaxycreations.com
+
+</p>
+
+<p>
+
+© 2026 Star Wars Galaxy Creations. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<button id="topBtn">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
