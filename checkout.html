@@ -91,9 +91,12 @@
         .order-total.grand{font-size:22px;font-weight:700;border-top:2px solid var(--gold);padding-top:18px;margin-top:5px;color:var(--white)}
         .order-total.grand span:last-child{color:var(--gold)}
 
-        .place-order-btn{width:100%;padding:16px;background:var(--gold);color:#000;border:none;border-radius:12px;font-weight:700;font-size:18px;cursor:pointer;transition:.3s;box-shadow:0 0 30px var(--gold-glow);font-family:'Poppins',sans-serif;margin-top:20px}
-        .place-order-btn:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 0 50px var(--gold-glow)}
+        .place-order-btn{width:100%;padding:16px;background:#25D366;color:#fff;border:none;border-radius:12px;font-weight:700;font-size:18px;cursor:pointer;transition:.3s;box-shadow:0 0 30px rgba(37,211,102,0.3);font-family:'Poppins',sans-serif;margin-top:20px}
+        .place-order-btn:hover{background:#1ebe5c;transform:translateY(-3px);box-shadow:0 0 50px rgba(37,211,102,0.4)}
         .place-order-btn i{margin-right:10px}
+
+        .whatsapp-note{text-align:center;margin-top:12px;color:var(--text-muted);font-size:13px}
+        .whatsapp-note i{color:#25D366;margin-right:6px;font-size:16px}
 
         .secure-badge{text-align:center;margin-top:15px;color:var(--text-muted);font-size:13px}
         .secure-badge i{color:var(--gold);margin-right:6px}
@@ -256,8 +259,12 @@
                         </div>
 
                         <button type="submit" class="place-order-btn">
-                            <i class="fa-solid fa-lock"></i> Place Order
+                            <i class="fa-brands fa-whatsapp"></i> Send Order via WhatsApp
                         </button>
+
+                        <div class="whatsapp-note">
+                            <i class="fa-brands fa-whatsapp"></i> Order will be sent to +1 (516) 288-4763
+                        </div>
 
                         <div class="secure-badge">
                             <i class="fa-solid fa-shield-halved"></i> Secure Checkout • Your order details are protected.
@@ -316,13 +323,17 @@
     <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
     <!-- ===================================
-         JAVASCRIPT
+         JAVASCRIPT - WHATSAPP INTEGRATION
     =================================== -->
     <script>
         // ============================================
-        // COMPLETE CHECKOUT SYSTEM
+        // WHATSAPP NUMBER (YOUR BUSINESS NUMBER)
         // ============================================
-        
+        const WHATSAPP_NUMBER = '15162884763'; // +1 (516) 288-4763
+
+        // ============================================
+        // CART SYSTEM
+        // ============================================
         let cart = [];
         try { const saved = localStorage.getItem('starWarsCart'); if (saved) cart = JSON.parse(saved); } catch(e) {}
 
@@ -330,7 +341,6 @@
             var container = document.getElementById('orderItems');
             var subtotalEl = document.getElementById('checkoutSubtotal');
             var totalEl = document.getElementById('checkoutTotal');
-            var summary = document.getElementById('orderSummary');
 
             if (!container) return;
 
@@ -362,7 +372,6 @@
             if (totalEl) totalEl.textContent = '£' + subtotal.toFixed(2);
         }
 
-        // Update cart badge
         function updateCartBadge() {
             var totalItems = 0;
             for (var i = 0; i < cart.length; i++) { totalItems += cart[i].quantity; }
@@ -372,6 +381,47 @@
                 if (totalItems > 0) { countElements[j].classList.add('show'); } 
                 else { countElements[j].classList.remove('show'); }
             }
+        }
+
+        // ============================================
+        // SEND ORDER TO WHATSAPP
+        // ============================================
+        function sendOrderToWhatsApp(orderData) {
+            // Build the message
+            var message = '🛒 *NEW ORDER - Star Wars Galaxy Creations*%0A%0A';
+            
+            message += '👤 *Customer Details*%0A';
+            message += 'Name: ' + orderData.fullname + '%0A';
+            message += 'Email: ' + orderData.email + '%0A';
+            message += 'Phone: ' + orderData.phone + '%0A%0A';
+            
+            message += '📍 *Shipping Address*%0A';
+            message += 'Country: ' + orderData.country + '%0A';
+            message += 'State: ' + orderData.state + '%0A';
+            message += 'City: ' + orderData.city + '%0A';
+            message += 'Address: ' + orderData.address + '%0A';
+            message += 'ZIP: ' + (orderData.zip || 'N/A') + '%0A%0A';
+            
+            message += '📦 *Order Items*%0A';
+            for (var i = 0; i < orderData.items.length; i++) {
+                var item = orderData.items[i];
+                message += '• ' + (item.emoji || '🪵') + ' ' + item.name + ' x' + item.quantity + ' = £' + (item.price * item.quantity).toFixed(2) + '%0A';
+            }
+            
+            message += '%0A💳 *Payment Method*: ' + orderData.payment + '%0A';
+            message += '💰 *Total Amount*: £' + orderData.total.toFixed(2) + '%0A%0A';
+            
+            message += '📅 Order placed: ' + new Date().toLocaleString() + '%0A%0A';
+            message += '✨ *May the Force be with you!* ✨';
+
+            // WhatsApp URL
+            var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + message;
+            
+            // Open WhatsApp
+            window.open(url, '_blank');
+            
+            // Clear cart after order
+            localStorage.setItem('starWarsCart', JSON.stringify([]));
         }
 
         // ============================================
@@ -413,7 +463,7 @@
                 });
             }
 
-            // Checkout form
+            // Checkout form - WhatsApp submission
             var form = document.getElementById('checkoutForm');
             if (form) {
                 form.addEventListener('submit', function(e) {
@@ -438,6 +488,7 @@
                     var state = document.getElementById('state').value.trim();
                     var city = document.getElementById('city').value.trim();
                     var address = document.getElementById('address').value.trim();
+                    var zip = document.getElementById('zip').value.trim();
 
                     if (!fullname || !email || !phone || !country || !state || !city || !address) {
                         alert('Please fill in all required fields.');
@@ -448,16 +499,23 @@
                     var total = 0;
                     for (var k = 0; k < cart.length; k++) { total += cart[k].price * cart[k].quantity; }
 
-                    // Success message
-                    alert('✅ Order placed successfully!\n\n' +
-                        'Customer: ' + fullname + '\n' +
-                        'Total: £' + total.toFixed(2) + '\n' +
-                        'Payment: ' + payment.value + '\n\n' +
-                        'Thank you for your order! We\'ll contact you shortly.');
+                    // Build order data
+                    var orderData = {
+                        fullname: fullname,
+                        email: email,
+                        phone: phone,
+                        country: country,
+                        state: state,
+                        city: city,
+                        address: address,
+                        zip: zip,
+                        payment: payment.value,
+                        items: cart,
+                        total: total
+                    };
 
-                    // Clear cart
-                    localStorage.setItem('starWarsCart', JSON.stringify([]));
-                    window.location.href = 'index.html';
+                    // Send to WhatsApp
+                    sendOrderToWhatsApp(orderData);
                 });
             }
         });
