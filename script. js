@@ -1,18 +1,18 @@
 /* ===================================
    STAR WARS GALAXY CREATIONS
-   MAIN JAVASCRIPT - FULLY WORKING
+   MAIN JAVASCRIPT - WORKING VERSION
 =================================== */
 
 // ===================================
 // PRODUCTS DATABASE
 // ===================================
 const products = [
-    { id: 1, name: "Galaxy Resin Board", price: 120.00, image: "images/board1.jpg", emoji: "🪵" },
-    { id: 2, name: "Death Star Board", price: 95.00, image: "images/board2.jpg", emoji: "🛸" },
-    { id: 3, name: "Lightsaber Cutting Board", price: 140.00, image: "images/board3.jpg", emoji: "⚡" },
-    { id: 4, name: "Custom Order", price: 150.00, image: "images/custom.jpg", emoji: "🎨" },
-    { id: 5, name: "Millennium Falcon Board", price: 165.00, image: "images/falcon.jpg", emoji: "🌌" },
-    { id: 6, name: "Jedi Master Serving Set", price: 110.00, image: "images/jedi.jpg", emoji: "🌟" }
+    { id: 1, name: "Galaxy Resin Board", price: 120.00, emoji: "🪵" },
+    { id: 2, name: "Death Star Board", price: 95.00, emoji: "🛸" },
+    { id: 3, name: "Lightsaber Cutting Board", price: 140.00, emoji: "⚡" },
+    { id: 4, name: "Custom Order", price: 150.00, emoji: "🎨" },
+    { id: 5, name: "Millennium Falcon Board", price: 165.00, emoji: "🌌" },
+    { id: 6, name: "Jedi Master Serving Set", price: 110.00, emoji: "🌟" }
 ];
 
 // ===================================
@@ -26,12 +26,14 @@ function saveCart() {
 }
 
 // ===================================
-// ADD TO CART - WITH NOTIFICATION
+// ADD TO CART
 // ===================================
 function addToCart(productId) {
+    console.log('🛒 Adding product:', productId);
+    
     const product = products.find(p => p.id === productId);
     if (!product) {
-        console.error('Product not found!');
+        console.error('❌ Product not found!');
         return;
     }
 
@@ -43,16 +45,16 @@ function addToCart(productId) {
             id: product.id,
             name: product.name,
             price: product.price,
-            image: product.image || 'images/placeholder.jpg',
             emoji: product.emoji || '🪵',
             quantity: 1
         });
     }
 
     saveCart();
+    console.log('✅ Cart after add:', cart);
     
-    // ✅ Show premium notification
-    showNotification(`${product.emoji} ${product.name} added to cart! ✨`);
+    // Show notification
+    showNotification(product);
 }
 
 // ===================================
@@ -63,7 +65,7 @@ function removeFromCart(productId) {
     if (item) {
         cart = cart.filter(i => i.id !== productId);
         saveCart();
-        showNotification(`🗑️ ${item.name} removed from cart.`);
+        showSimpleNotification(`🗑️ ${item.name} removed`);
     }
 }
 
@@ -85,85 +87,155 @@ function updateQuantity(productId, change) {
 }
 
 // ===================================
-// PREMIUM SLIDE-IN NOTIFICATION
+// ✅ PREMIUM NOTIFICATION (GUARANTEED TO WORK)
 // ===================================
-function showNotification(message) {
+function showNotification(product) {
     // Remove any existing notification
     const existing = document.querySelector('.cart-notification');
     if (existing) existing.remove();
 
-    // Create notification element
+    // Create the notification
     const notif = document.createElement('div');
     notif.className = 'cart-notification';
     notif.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 24px;">✅</span>
-            <span style="font-weight: 500;">${message}</span>
+        <div style="display: flex; align-items: center; gap: 14px; flex: 1;">
+            <span style="font-size: 28px;">${product.emoji || '✅'}</span>
+            <div>
+                <div style="font-weight: 600; color: white; font-size: 16px;">${product.name}</div>
+                <div style="color: #aaa; font-size: 13px;">Added to cart ✨</div>
+            </div>
         </div>
         <button onclick="this.parentElement.remove()" style="
             background: none;
             border: none;
-            color: #888;
-            font-size: 18px;
+            color: #666;
+            font-size: 20px;
             cursor: pointer;
-            padding: 0 5px;
+            padding: 0 8px;
             transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
         ">✕</button>
     `;
 
-    // Premium styling
+    // Apply styles
     Object.assign(notif.style, {
         position: 'fixed',
         top: '100px',
         right: '20px',
-        maxWidth: '420px',
-        width: 'auto',
-        background: 'rgba(5, 7, 13, 0.95)',
+        maxWidth: '400px',
+        minWidth: '280px',
+        background: 'rgba(11, 14, 20, 0.95)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid var(--gold, #d4af37)',
+        border: '1px solid #d4af37',
         borderRadius: '14px',
         padding: '16px 20px',
         color: '#ffffff',
-        zIndex: '99999',
-        boxShadow: '0 12px 50px rgba(0,0,0,0.8), 0 0 40px rgba(212,175,55,0.15)',
+        zIndex: '999999',
+        boxShadow: '0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(212,175,55,0.15)',
         fontFamily: "'Poppins', sans-serif",
-        fontSize: '15px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: '15px',
+        gap: '12px',
         transform: 'translateX(120%)',
-        transition: 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         opacity: '0',
+        transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
         pointerEvents: 'none',
-        borderLeft: '4px solid var(--gold, #d4af37)'
+        borderLeft: '4px solid #d4af37'
     });
 
     document.body.appendChild(notif);
 
-    // Trigger slide-in animation
-    requestAnimationFrame(() => {
+    // Trigger slide in
+    setTimeout(() => {
         notif.style.transform = 'translateX(0)';
         notif.style.opacity = '1';
         notif.style.pointerEvents = 'auto';
-    });
+    }, 50);
 
-    // Auto dismiss after 3.5 seconds
+    // Auto remove after 4 seconds
     setTimeout(() => {
         notif.style.transform = 'translateX(120%)';
         notif.style.opacity = '0';
         setTimeout(() => {
             if (notif.parentElement) notif.remove();
         }, 500);
-    }, 3500);
+    }, 4000);
+}
+
+// ===================================
+// SIMPLE NOTIFICATION (for remove)
+// ===================================
+function showSimpleNotification(message) {
+    const existing = document.querySelector('.cart-notification');
+    if (existing) existing.remove();
+
+    const notif = document.createElement('div');
+    notif.className = 'cart-notification';
+    notif.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+            <span style="font-size: 20px;">${message.includes('removed') ? '🗑️' : '✅'}</span>
+            <span style="font-weight: 500;">${message}</span>
+        </div>
+        <button onclick="this.parentElement.remove()" style="
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0 6px;
+        ">✕</button>
+    `;
+
+    Object.assign(notif.style, {
+        position: 'fixed',
+        top: '100px',
+        right: '20px',
+        maxWidth: '400px',
+        background: 'rgba(11, 14, 20, 0.95)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid #d4af37',
+        borderRadius: '14px',
+        padding: '14px 20px',
+        color: '#ffffff',
+        zIndex: '999999',
+        boxShadow: '0 12px 50px rgba(0,0,0,0.9)',
+        fontFamily: "'Poppins', sans-serif",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '12px',
+        transform: 'translateX(120%)',
+        opacity: '0',
+        transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        pointerEvents: 'none',
+        borderLeft: '4px solid #d4af37'
+    });
+
+    document.body.appendChild(notif);
+
+    setTimeout(() => {
+        notif.style.transform = 'translateX(0)';
+        notif.style.opacity = '1';
+        notif.style.pointerEvents = 'auto';
+    }, 50);
+
+    setTimeout(() => {
+        notif.style.transform = 'translateX(120%)';
+        notif.style.opacity = '0';
+        setTimeout(() => {
+            if (notif.parentElement) notif.remove();
+        }, 500);
+    }, 3000);
 }
 
 // ===================================
 // UPDATE CART UI
 // ===================================
 function updateCartUI() {
-    // Update cart count badge on all pages
+    // Update cart badge
     const countElements = document.querySelectorAll('.cart-count');
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     
@@ -172,12 +244,20 @@ function updateCartUI() {
         if (totalItems > 0) {
             el.style.display = 'flex';
             el.style.background = '#e63946';
+            el.style.color = 'white';
+            el.style.width = '22px';
+            el.style.height = '22px';
+            el.style.borderRadius = '50%';
+            el.style.alignItems = 'center';
+            el.style.justifyContent = 'center';
+            el.style.fontSize = '11px';
+            el.style.fontWeight = '700';
         } else {
             el.style.display = 'none';
         }
     });
 
-    // ===== CART PAGE SPECIFIC =====
+    // Cart page specific
     const cartContainer = document.getElementById('cart-items');
     const emptyMsg = document.getElementById('empty-cart');
     const summary = document.getElementById('cartSummary');
@@ -197,13 +277,12 @@ function updateCartUI() {
     if (summary) summary.style.display = 'block';
     if (table) table.style.display = 'table';
 
-    // Render cart items
     cartContainer.innerHTML = cart.map(item => `
         <tr>
             <td>
                 <div class="cart-product-info">
                     <span style="font-size: 30px;">${item.emoji || '🪵'}</span>
-                    <span>${item.name}</span>
+                    <span style="font-weight: 500;">${item.name}</span>
                 </div>
             </td>
             <td>£${item.price.toFixed(2)}</td>
@@ -223,7 +302,6 @@ function updateCartUI() {
         </tr>
     `).join('');
 
-    // Update totals
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const subtotalEl = document.getElementById('cart-subtotal');
     const totalEl = document.getElementById('cart-total');
@@ -232,9 +310,12 @@ function updateCartUI() {
 }
 
 // ===================================
-// MOBILE MENU TOGGLE
+// EVENT LISTENERS
 // ===================================
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Star Wars Galaxy Creations - Loaded!');
+
+    // Mobile menu
     const menuToggle = document.getElementById('menuToggle');
     const nav = document.getElementById('mainNav') || document.getElementById('nav');
 
@@ -250,9 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===================================
-    // BACK TO TOP BUTTON
-    // ===================================
+    // Back to top
     const topBtn = document.getElementById('topBtn');
     if (topBtn) {
         window.addEventListener('scroll', function() {
@@ -264,29 +343,22 @@ document.addEventListener('DOMContentLoaded', function() {
         topBtn.style.display = 'none';
     }
 
-    // ===================================
-    // ADD TO CART BUTTONS (Products Page)
-    // ===================================
+    // ✅ ADD TO CART BUTTONS - DIRECT EVENT BINDING
     document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             const productId = parseInt(this.dataset.productId);
+            console.log('🛒 Button clicked for product ID:', productId);
             if (productId) {
                 addToCart(productId);
             } else {
-                console.warn('No product ID found on this button');
+                console.error('❌ No product ID found!');
             }
         });
     });
 
-    // ===================================
-    // UPDATE CART ON LOAD
-    // ===================================
-    updateCartUI();
-
-    // ===================================
-    // CLOSE MENU ON LINK CLICK (Mobile)
-    // ===================================
+    // Close menu on link click
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', function() {
             if (nav && nav.classList.contains('active')) {
@@ -296,6 +368,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Update cart on load
+    updateCartUI();
 });
 
 // ===================================
@@ -306,11 +381,5 @@ window.removeFromCart = removeFromCart;
 window.updateQuantity = updateQuantity;
 window.showNotification = showNotification;
 
-console.log('🚀 Star Wars Galaxy Creations - Cart System Loaded!');
+console.log('✅ Cart system ready!');
 console.log(`📦 ${cart.length} items in cart`);
-// ===================================
-// FINAL CHECK - CONSOLE LOG
-// ===================================
-console.log('✅ Star Wars Cart System Ready!');
-console.log('📦 Current cart:', cart);
-console.log('🛒 Total items:', cart.reduce((sum, item) => sum + item.quantity, 0));
