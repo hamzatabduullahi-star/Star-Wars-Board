@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shopping Cart | Star Wars Galaxy Creations</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="container header-inner">
+
+<a href="index.html" class="logo">
+Star Wars <span>Galaxy Creations</span>
+</a>
+
+<nav id="nav">
+
+<a href="index.html">Home</a>
+
+<a href="products.html">Products</a>
+
+<a href="about.html">About</a>
+
+<a href="contact.html">Contact</a>
+
+<a href="cart.html" class="cart-btn active">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+<span class="cart-count">0</span>
+
+</a>
+
+</nav>
+
+<button class="menu-toggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+</div>
+
+</header>
+
+<section class="section cart-page">
+
+<div class="container">
+
+<h1 class="section-title">
+Shopping Cart
+</h1>
+
+<p class="section-subtitle">
+Review your selected items before proceeding to checkout.
+</p>
+
+<table class="cart-table">
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+
+<th>Price</th>
+
+<th>Quantity</th>
+
+<th>Total</th>
+
+<th>Remove</th>
+
+</tr>
+
+</thead>
+
+<tbody id="cart-items">
+
+<!-- JavaScript will display the cart items here -->
+
+</tbody>
+
+</table>
+
+<div class="cart-empty-msg" id="empty-cart">
+
+Your shopping cart is currently empty.
+
+</div>
+  </div>
+
+<div class="cart-summary">
+
+<div class="cart-total-row">
+
+<span>Subtotal</span>
+
+<span id="cart-total">£0.00</span>
+
+</div>
+
+<p style="margin-bottom:20px;color:#A0A0A0;">
+
+Shipping and payment details will be confirmed during checkout.
+
+</p>
+
+<a href="checkout.html" class="checkout-btn">
+
+<i class="fa-solid fa-credit-card"></i>
+
+Proceed to Checkout
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+<h2>Star Wars Galaxy Creations</h2>
+
+<p>
+
+Handcrafted Star Wars-inspired cutting boards made with premium craftsmanship.
+
+</p>
+
+<div class="social-icons">
+
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+
+<a href="#"><i class="fab fa-instagram"></i></a>
+
+<a href="#"><i class="fab fa-tiktok"></i></a>
+
+<a href="#"><i class="fab fa-whatsapp"></i></a>
+
+</div>
+
+<p style="margin-top:25px;">
+
+© 2026 Star Wars Galaxy Creations. All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
