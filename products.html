@@ -147,7 +147,6 @@
             box-shadow: 0 0 30px var(--gold-glow);
         }
 
-        /* Category Filters */
         .filters {
             display: flex;
             justify-content: center;
@@ -178,7 +177,6 @@
             box-shadow: 0 0 25px var(--gold-glow);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .products-page {
                 padding-top: 120px;
@@ -243,7 +241,6 @@
                 Choose from our handcrafted Star Wars-inspired creations.
             </p>
 
-            <!-- Filters -->
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="board">Cutting Boards</button>
@@ -251,7 +248,6 @@
                 <button class="filter-btn" data-filter="custom">Custom Orders</button>
             </div>
 
-            <!-- Products Grid -->
             <div class="products-grid" id="productsGrid">
                 <!-- Product 1 -->
                 <div class="product-card" data-category="board">
@@ -375,9 +371,10 @@
 
     <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
+    <!-- ✅ ONLY ONE SCRIPT - REMOVED DUPLICATE -->
     <script src="script.js"></script>
 
-    <!-- PRODUCT FILTER SCRIPT -->
+    <!-- ✅ PRODUCT FILTER ONLY (NO CONFLICT) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Product Filter
@@ -386,34 +383,17 @@
 
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Update active button
                     filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
 
                     const filter = this.dataset.filter;
-
                     productCards.forEach(card => {
                         if (filter === 'all' || card.dataset.category === filter) {
                             card.style.display = 'block';
-                            card.style.animation = 'fade 0.5s ease';
                         } else {
                             card.style.display = 'none';
                         }
                     });
-                });
-            });
-
-            // Add to Cart buttons - connected to script.js
-            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const productId = parseInt(this.dataset.productId);
-                    if (productId && typeof window.addToCart === 'function') {
-                        window.addToCart(productId);
-                    } else {
-                        // Fallback if script.js hasn't loaded
-                        alert('Product added to cart! (Update script.js for full functionality)');
-                    }
                 });
             });
         });
