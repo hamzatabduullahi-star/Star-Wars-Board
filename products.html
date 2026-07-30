@@ -1,269 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products - Star Wars Galaxy Creations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            background-image: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0a 70%);
+            min-height: 100vh;
+        }
 
-<title>Products | Star Wars Galaxy Creations</title>
+        /* Header / Nav */
+        header {
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid #c9a227;
+            padding: 18px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
 
-<link rel="stylesheet" href="style.css">
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+        .logo span {
+            color: #c9a227;
+        }
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        nav a:hover {
+            color: #c9a227;
+        }
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        .cart {
+            color: #c9a227;
+            font-weight: 600;
+        }
 
+        /* Page Title */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .page-header p {
+            color: #aaaaaa;
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #444;
+            color: #cccccc;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #c9a227;
+            color: #000;
+            border-color: #c9a227;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, #141414, #1c1c1c);
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(201, 162, 39, 0.15);
+            border-color: #c9a227;
+        }
+
+        .product-image {
+            height: 220px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .stars {
+            color: #c9a227;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .product-info p {
+            color: #999;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c9a227;
+            margin-bottom: 18px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: #c9a227;
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #e0b83a;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav a {
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
+    <header>
+        <div class="logo">Star Wars <span>Galaxy Creations</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="#" class="cart">🛒 0</a>
+        </nav>
+    </header>
 
-<div class="container header-inner">
+    <section class="page-header">
+        <h1>Our Products</h1>
+        <p>Choose from our handcrafted Star Wars-inspired creations.</p>
+    </section>
 
-<a href="index.html" class="logo">
-Star Wars <span>Galaxy Creations</span>
-</a>
-
-<nav id="nav">
-
-<a href="index.html">Home</a>
-
-<a href="products.html" class="active">Products</a>
-
-<a href="about.html">About</a>
-
-<a href="contact.html">Contact</a>
-
-<a href="cart.html" class="cart-btn">
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-<span class="cart-count">0</span>
-
-</a>
-
-</nav>
-
-<button class="menu-toggle">
-
-<i class="fa-solid fa-bars"></i>
-
-</button>
-
-</div>
-
-</header>
-
-<section class="section">
-
-<div class="container">
-
-<h1 class="section-title">
-Our Products
-</h1>
-
-<p class="section-subtitle">
-Choose from our handcrafted Star Wars inspired creations.
-</p>
-
-<div class="category-tabs">
-
-<button class="tab-btn active">All</button>
-
-<button class="tab-btn">Cutting Boards</button>
-
-<button class="tab-btn">Serving Boards</button>
-
-<button class="tab-btn">Custom Orders</button>
-
-</div>
-
-<div class="product-grid">
-  <!-- Product 1 -->
-
-<div class="product-card">
-
-    <img src="images/board1.jpg" alt="Galaxy Resin Board" class="product-image">
-
-    <div class="product-body">
-
-        <h3>Galaxy Resin Board</h3>
-
-        <div class="rating">
-            ⭐⭐⭐⭐⭐
-        </div>
-
-        <p>
-            Premium handcrafted walnut cutting board with beautiful blue epoxy resin.
-        </p>
-
-        <h2 class="price">£120</h2>
-
-        <button class="btn add-cart"
-            data-name="Galaxy Resin Board"
-            data-price="120"
-            data-image="images/board1.jpg">
-
-            <i class="fa-solid fa-cart-plus"></i>
-            Add to Cart
-
-        </button>
-
+    <div class="filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Cutting Boards</button>
+        <button class="filter-btn">Serving Boards</button>
+        <button class="filter-btn">Custom Orders</button>
     </div>
 
-</div>
-
-
-<!-- Product 2 -->
-
-<div class="product-card">
-
-    <img src="images/board2.jpg" alt="Death Star Board" class="product-image">
-
-    <div class="product-body">
-
-        <h3>Death Star Board</h3>
-
-        <div class="rating">
-            ⭐⭐⭐⭐⭐
+    <div class="products-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <div class="product-image">[Product Image]</div>
+            <div class="product-info">
+                <h3>Galaxy Resin Board</h3>
+                <div class="stars">★★★★★</div>
+                <p>Premium handcrafted walnut cutting board with beautiful blue epoxy resin.</p>
+                <div class="price">£120</div>
+                <button class="add-to-cart">🛒 Add to Cart</button>
+            </div>
         </div>
 
-        <p>
-            Handmade hardwood serving board inspired by the Death Star.
-        </p>
-
-        <h2 class="price">£145</h2>
-
-        <button class="btn add-cart"
-            data-name="Death Star Board"
-            data-price="145"
-            data-image="images/board2.jpg">
-
-            <i class="fa-solid fa-cart-plus"></i>
-            Add to Cart
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- Product 3 -->
-
-<div class="product-card">
-
-    <img src="images/board3.jpg" alt="Millennium Falcon Board" class="product-image">
-
-    <div class="product-body">
-
-        <h3>Millennium Falcon Board</h3>
-
-        <div class="rating">
-            ⭐⭐⭐⭐⭐
+        <!-- Product 2 -->
+        <div class="product-card">
+            <div class="product-image">[Product Image]</div>
+            <div class="product-info">
+                <h3>Death Star Board</h3>
+                <div class="stars">★★★★★</div>
+                <p>Handmade hardwood serving board inspired by the Death Star.</p>
+                <div class="price">£95</div>
+                <button class="add-to-cart">🛒 Add to Cart</button>
+            </div>
         </div>
 
-        <p>
-            Luxury handcrafted cutting board with a premium epoxy finish.
-        </p>
-
-        <h2 class="price">£160</h2>
-
-        <button class="btn add-cart"
-            data-name="Millennium Falcon Board"
-            data-price="160"
-            data-image="images/board3.jpg">
-
-            <i class="fa-solid fa-cart-plus"></i>
-            Add to Cart
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- Product 4 -->
-
-<div class="product-card">
-
-    <img src="images/board4.jpg" alt="Custom Jedi Board" class="product-image">
-
-    <div class="product-body">
-
-        <h3>Custom Jedi Board</h3>
-
-        <div class="rating">
-            ⭐⭐⭐⭐⭐
+        <!-- Product 3 -->
+        <div class="product-card">
+            <div class="product-image">[Product Image]</div>
+            <div class="product-info">
+                <h3>Lightsaber Cutting Board</h3>
+                <div class="stars">★★★★★</div>
+                <p>Elegant long board with lightsaber-inspired resin inlays.</p>
+                <div class="price">£140</div>
+                <button class="add-to-cart">🛒 Add to Cart</button>
+            </div>
         </div>
 
-        <p>
-            Personalised handcrafted board made specially for your kitchen.
-        </p>
-
-        <h2 class="price">£180</h2>
-
-        <button class="btn add-cart"
-            data-name="Custom Jedi Board"
-            data-price="180"
-            data-image="images/board4.jpg">
-
-            <i class="fa-solid fa-cart-plus"></i>
-            Add to Cart
-
-        </button>
-
+        <!-- Product 4 -->
+        <div class="product-card">
+            <div class="product-image">[Product Image]</div>
+            <div class="product-info">
+                <h3>Custom Order</h3>
+                <div class="stars">★★★★★</div>
+                <p>Tell us your vision — we create unique Star Wars pieces just for you.</p>
+                <div class="price">From £150</div>
+                <button class="add-to-cart">Request Custom</button>
+            </div>
+        </div>
     </div>
 
-</div>
-  </div>
-
-</div>
-
-</section>
-
-<!-- Footer -->
-
-<footer>
-
-<div class="container">
-
-<h2>Star Wars Galaxy Creations</h2>
-
-<p>
-Handcrafted Star Wars-inspired cutting boards made with premium wood and craftsmanship.
-</p>
-
-<div class="social-icons">
-
-<a href="#"><i class="fab fa-facebook-f"></i></a>
-
-<a href="#"><i class="fab fa-instagram"></i></a>
-
-<a href="#"><i class="fab fa-tiktok"></i></a>
-
-<a href="#"><i class="fab fa-whatsapp"></i></a>
-
-</div>
-
-<p style="margin-top:25px;">
-&copy; 2026 Star Wars Galaxy Creations. All Rights Reserved.
-</p>
-
-</div>
-
-</footer>
-
-<script src="script.js"></script>
+    <footer>
+        © 2026 Star Wars Galaxy Creations • Handcrafted with passion
+    </footer>
 
 </body>
-
 </html>
