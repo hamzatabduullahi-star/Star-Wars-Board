@@ -74,14 +74,17 @@
         .stat-box .number{font-size:28px;font-weight:700;color:var(--gold)}
         .stat-box .label{font-size:12px;color:var(--text-muted)}
 
-        .login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
-        .login-box{background:var(--bg-card);padding:40px;border-radius:20px;border:1px solid var(--gold);max-width:400px;width:90%;box-shadow:0 0 60px rgba(212,175,55,0.1)}
-        .login-box h2{color:var(--gold);text-align:center;margin-bottom:10px}
+        .login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+        .login-box{background:var(--bg-card);padding:40px;border-radius:20px;border:2px solid var(--gold);max-width:400px;width:90%;box-shadow:0 0 60px rgba(212,175,55,0.15)}
+        .login-box h2{color:var(--gold);text-align:center;margin-bottom:10px;font-size:28px}
         .login-box p{color:var(--text-muted);text-align:center;margin-bottom:25px;font-size:14px}
         .login-box .form-group{margin-bottom:18px}
         .login-box input{width:100%;padding:14px;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;color:white;font-size:16px;outline:none}
         .login-box input:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .login-box .btn{width:100%;padding:14px;font-size:16px}
+
+        /* HIDE PASSWORD HINT */
+        .password-hint{display:none !important}
 
         .hidden{display:none !important}
 
@@ -115,7 +118,7 @@
                 <input type="password" id="adminPassword" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') adminLogin()">
             </div>
             <button class="btn" onclick="adminLogin()"><i class="fa-solid fa-lock"></i> Login</button>
-            <p style="margin-top:15px;color:var(--text-muted);font-size:12px;">Default password: <strong style="color:var(--gold);">admin123</strong></p>
+            <!-- PASSWORD HINT REMOVED - only you know it -->
         </div>
     </div>
 
@@ -275,16 +278,43 @@
 
     <script>
         // ============================================
+        // ADMIN PASSWORD - CHANGE THIS!
+        // ============================================
+        const ADMIN_PASSWORD = 'admin123'; // Change this to your own password!
+
+        // ============================================
+        // AUTO-LOGOUT WHEN LEAVING PAGE
+        // ============================================
+        // Logout when page is hidden (minimized or tab switched)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && localStorage.getItem('adminLoggedIn') === 'true') {
+                // Auto logout when user leaves the page
+                adminLogout();
+            }
+        });
+
+        // Logout when window loses focus (clicking outside)
+        window.addEventListener('blur', function() {
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                // Small delay to prevent accidental logout
+                setTimeout(function() {
+                    if (document.hidden) {
+                        adminLogout();
+                    }
+                }, 500);
+            }
+        });
+
+        // ============================================
         // ADMIN AUTHENTICATION
         // ============================================
-        const ADMIN_PASSWORD = 'admin123';
-
         function adminLogin() {
             var password = document.getElementById('adminPassword').value;
             if (password === ADMIN_PASSWORD) {
                 document.getElementById('loginOverlay').classList.add('hidden');
                 localStorage.setItem('adminLoggedIn', 'true');
                 loadAdminData();
+                document.getElementById('adminPassword').value = '';
             } else {
                 alert('❌ Wrong password! Try again.');
                 document.getElementById('adminPassword').value = '';
@@ -296,8 +326,11 @@
             localStorage.removeItem('adminLoggedIn');
             document.getElementById('loginOverlay').classList.remove('hidden');
             document.getElementById('adminPassword').value = '';
+            // Clear any sensitive data
+            sessionStorage.clear();
         }
 
+        // Check if already logged in
         if (localStorage.getItem('adminLoggedIn') === 'true') {
             document.getElementById('loginOverlay').classList.add('hidden');
         }
@@ -583,7 +616,7 @@
         });
 
         console.log('🚀 Admin Dashboard Ready!');
-        console.log('📦 Default admin password: admin123');
+        console.log('🔐 Auto-logout enabled for security');
     </script>
 </body>
 </html>
