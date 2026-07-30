@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Star Wars Galaxy Creations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+        :root{--bg-primary:#05070d;--bg-card:rgba(17,24,39,0.85);--gold:#d4af37;--gold2:#f6d365;--gold-glow:rgba(212,175,55,0.25);--white:#ffffff;--text:#d1d5db;--text-muted:#8892a0;--border:rgba(255,255,255,0.08);--shadow:0 8px 32px rgba(0,0,0,0.6)}
+        body{font-family:'Poppins',sans-serif;background:var(--bg-primary);color:var(--white);overflow-x:hidden;min-height:100vh;background-image:radial-gradient(ellipse at 20% 50%,rgba(40,60,120,0.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(80,40,80,0.2) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(20,60,100,0.15) 0%,transparent 50%),url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.4"><circle cx="20" cy="30" r="1.5" fill="white"/><circle cx="50" cy="10" r="1" fill="white"/><circle cx="80" cy="50" r="2" fill="white"/><circle cx="120" cy="20" r="1.2" fill="white"/><circle cx="160" cy="40" r="1.8" fill="white"/><circle cx="180" cy="80" r="1" fill="white"/><circle cx="10" cy="80" r="2.2" fill="white"/><circle cx="40" cy="100" r="1.5" fill="white"/><circle cx="70" cy="130" r="1" fill="white"/><circle cx="100" cy="160" r="2" fill="white"/><circle cx="130" cy="180" r="1.3" fill="white"/><circle cx="170" cy="150" r="1.7" fill="white"/><circle cx="190" cy="120" r="1" fill="white"/><circle cx="30" cy="170" r="1.5" fill="white"/><circle cx="90" cy="90" r="1.2" fill="white"/><circle cx="150" cy="100" r="2.5" fill="white"/><circle cx="60" cy="60" r="0.8" fill="white"/><circle cx="110" cy="110" r="1.1" fill="white"/></svg>');background-size:cover,cover,cover,300px 300px;background-blend-mode:normal,normal,normal,overlay}
+        ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:20px;box-shadow:0 0 20px var(--gold-glow)}
+        .container{width:90%;max-width:1300px;margin:auto}
+
+        /* HEADER */
+        header{position:fixed;top:0;left:0;width:100%;background:rgba(5,7,13,0.92);backdrop-filter:blur(20px);z-index:999;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)1;box-shadow:0 4px 40px rgba(0,0,0,0.6)}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
+        .logo{font-size:28px;font-weight:800;color:var(--gold);text-decoration:none;text-shadow:0 0 30px var(--gold-glow);display:flex;align-items:center;gap:10px}
+        .logo i{font-size:30px;color:var(--gold)}
+        .logo span{color:white;font-weight:300}
+        nav{display:flex;align-items:center;gap:8px}
+        nav a{text-decoration:none;color:rgba(255,255,255,0.7);font-weight:500;font-size:15px;padding:8px 16px;border-radius:8px;transition:.3s}
+        nav a:hover{color:white;background:rgba(212,175,55,0.1)}
+        nav a.active{color:var(--gold);background:rgba(212,175,55,0.12)}
+        .menu-toggle{display:none;font-size:28px;color:white;background:none;border:none;cursor:pointer}
+
+        /* ADMIN PAGE */
+        .admin-page{padding-top:140px;min-height:70vh}
+        .section-title{font-size:42px;text-align:center;margin-bottom:15px;color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
+        .section-subtitle{text-align:center;color:var(--text-muted);margin-bottom:40px}
+
+        .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+
+        .admin-card{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:18px;padding:25px;box-shadow:var(--shadow);transition:.4s}
+        .admin-card:hover{border-color:var(--gold)}
+        .admin-card h3{color:var(--gold);font-size:18px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+        .admin-card h3 i{font-size:18px}
+
+        .form-group{margin-bottom:15px}
+        .form-group label{display:block;margin-bottom:5px;font-weight:600;color:var(--text);font-size:13px}
+        .form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;background:rgba(0,0,0,0.35);border:1px solid var(--border);border-radius:10px;color:var(--white);outline:none;font-size:14px;transition:.3s;font-family:'Poppins',sans-serif}
+        .form-group input:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .form-group textarea{resize:vertical;min-height:60px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+        .btn{display:inline-block;padding:12px 24px;background:var(--gold);color:#000;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:.3s;font-family:'Poppins',sans-serif}
+        .btn:hover{background:var(--gold2);transform:translateY(-2px)}
+        .btn-danger{background:#d32f2f;color:white}
+        .btn-danger:hover{background:#ff1744}
+        .btn-success{background:#2e7d32;color:white}
+        .btn-success:hover{background:#388e3c}
+        .btn-sm{padding:6px 12px;font-size:12px}
+        .btn-block{width:100%}
+
+        .product-list{max-height:400px;overflow-y:auto}
+        .product-list::-webkit-scrollbar{width:6px}
+        .product-list::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+
+        .product-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);transition:.3s}
+        .product-item:hover{border-color:var(--gold)}
+        .product-item .info{display:flex;align-items:center;gap:12px;flex:1}
+        .product-item .info .emoji{font-size:24px}
+        .product-item .info .name{font-weight:500;font-size:14px}
+        .product-item .info .sizes{color:var(--text-muted);font-size:12px}
+        .product-item .actions{display:flex;gap:8px}
+
+        .size-tag{display:inline-block;background:rgba(212,175,55,0.15);color:var(--gold);padding:2px 10px;border-radius:12px;font-size:11px;margin:2px 4px 2px 0}
+
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;margin-bottom:20px}
+        .stat-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:15px;text-align:center}
+        .stat-box .number{font-size:28px;font-weight:700;color:var(--gold)}
+        .stat-box .label{font-size:12px;color:var(--text-muted)}
+
+        .login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px)}
+        .login-box{background:var(--bg-card);padding:40px;border-radius:20px;border:1px solid var(--gold);max-width:400px;width:90%;box-shadow:0 0 60px rgba(212,175,55,0.1)}
+        .login-box h2{color:var(--gold);text-align:center;margin-bottom:10px}
+        .login-box p{color:var(--text-muted);text-align:center;margin-bottom:25px;font-size:14px}
+        .login-box .form-group{margin-bottom:18px}
+        .login-box input{width:100%;padding:14px;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:10px;color:white;font-size:16px;outline:none}
+        .login-box input:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .login-box .btn{width:100%;padding:14px;font-size:16px}
+
+        .hidden{display:none !important}
+
+        @media(max-width:768px){
+            .menu-toggle{display:block}
+            nav{display:none;width:100%;flex-direction:column;background:rgba(5,7,13,0.98);margin-top:10px;padding:20px;border-radius:15px;border:1px solid var(--border);gap:5px}
+            nav.active{display:flex}
+            nav a{width:100%;padding:12px 16px}
+            .admin-grid{grid-template-columns:1fr}
+            .admin-page{padding-top:130px}
+            .section-title{font-size:28px}
+            .form-row{grid-template-columns:1fr}
+            .stats-grid{grid-template-columns:1fr 1fr}
+        }
+        @media(max-width:480px){
+            .logo{font-size:18px}
+            .logo i{font-size:20px}
+            .login-box{padding:25px}
+            .stats-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN OVERLAY -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <h2><i class="fa-solid fa-jedi"></i> Admin Login</h2>
+            <p>Enter your password to access the dashboard</p>
+            <div class="form-group">
+                <input type="password" id="adminPassword" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') adminLogin()">
+            </div>
+            <button class="btn" onclick="adminLogin()"><i class="fa-solid fa-lock"></i> Login</button>
+            <p style="margin-top:15px;color:var(--text-muted);font-size:12px;">Default password: <strong style="color:var(--gold);">admin123</strong></p>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-jedi"></i>
+                Star Wars <span>Galaxy</span> <span style="color:var(--gold);">✦</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Shop</a>
+                <a href="admin.html" class="active">Admin</a>
+                <a href="#" onclick="adminLogout()" style="color:#d32f2f;">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ADMIN DASHBOARD -->
+    <section class="section admin-page" id="adminContent">
+        <div class="container">
+            <h1 class="section-title"><i class="fa-solid fa-shield-halved" style="color:var(--gold);"></i> Admin Dashboard</h1>
+            <p class="section-subtitle">Manage your products, sizes, and orders.</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number" id="totalProducts">0</div>
+                    <div class="label">Total Products</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" id="totalSizes">0</div>
+                    <div class="label">Total Sizes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" id="totalOrders">0</div>
+                    <div class="label">Total Orders</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" id="totalRevenue">$0</div>
+                    <div class="label">Total Revenue</div>
+                </div>
+            </div>
+
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3><i class="fa-solid fa-plus-circle"></i> Add New Product</h3>
+                    <form id="productForm">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" id="productName" placeholder="e.g. Galaxy Resin Board" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Emoji / Icon</label>
+                            <input type="text" id="productEmoji" placeholder="e.g. 🌌" value="🪵">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="productDesc" placeholder="Describe your product..." rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="productCategory">
+                                <option value="board">Cutting Board</option>
+                                <option value="serving">Serving Board</option>
+                                <option value="custom">Custom Order</option>
+                                <option value="new">New Collection</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="text" id="productImage" placeholder="images/board1.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label>Badge (e.g. Bestseller, New, Premium)</label>
+                            <input type="text" id="productBadge" placeholder="Bestseller">
+                        </div>
+
+                        <h4 style="color:var(--gold);margin:15px 0 10px;font-size:15px;">
+                            <i class="fa-solid fa-ruler-combined"></i> Sizes & Prices
+                        </h4>
+                        <div id="sizeFields">
+                            <div class="form-row size-row">
+                                <div class="form-group">
+                                    <label>Size Name</label>
+                                    <input type="text" class="size-name" placeholder="12x12" value="12x12">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" class="size-price" placeholder="120" value="120">
+                                </div>
+                            </div>
+                            <div class="form-row size-row">
+                                <div class="form-group">
+                                    <label>Size Name</label>
+                                    <input type="text" class="size-name" placeholder="12x18" value="12x18">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" class="size-price" placeholder="150" value="150">
+                                </div>
+                            </div>
+                            <div class="form-row size-row">
+                                <div class="form-group">
+                                    <label>Size Name</label>
+                                    <input type="text" class="size-name" placeholder="18x24" value="18x24">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" class="size-price" placeholder="180" value="180">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm" onclick="addSizeRow()" style="background:rgba(212,175,55,0.2);color:var(--gold);">
+                            <i class="fa-solid fa-plus"></i> Add Another Size
+                        </button>
+
+                        <input type="hidden" id="editProductId" value="">
+                        <div style="display:flex;gap:10px;margin-top:20px;">
+                            <button type="submit" class="btn btn-block" id="submitBtn"><i class="fa-solid fa-save"></i> Save Product</button>
+                            <button type="button" class="btn btn-danger btn-block" onclick="clearForm()" style="display:none;" id="cancelBtn">
+                                <i class="fa-solid fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-card">
+                    <h3><i class="fa-solid fa-list"></i> All Products</h3>
+                    <div style="display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap;">
+                        <button class="btn btn-sm" onclick="exportProducts()"><i class="fa-solid fa-download"></i> Export</button>
+                        <button class="btn btn-sm btn-danger" onclick="clearAllProducts()"><i class="fa-solid fa-trash"></i> Clear All</button>
+                    </div>
+                    <div class="product-list" id="productList"></div>
+                </div>
+
+                <div class="admin-card" style="grid-column:1/-1;">
+                    <h3><i class="fa-solid fa-box"></i> Recent Orders</h3>
+                    <div id="orderList">
+                        <p style="color:var(--text-muted);text-align:center;padding:20px;">No orders yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="margin-top:40px;padding:40px 0;background:rgba(0,0,0,0.9);text-align:center;border-top:1px solid var(--border)">
+        <div class="container">
+            <p style="color:var(--text-muted);">© 2026 Star Wars Galaxy Creations. Admin Panel</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // ADMIN AUTHENTICATION
+        // ============================================
+        const ADMIN_PASSWORD = 'admin123';
+
+        function adminLogin() {
+            var password = document.getElementById('adminPassword').value;
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginOverlay').classList.add('hidden');
+                localStorage.setItem('adminLoggedIn', 'true');
+                loadAdminData();
+            } else {
+                alert('❌ Wrong password! Try again.');
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        }
+
+        function adminLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            document.getElementById('loginOverlay').classList.remove('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            document.getElementById('loginOverlay').classList.add('hidden');
+        }
+
+        // ============================================
+        // PRODUCT DATABASE
+        // ============================================
+        let products = [];
+
+        function loadProducts() {
+            try {
+                var saved = localStorage.getItem('adminProducts');
+                if (saved) {
+                    products = JSON.parse(saved);
+                } else {
+                    products = [];
+                    saveProducts();
+                }
+            } catch(e) {
+                products = [];
+            }
+            renderProductList();
+            updateStats();
+        }
+
+        function saveProducts() {
+            try {
+                localStorage.setItem('adminProducts', JSON.stringify(products));
+            } catch(e) {}
+        }
+
+        function renderProductList() {
+            var container = document.getElementById('productList');
+            if (products.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px;">No products yet. Add one!</p>';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < products.length; i++) {
+                var p = products[i];
+                var sizeTags = '';
+                for (var s = 0; s < p.sizes.length; s++) {
+                    sizeTags += '<span class="size-tag">' + p.sizes[s].name + ' $' + p.sizes[s].price + '</span>';
+                }
+                html += '<div class="product-item">' +
+                    '<div class="info">' +
+                        '<span class="emoji">' + p.emoji + '</span>' +
+                        '<div>' +
+                            '<div class="name">' + p.name + '</div>' +
+                            '<div class="sizes">' + sizeTags + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="actions">' +
+                        '<button class="btn btn-sm" onclick="editProduct(' + p.id + ')"><i class="fa-solid fa-edit"></i></button>' +
+                        '<button class="btn btn-sm btn-danger" onclick="deleteProduct(' + p.id + ')"><i class="fa-solid fa-trash"></i></button>' +
+                    '</div>' +
+                '</div>';
+            }
+            container.innerHTML = html;
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('totalProducts').textContent = products.length;
+            var totalSizes = 0;
+            for (var i = 0; i < products.length; i++) {
+                totalSizes += products[i].sizes.length;
+            }
+            document.getElementById('totalSizes').textContent = totalSizes;
+
+            var orders = [];
+            try {
+                var savedOrders = localStorage.getItem('adminOrders');
+                if (savedOrders) orders = JSON.parse(savedOrders);
+            } catch(e) {}
+            document.getElementById('totalOrders').textContent = orders.length;
+
+            var totalRevenue = 0;
+            for (var j = 0; j < orders.length; j++) {
+                totalRevenue += orders[j].total || 0;
+            }
+            document.getElementById('totalRevenue').textContent = '$' + totalRevenue.toFixed(0);
+        }
+
+        // ============================================
+        // ADD / EDIT PRODUCT
+        // ============================================
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var name = document.getElementById('productName').value.trim();
+            var emoji = document.getElementById('productEmoji').value.trim();
+            var desc = document.getElementById('productDesc').value.trim();
+            var category = document.getElementById('productCategory').value;
+            var image = document.getElementById('productImage').value.trim();
+            var badge = document.getElementById('productBadge').value.trim();
+            var editId = document.getElementById('editProductId').value;
+
+            var sizeNames = document.querySelectorAll('.size-name');
+            var sizePrices = document.querySelectorAll('.size-price');
+            var sizes = [];
+            for (var i = 0; i < sizeNames.length; i++) {
+                if (sizeNames[i].value.trim() && sizePrices[i].value) {
+                    sizes.push({
+                        name: sizeNames[i].value.trim(),
+                        price: parseFloat(sizePrices[i].value)
+                    });
+                }
+            }
+
+            if (!name || sizes.length === 0) {
+                alert('Please fill in product name and at least one size.');
+                return;
+            }
+
+            if (editId) {
+                var id = parseInt(editId);
+                for (var p = 0; p < products.length; p++) {
+                    if (products[p].id === id) {
+                        products[p].name = name;
+                        products[p].emoji = emoji || '🪵';
+                        products[p].description = desc;
+                        products[p].category = category;
+                        products[p].image = image;
+                        products[p].badge = badge;
+                        products[p].sizes = sizes;
+                        break;
+                    }
+                }
+            } else {
+                var newId = 1;
+                for (var j = 0; j < products.length; j++) {
+                    if (products[j].id >= newId) newId = products[j].id + 1;
+                }
+                products.push({
+                    id: newId,
+                    name: name,
+                    emoji: emoji || '🪵',
+                    description: desc,
+                    category: category,
+                    image: image,
+                    badge: badge,
+                    sizes: sizes
+                });
+            }
+
+            saveProducts();
+            renderProductList();
+            clearForm();
+            alert('✅ Product saved successfully!');
+        });
+
+        function editProduct(id) {
+            var product = null;
+            for (var i = 0; i < products.length; i++) {
+                if (products[i].id === id) {
+                    product = products[i];
+                    break;
+                }
+            }
+            if (!product) return;
+
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productEmoji').value = product.emoji || '🪵';
+            document.getElementById('productDesc').value = product.description || '';
+            document.getElementById('productCategory').value = product.category || 'board';
+            document.getElementById('productImage').value = product.image || '';
+            document.getElementById('productBadge').value = product.badge || '';
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('submitBtn').innerHTML = '<i class="fa-solid fa-edit"></i> Update Product';
+            document.getElementById('cancelBtn').style.display = 'block';
+
+            var sizeContainer = document.getElementById('sizeFields');
+            sizeContainer.innerHTML = '';
+            for (var s = 0; s < product.sizes.length; s++) {
+                addSizeRow(product.sizes[s].name, product.sizes[s].price);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function deleteProduct(id) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            products = products.filter(function(p) { return p.id !== id; });
+            saveProducts();
+            renderProductList();
+        }
+
+        function clearForm() {
+            document.getElementById('productForm').reset();
+            document.getElementById('editProductId').value = '';
+            document.getElementById('submitBtn').innerHTML = '<i class="fa-solid fa-save"></i> Save Product';
+            document.getElementById('cancelBtn').style.display = 'none';
+
+            var sizeContainer = document.getElementById('sizeFields');
+            sizeContainer.innerHTML = '';
+            addSizeRow('12x12', 120);
+            addSizeRow('12x18', 150);
+            addSizeRow('18x24', 180);
+        }
+
+        function addSizeRow(name, price) {
+            var container = document.getElementById('sizeFields');
+            var row = document.createElement('div');
+            row.className = 'form-row size-row';
+            row.innerHTML = 
+                '<div class="form-group"><input type="text" class="size-name" placeholder="Size name" value="' + (name || '') + '"></div>' +
+                '<div class="form-group"><input type="number" class="size-price" placeholder="Price" value="' + (price || '') + '"></div>' +
+                '<button type="button" class="btn btn-sm btn-danger" onclick="this.parentElement.remove()" style="width:auto;padding:0 10px;height:42px;"><i class="fa-solid fa-times"></i></button>';
+            container.appendChild(row);
+        }
+
+        function exportProducts() {
+            var data = JSON.stringify(products, null, 2);
+            var blob = new Blob([data], {type: 'application/json'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'products_backup.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearAllProducts() {
+            if (!confirm('⚠️ Are you sure you want to delete ALL products? This cannot be undone!')) return;
+            if (!confirm('⚠️ REALLY? All products will be permanently deleted!')) return;
+            products = [];
+            saveProducts();
+            renderProductList();
+        }
+
+        function loadOrders() {
+            var orders = [];
+            try {
+                var saved = localStorage.getItem('adminOrders');
+                if (saved) orders = JSON.parse(saved);
+            } catch(e) {}
+
+            var container = document.getElementById('orderList');
+            if (orders.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px;">No orders yet.</p>';
+                return;
+            }
+
+            var html = '';
+            for (var i = orders.length - 1; i >= 0; i--) {
+                var order = orders[i];
+                var statusClass = order.status === 'completed' ? '' : 'pending';
+                html += '<div class="order-item-admin" style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:8px;border:1px solid var(--border)">' +
+                    '<div class="info" style="flex:1">' +
+                        '<div class="name" style="font-weight:500;font-size:14px;">' + order.customer + '</div>' +
+                        '<div class="details" style="color:var(--text-muted);font-size:12px;">' + order.items + ' · $' + order.total + ' · ' + order.date + '</div>' +
+                    '</div>' +
+                    '<span class="status" style="font-size:12px;padding:4px 12px;border-radius:20px;background:rgba(46,125,50,0.2);color:#4caf50;">' + (order.status || 'Pending') + '</span>' +
+                '</div>';
+            }
+            container.innerHTML = html;
+        }
+
+        function loadAdminData() {
+            loadProducts();
+            loadOrders();
+        }
+
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuToggle = document.getElementById('menuToggle');
+            var nav = document.getElementById('mainNav');
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    var icon = menuToggle.querySelector('i');
+                    if (icon) { icon.className = nav.classList.contains('active') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; }
+                });
+            }
+
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                loadAdminData();
+            }
+        });
+
+        console.log('🚀 Admin Dashboard Ready!');
+        console.log('📦 Default admin password: admin123');
+    </script>
+</body>
+</html>
