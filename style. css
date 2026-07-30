@@ -641,3 +641,144 @@ footer a {
     display: none;
   }
 }
+/* ===============================
+PREMIUM HERO IMAGE
+================================ */
+
+.hero{
+background:
+linear-gradient(rgba(0,0,0,.65),
+rgba(0,0,0,.65)),
+url("images/hero.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+min-height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:120px 20px;
+}
+
+.hero h1{
+font-size:75px;
+font-weight:800;
+letter-spacing:4px;
+animation:slideHero 5s infinite alternate;
+text-transform:uppercase;
+text-shadow:0 0 20px rgba(201,162,39,.4);
+}
+
+.hero p{
+font-size:22px;
+max-width:750px;
+margin:25px auto;
+}
+
+@keyframes slideHero{
+
+0%{
+transform:translateX(-40px);
+}
+
+100%{
+transform:translateX(40px);
+}
+
+}
+
+/* ===============================
+GLASS PRODUCT CARDS
+================================ */
+
+.product-card{
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+transition:.4s;
+
+}
+
+.product-card:hover{
+
+transform:translateY(-12px) scale(1.02);
+
+box-shadow:0 20px 45px rgba(201,162,39,.25);
+
+}
+
+/* ===============================
+SECTION ANIMATION
+================================ */
+
+.section{
+
+animation:fadeUp 1s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(60px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===============================
+HOVER BUTTONS
+================================ */
+
+.btn,
+.add-btn,
+.cart-btn{
+
+transition:.4s;
+
+}
+
+.btn:hover,
+.add-btn:hover{
+
+transform:translateY(-5px);
+
+}
+
+/* ===============================
+SCROLLBAR
+================================ */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#C9A227;
+
+border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111;
+
+}
