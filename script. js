@@ -1,386 +1,310 @@
-// ===============================
-// STAR WARS GALAXY CREATIONS
-// Shopping Cart System
-// ===============================
+/* ===================================
+   STAR WARS GALAXY CREATIONS
+   MAIN JAVASCRIPT - FULLY WORKING
+=================================== */
 
-// Get cart from localStorage
+// ===================================
+// PRODUCTS DATABASE
+// ===================================
+const products = [
+    { id: 1, name: "Galaxy Resin Board", price: 120.00, image: "images/board1.jpg", emoji: "🪵" },
+    { id: 2, name: "Death Star Board", price: 95.00, image: "images/board2.jpg", emoji: "🛸" },
+    { id: 3, name: "Lightsaber Cutting Board", price: 140.00, image: "images/board3.jpg", emoji: "⚡" },
+    { id: 4, name: "Custom Order", price: 150.00, image: "images/custom.jpg", emoji: "🎨" },
+    { id: 5, name: "Millennium Falcon Board", price: 165.00, image: "images/falcon.jpg", emoji: "🌌" },
+    { id: 6, name: "Jedi Master Serving Set", price: 110.00, image: "images/jedi.jpg", emoji: "🌟" }
+];
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-// Save cart
+// ===================================
+// CART SYSTEM
+// ===================================
+let cart = JSON.parse(localStorage.getItem('starWarsCart')) || [];
 
 function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
+    localStorage.setItem('starWarsCart', JSON.stringify(cart));
+    updateCartUI();
 }
 
-// Update cart badge
+// ===================================
+// ADD TO CART - WITH NOTIFICATION
+// ===================================
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.error('Product not found!');
+        return;
+    }
 
-function updateCartCount() {
-
-    const badges = document.querySelectorAll(".cart-count");
-
-    badges.forEach(badge => {
-
-        badge.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-
-    });
-
-}
-
-// Add product
-
-function addToCart(name, price, image) {
-
-    const existing = cart.find(item => item.name === name);
-
+    const existing = cart.find(item => item.id === productId);
     if (existing) {
-
-        existing.quantity++;
-
+        existing.quantity += 1;
     } else {
-
         cart.push({
-
-            name: name,
-
-            price: Number(price),
-
-            image: image,
-
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image || 'images/placeholder.jpg',
+            emoji: product.emoji || '🪵',
             quantity: 1
-
         });
-
     }
 
     saveCart();
-
-    alert(name + " added to cart.");
-
+    
+    // ✅ Show premium notification
+    showNotification(`${product.emoji} ${product.name} added to cart! ✨`);
 }
 
-// Add button events
+// ===================================
+// REMOVE FROM CART
+// ===================================
+function removeFromCart(productId) {
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+        cart = cart.filter(i => i.id !== productId);
+        saveCart();
+        showNotification(`🗑️ ${item.name} removed from cart.`);
+    }
+}
 
-document.querySelectorAll(".add-cart").forEach(button => {
+// ===================================
+// UPDATE QUANTITY
+// ===================================
+function updateQuantity(productId, change) {
+    const item = cart.find(i => i.id === productId);
+    if (!item) return;
 
-    button.addEventListener("click", () => {
+    const newQty = item.quantity + change;
+    if (newQty <= 0) {
+        removeFromCart(productId);
+        return;
+    }
 
-        addToCart(
+    item.quantity = newQty;
+    saveCart();
+}
 
-            button.dataset.name,
+// ===================================
+// PREMIUM SLIDE-IN NOTIFICATION
+// ===================================
+function showNotification(message) {
+    // Remove any existing notification
+    const existing = document.querySelector('.cart-notification');
+    if (existing) existing.remove();
 
-            button.dataset.price,
+    // Create notification element
+    const notif = document.createElement('div');
+    notif.className = 'cart-notification';
+    notif.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 24px;">✅</span>
+            <span style="font-weight: 500;">${message}</span>
+        </div>
+        <button onclick="this.parentElement.remove()" style="
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: 0.3s;
+        ">✕</button>
+    `;
 
-            button.dataset.image
-
-        );
-
+    // Premium styling
+    Object.assign(notif.style, {
+        position: 'fixed',
+        top: '100px',
+        right: '20px',
+        maxWidth: '420px',
+        width: 'auto',
+        background: 'rgba(5, 7, 13, 0.95)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid var(--gold, #d4af37)',
+        borderRadius: '14px',
+        padding: '16px 20px',
+        color: '#ffffff',
+        zIndex: '99999',
+        boxShadow: '0 12px 50px rgba(0,0,0,0.8), 0 0 40px rgba(212,175,55,0.15)',
+        fontFamily: "'Poppins', sans-serif",
+        fontSize: '15px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '15px',
+        transform: 'translateX(120%)',
+        transition: 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        opacity: '0',
+        pointerEvents: 'none',
+        borderLeft: '4px solid var(--gold, #d4af37)'
     });
 
-});
+    document.body.appendChild(notif);
 
-updateCartCount();
-// ===============================
-// DISPLAY CART
-// ===============================
+    // Trigger slide-in animation
+    requestAnimationFrame(() => {
+        notif.style.transform = 'translateX(0)';
+        notif.style.opacity = '1';
+        notif.style.pointerEvents = 'auto';
+    });
 
-function displayCart() {
+    // Auto dismiss after 3.5 seconds
+    setTimeout(() => {
+        notif.style.transform = 'translateX(120%)';
+        notif.style.opacity = '0';
+        setTimeout(() => {
+            if (notif.parentElement) notif.remove();
+        }, 500);
+    }, 3500);
+}
 
-    const cartContainer = document.getElementById("cart-items");
+// ===================================
+// UPDATE CART UI
+// ===================================
+function updateCartUI() {
+    // Update cart count badge on all pages
+    const countElements = document.querySelectorAll('.cart-count');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    countElements.forEach(el => {
+        el.textContent = totalItems;
+        if (totalItems > 0) {
+            el.style.display = 'flex';
+            el.style.background = '#e63946';
+        } else {
+            el.style.display = 'none';
+        }
+    });
 
-    const totalElement = document.getElementById("cart-total");
-
-    const emptyMessage = document.getElementById("empty-cart");
+    // ===== CART PAGE SPECIFIC =====
+    const cartContainer = document.getElementById('cart-items');
+    const emptyMsg = document.getElementById('empty-cart');
+    const summary = document.getElementById('cartSummary');
+    const table = document.getElementById('cartTable');
 
     if (!cartContainer) return;
 
-    cartContainer.innerHTML = "";
-
     if (cart.length === 0) {
-
-        emptyMessage.style.display = "block";
-
-        totalElement.textContent = "£0.00";
-
+        cartContainer.innerHTML = '';
+        if (emptyMsg) emptyMsg.style.display = 'block';
+        if (summary) summary.style.display = 'none';
+        if (table) table.style.display = 'none';
         return;
-
     }
 
-    emptyMessage.style.display = "none";
-
-    let total = 0;
-
-    cart.forEach((item, index) => {
-
-        total += item.price * item.quantity;
-
-        cartContainer.innerHTML += `
-
-<tr>
-
-<td>
-
-<img src="${item.image}" width="70">
-
-<br>
-
-${item.name}
-
-</td>
-
-<td>£${item.price}</td>
-
-<td>
-
-<div class="qty-controls">
-
-<button class="qty-btn" onclick="decreaseQty(${index})">-</button>
-
-<span>${item.quantity}</span>
-
-<button class="qty-btn" onclick="increaseQty(${index})">+</button>
-
-</div>
-
-</td>
-
-<td>
-
-£${item.price * item.quantity}
-
-</td>
-
-<td>
-
-<button class="remove-item"
-
-onclick="removeItem(${index})">
-
-Remove
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-    });
-
-    totalElement.textContent = "£" + total.toFixed(2);
-
-}
-
-// ===============================
-// INCREASE QUANTITY
-// ===============================
-
-function increaseQty(index){
-
-    cart[index].quantity++;
-
-    saveCart();
-
-    displayCart();
-
-}
-
-// ===============================
-// DECREASE QUANTITY
-// ===============================
-
-function decreaseQty(index){
-
-    if(cart[index].quantity > 1){
-
-        cart[index].quantity--;
-
-    }else{
-
-        cart.splice(index,1);
-
-    }
-
-    saveCart();
-
-    displayCart();
-
-}
-
-// ===============================
-// REMOVE PRODUCT
-// ===============================
-
-function removeItem(index){
-
-    cart.splice(index,1);
-
-    saveCart();
-
-    displayCart();
-
-}
-
-displayCart();
-// ==========================================
-// CHECKOUT PAGE
-// ==========================================
-
-function displayCheckout() {
-
-    const checkoutItems = document.getElementById("checkout-items");
-    const checkoutTotal = document.getElementById("checkout-total");
-
-    if (!checkoutItems || !checkoutTotal) return;
-
-    checkoutItems.innerHTML = "";
-
-    let total = 0;
-
-    cart.forEach(item => {
-
-        total += item.price * item.quantity;
-
-        checkoutItems.innerHTML += `
-
-        <div class="checkout-item">
-
-            <div style="display:flex;align-items:center;gap:15px;margin-bottom:20px;">
-
-                <img src="${item.image}" width="80">
-
-                <div>
-
-                    <h4>${item.name}</h4>
-
-                    <p>Quantity: ${item.quantity}</p>
-
-                    <strong>£${item.price * item.quantity}</strong>
-
+    if (emptyMsg) emptyMsg.style.display = 'none';
+    if (summary) summary.style.display = 'block';
+    if (table) table.style.display = 'table';
+
+    // Render cart items
+    cartContainer.innerHTML = cart.map(item => `
+        <tr>
+            <td>
+                <div class="cart-product-info">
+                    <span style="font-size: 30px;">${item.emoji || '🪵'}</span>
+                    <span>${item.name}</span>
                 </div>
+            </td>
+            <td>£${item.price.toFixed(2)}</td>
+            <td>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>−</button>
+                    <span class="qty-number">${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                </div>
+            </td>
+            <td>£${(item.price * item.quantity).toFixed(2)}</td>
+            <td>
+                <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                    <i class="fa-solid fa-trash"></i> Remove
+                </button>
+            </td>
+        </tr>
+    `).join('');
 
-            </div>
+    // Update totals
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotalEl = document.getElementById('cart-subtotal');
+    const totalEl = document.getElementById('cart-total');
+    if (subtotalEl) subtotalEl.textContent = `£${subtotal.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `£${subtotal.toFixed(2)}`;
+}
 
-        </div>
+// ===================================
+// MOBILE MENU TOGGLE
+// ===================================
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('mainNav') || document.getElementById('nav');
 
-        `;
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+                icon.className = nav.classList.contains('active')
+                    ? 'fa-solid fa-xmark'
+                    : 'fa-solid fa-bars';
+            }
+        });
+    }
 
+    // ===================================
+    // BACK TO TOP BUTTON
+    // ===================================
+    const topBtn = document.getElementById('topBtn');
+    if (topBtn) {
+        window.addEventListener('scroll', function() {
+            topBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+        });
+        topBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        topBtn.style.display = 'none';
+    }
+
+    // ===================================
+    // ADD TO CART BUTTONS (Products Page)
+    // ===================================
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productId = parseInt(this.dataset.productId);
+            if (productId) {
+                addToCart(productId);
+            } else {
+                console.warn('No product ID found on this button');
+            }
+        });
     });
 
-    checkoutTotal.textContent = "£" + total.toFixed(2);
+    // ===================================
+    // UPDATE CART ON LOAD
+    // ===================================
+    updateCartUI();
 
-}
-
-displayCheckout();
-
-
-// ==========================================
-// PLACE ORDER
-// ==========================================
-
-const checkoutForm = document.getElementById("checkout-form");
-
-if (checkoutForm) {
-
-checkoutForm.addEventListener("submit", function(e){
-
-e.preventDefault();
-
-const fullname = document.getElementById("fullname").value;
-
-const email = document.getElementById("email").value;
-
-const phone = document.getElementById("phone").value;
-
-const country = document.getElementById("country").value;
-
-const state = document.getElementById("state").value;
-
-const city = document.getElementById("city").value;
-
-const address = document.getElementById("address").value;
-
-const zip = document.getElementById("zip").value;
-
-const payment = document.querySelector("input[name='payment']:checked");
-
-if(!payment){
-
-alert("Please select a payment method.");
-
-return;
-
-}
-
-let message =
-
-`🛒 *NEW ORDER*%0A%0A`;
-
-cart.forEach(item=>{
-
-message +=
-
-`📦 ${item.name}%0A`;
-
-message +=
-
-`Qty: ${item.quantity}%0A`;
-
-message +=
-
-`Price: £${item.price * item.quantity}%0A%0A`;
-
+    // ===================================
+    // CLOSE MENU ON LINK CLICK (Mobile)
+    // ===================================
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (nav && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                const icon = menuToggle?.querySelector('i');
+                if (icon) icon.className = 'fa-solid fa-bars';
+            }
+        });
+    });
 });
 
-message +=
+// ===================================
+// EXPOSE FUNCTIONS TO GLOBAL SCOPE
+// ===================================
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.updateQuantity = updateQuantity;
+window.showNotification = showNotification;
 
-`👤 Name: ${fullname}%0A`;
-
-message +=
-
-`📧 Email: ${email}%0A`;
-
-message +=
-
-`📱 Phone: ${phone}%0A`;
-
-message +=
-
-`🌍 Country: ${country}%0A`;
-
-message +=
-
-`🏙 State: ${state}%0A`;
-
-message +=
-
-`🏠 City: ${city}%0A`;
-
-message +=
-
-`📍 Address: ${address}%0A`;
-
-message +=
-
-`📮 ZIP: ${zip}%0A%0A`;
-
-message +=
-
-`💳 Payment: ${payment.value}`;
-
-window.open(
-`https://wa.me/15162884763?text=${message}`,
-"_blank"
-);
-
-localStorage.removeItem("cart");
-
-cart = [];
-
-saveCart();
-
-});
-
-}
+console.log('🚀 Star Wars Galaxy Creations - Cart System Loaded!');
+console.log(`📦 ${cart.length} items in cart`);
