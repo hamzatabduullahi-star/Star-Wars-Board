@@ -1,1 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Star Wars Galaxy Creations</title>
+    <meta name="description" content="Contact Star Wars Galaxy Creations for custom orders and inquiries.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        /* === CONTACT PAGE SPECIFIC STYLES === */
+        .contact-page {
+            padding-top: 140px;
+            min-height: 70vh;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.08);
+        }
+
+        .contact-card h3 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-card h3 i {
+            font-size: 1.2rem;
+        }
+
+        .contact-card label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .contact-card input,
+        .contact-card textarea,
+        .contact-card select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--white);
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-card input:focus,
+        .contact-card textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .contact-card input::placeholder,
+        .contact-card textarea::placeholder {
+            color: #666;
+        }
+
+        .contact-card textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-card select option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 30px var(--gold-glow);
+            font-family: 'Poppins', sans-serif;
+            margin-top: 25px;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold2);
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px var(--gold-glow);
+        }
+
+        .submit-btn i {
+            margin-right: 10px;
+        }
+
+        /* Contact Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .info-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .info-item .icon {
+            font-size: 30px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .info-item h4 {
+            color: var(--white);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .info-item a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .info-item a:hover {
+            color: var(--gold);
+        }
+
+        /* Social Links in Contact */
+        .social-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-contact a {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 20px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-contact a:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 30px var(--gold-glow);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-page {
+                padding-top: 120px;
+            }
+            .contact-card {
+                padding: 25px;
+            }
+            .contact-card h3 {
+                font-size: 1.1rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-card {
+                padding: 18px;
+            }
+            .contact-card input,
+            .contact-card textarea,
+            .contact-card select {
+                padding: 12px;
+                font-size: 14px;
+            }
+            .social-contact a {
+                width: 42px;
+                height: 42px;
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                Star Wars <span>Galaxy Creations</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTACT PAGE -->
+    <section class="section contact-page">
+        <div class="container">
+            <h1 class="section-title">
+                <i class="fa-solid fa-envelope" style="color: var(--gold);"></i>
+                Contact Us
+            </h1>
+            <p class="section-subtitle">
+                Have a question or want a custom creation? Reach out to us!
+            </p>
+
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-card">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> Send a Message</h3>
+                    <form id="contactForm">
+                        <label>Full Name</label>
+                        <input type="text" id="contactName" placeholder="Enter your full name" required>
+
+                        <label>Email Address</label>
+                        <input type="email" id="contactEmail" placeholder="Enter your email" required>
+
+                        <label>Subject</label>
+                        <select id="contactSubject" required>
+                            <option value="">Select a subject</option>
+                            <option value="Custom Order">Custom Order</option>
+                            <option value="Product Inquiry">Product Inquiry</option>
+                            <option value="Order Status">Order Status</option>
+                            <option value="Collaboration">Collaboration</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <label>Message</label>
+                        <textarea id="contactMessage" placeholder="Tell us about your request..." rows="5" required></textarea>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Send Message
+                        </button>
+
+                        <p style="margin-top:15px; color: var(--text-muted); font-size:13px; text-align:center;">
+                            <i class="fa-solid fa-clock" style="color: var(--gold);"></i>
+                            We typically respond within 24 hours
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <div class="contact-card" style="margin-bottom: 30px;">
+                        <h3><i class="fa-solid fa-circle-info"></i> Get in Touch</h3>
+                        <p style="color: var(--text); line-height: 1.8; margin-bottom: 20px;">
+                            We'd love to hear from you! Whether you have questions about our products,
+                            want to commission a custom piece, or just want to say hello — reach out anytime.
+                        </p>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="icon">📧</span>
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@starwarsgalaxycreations.com">info@starwarsgalaxycreations.com</a></p>
+                            </div>
+                            <div class="info-item">
+                                <span class="icon">📱</span>
+                                <h4>Phone</h4>
+                                <p><a href="tel:+441234567890">+44 1234 567890</a></p>
+                            </div>
+                            <div class="info-item">
+                                <span class="icon">📍</span>
+                                <h4>Location</h4>
+                                <p>United Kingdom</p>
+                            </div>
+                            <div class="info-item">
+                                <span class="icon">🕐</span>
+                                <h4>Working Hours</h4>
+                                <p>Mon - Fri: 9AM - 6PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Connect -->
+                    <div class="contact-card">
+                        <h3><i class="fa-solid fa-share-nodes"></i> Connect With Us</h3>
+                        <p style="color: var(--text); line-height: 1.8; margin-bottom: 15px;">
+                            Follow us on social media for the latest creations and behind-the-scenes content.
+                        </p>
+                        <div class="social-contact">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                        <p style="margin-top:20px; color: var(--text-muted); font-size:13px; text-align:center;">
+                            <i class="fa-solid fa-hand-peace" style="color: var(--gold);"></i>
+                            May the Force be with you
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h2>Star Wars Galaxy Creations</h2>
+            <p>Handcrafted Star Wars-inspired products made with premium craftsmanship.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top:25px;">Email: info@starwarsgalaxycreations.com</p>
+            <p>© 2026 Star Wars Galaxy Creations. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <script src="script.js"></script>
+
+    <!-- CONTACT FORM SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form values
+                    const name = document.getElementById('contactName').value.trim();
+                    const email = document.getElementById('contactEmail').value.trim();
+                    const subject = document.getElementById('contactSubject').value;
+                    const message = document.getElementById('contactMessage').value.trim();
+
+                    // Validate
+                    if (!name || !email || !subject || !message) {
+                        alert('Please fill in all fields.');
+                        return;
+                    }
+
+                    // Simple email validation
+                    if (!email.includes('@') || !email.includes('.')) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+
+                    // Success message
+                    alert(`✅ Message sent successfully!\n\nThank you ${name} for reaching out!\nWe'll get back to you shortly.`);
+
+                    // Reset form
+                    contactForm.reset();
+
+                    // Optional: Log to console for debugging
+                    console.log('Contact Form Submission:', { name, email, subject, message });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
