@@ -6,6 +6,185 @@
   <title>About | Star Wars Galaxy Creations</title>
   <meta name="description" content="About Star Wars Galaxy Creations - handcrafted galactic products.">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* === ADDITIONAL ABOUT PAGE STYLES === */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .about-text {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      transition: 0.4s;
+    }
+
+    .about-text:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 40px rgba(212, 175, 55, 0.12);
+    }
+
+    .about-text p {
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-text p::before {
+      content: "✦ ";
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .about-visual {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      font-size: 120px;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-visual:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 40px rgba(212, 175, 55, 0.12);
+      transform: translateY(-5px);
+    }
+
+    .about-visual::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      animation: rotateGlow 20s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .about-visual span {
+      position: relative;
+      z-index: 1;
+      display: block;
+      font-size: 24px;
+      color: var(--gold);
+      margin-top: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 0 30px var(--gold-glow);
+    }
+
+    .about-visual .sub-icon {
+      font-size: 40px;
+      margin-top: 15px;
+      color: var(--text-muted);
+    }
+
+    /* Values section */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: 0.4s;
+      box-shadow: var(--shadow);
+    }
+
+    .value-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 35px rgba(212, 175, 55, 0.12);
+    }
+
+    .value-card .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .value-card h4 {
+      color: var(--gold);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .value-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .about-visual {
+        min-height: 200px;
+        font-size: 80px;
+        padding: 40px 20px;
+      }
+
+      .about-text {
+        padding: 25px;
+      }
+
+      .about-text p {
+        font-size: 16px;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -26,8 +205,8 @@
     </div>
   </header>
 
-  <!-- ABOUT -->
-  <section class="section">
+  <!-- ABOUT SECTION -->
+  <section class="section" style="padding-top: 140px;">
     <div class="container">
       <h2 class="section-title">About Us</h2>
       <p class="section-subtitle">Bringing the galaxy far, far away into your home</p>
@@ -38,7 +217,35 @@
           <p>Every piece is made with quality, creativity, and a passion for bringing the galaxy far, far away into your home.</p>
           <p>From detailed engravings to carefully chosen materials, each item is crafted to celebrate the stories and characters we love.</p>
         </div>
-        <div class="about-visual">🌌</div>
+        <div class="about-visual">
+          🌌
+          <span>May the Force Be With You</span>
+          <span class="sub-icon">⚡ ✨ ⚡</span>
+        </div>
+      </div>
+
+      <!-- Values / Why Choose Us -->
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="icon">🛠️</span>
+          <h4>Handcrafted Quality</h4>
+          <p>Every item is carefully made with premium materials and attention to detail</p>
+        </div>
+        <div class="value-card">
+          <span class="icon">🎨</span>
+          <h4>Unique Designs</h4>
+          <p>Original Star Wars-inspired creations you won't find anywhere else</p>
+        </div>
+        <div class="value-card">
+          <span class="icon">❤️</span>
+          <h4>Made with Passion</h4>
+          <p>Crafted by fans, for fans who share the love of the galaxy</p>
+        </div>
+        <div class="value-card">
+          <span class="icon">🌍</span>
+          <h4>Worldwide Shipping</h4>
+          <p>Bringing the galaxy to fans everywhere, no matter where you are</p>
+        </div>
       </div>
     </div>
   </section>
@@ -46,10 +253,20 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Facebook">👍</a>
+        <a href="#" aria-label="YouTube">▶️</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+      </div>
       <p>© 2026 Star Wars Galaxy Creations. Handcrafted with passion.</p>
-      <p class="disclaimer">All products are fan-made and inspired by the galaxy far, far away. Not affiliated with Lucasfilm or Disney.</p>
+      <p class="disclaimer" style="font-size: 13px; color: var(--text-muted); margin-top: 10px;">
+        All products are fan-made and inspired by the galaxy far, far away. Not affiliated with Lucasfilm or Disney.
+      </p>
     </div>
   </footer>
+
+  <button id="topBtn" aria-label="Back to top">⬆</button>
 
   <script src="script.js"></script>
 </body>
