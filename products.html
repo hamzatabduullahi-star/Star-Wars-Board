@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Star Wars Galaxy Creations</title>
+  <meta name="description" content="Browse our handcrafted Star Wars-inspired products.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Star Wars <span>Galaxy Creations</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <nav id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html" class="cart-btn">
+          🛒 Cart <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PRODUCTS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Our Products</h2>
+      <p class="section-subtitle">Handcrafted with quality, creativity, and passion</p>
+
+      <div class="category-tabs">
+        <button class="tab-btn active" data-category="all">All</button>
+        <button class="tab-btn" data-category="boards">Cutting Boards</button>
+        <button class="tab-btn" data-category="jackets">Custom Jackets</button>
+        <button class="tab-btn" data-category="lights">Unique Lights</button>
+        <button class="tab-btn" data-category="wreaths">Decorative Wreaths</button>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Products loaded by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Star Wars Galaxy Creations. Handcrafted with passion.</p>
+      <p class="disclaimer">All products are fan-made and inspired by the galaxy far, far away. Not affiliated with Lucasfilm or Disney.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
