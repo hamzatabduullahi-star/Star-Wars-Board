@@ -83,10 +83,9 @@
         .login-box input:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .login-box .btn{width:100%;padding:14px;font-size:16px}
 
-        /* HIDE PASSWORD HINT */
-        .password-hint{display:none !important}
-
         .hidden{display:none !important}
+
+        /* NO PASSWORD HINT - REMOVED COMPLETELY */
 
         @media(max-width:768px){
             .menu-toggle{display:block}
@@ -109,7 +108,7 @@
 </head>
 <body>
 
-    <!-- LOGIN OVERLAY -->
+    <!-- LOGIN OVERLAY - NO PASSWORD HINT -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-box">
             <h2><i class="fa-solid fa-jedi"></i> Admin Login</h2>
@@ -118,7 +117,7 @@
                 <input type="password" id="adminPassword" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') adminLogin()">
             </div>
             <button class="btn" onclick="adminLogin()"><i class="fa-solid fa-lock"></i> Login</button>
-            <!-- PASSWORD HINT REMOVED - only you know it -->
+            <!-- PASSWORD HINT COMPLETELY REMOVED -->
         </div>
     </div>
 
@@ -280,23 +279,19 @@
         // ============================================
         // ADMIN PASSWORD - CHANGE THIS!
         // ============================================
-        const ADMIN_PASSWORD = 'admin123'; // Change this to your own password!
+        const ADMIN_PASSWORD = 'admin123';
 
         // ============================================
         // AUTO-LOGOUT WHEN LEAVING PAGE
         // ============================================
-        // Logout when page is hidden (minimized or tab switched)
         document.addEventListener('visibilitychange', function() {
             if (document.hidden && localStorage.getItem('adminLoggedIn') === 'true') {
-                // Auto logout when user leaves the page
                 adminLogout();
             }
         });
 
-        // Logout when window loses focus (clicking outside)
         window.addEventListener('blur', function() {
             if (localStorage.getItem('adminLoggedIn') === 'true') {
-                // Small delay to prevent accidental logout
                 setTimeout(function() {
                     if (document.hidden) {
                         adminLogout();
@@ -326,11 +321,9 @@
             localStorage.removeItem('adminLoggedIn');
             document.getElementById('loginOverlay').classList.remove('hidden');
             document.getElementById('adminPassword').value = '';
-            // Clear any sensitive data
             sessionStorage.clear();
         }
 
-        // Check if already logged in
         if (localStorage.getItem('adminLoggedIn') === 'true') {
             document.getElementById('loginOverlay').classList.add('hidden');
         }
