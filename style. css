@@ -1073,3 +1073,10 @@ color:#111;
 transform:translateY(-8px);
 
 }
+/* Force dark background for About & Contact */
+.about-grid,
+.contact-grid,
+.contact-card {
+  background: var(--bg-dark) !important;
+}
+
