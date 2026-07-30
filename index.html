@@ -104,20 +104,6 @@
         .step h3{color:var(--white);margin-bottom:10px}
         .step p{color:var(--text-muted);font-size:14px;line-height:1.7}
 
-        /* FEATURED PRODUCTS */
-        .featured-section{padding:60px 0 80px}
-        .featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;margin-top:40px}
-        .featured-card{background:var(--bg-card);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:.4s;box-shadow:var(--shadow)}
-        .featured-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 8px 35px rgba(212,175,55,0.12)}
-        .featured-card .image{height:200px;background:linear-gradient(145deg,#1a1a2e,#0f0f1a);display:flex;align-items:center;justify-content:center;font-size:60px;border-bottom:1px solid var(--border)}
-        .featured-card .info{padding:20px}
-        .featured-card .info h3{font-size:18px;color:var(--white);margin-bottom:5px}
-        .featured-card .info .price{color:var(--gold);font-size:20px;font-weight:700}
-
-        .view-all-wrap{text-align:center;margin-top:40px}
-        .view-all-btn{display:inline-block;padding:14px 40px;background:transparent;border:2px solid var(--gold);color:var(--gold);border-radius:50px;text-decoration:none;font-weight:600;transition:.4s}
-        .view-all-btn:hover{background:var(--gold);color:#000;box-shadow:0 0 30px var(--gold-glow)}
-
         /* FOOTER */
         footer{margin-top:0;padding:60px 0;background:rgba(0,0,0,0.9);text-align:center;border-top:1px solid var(--border)}
         footer h2{color:var(--gold);margin-bottom:20px;text-shadow:0 0 30px var(--gold-glow)}
@@ -142,7 +128,7 @@
             .hero p{font-size:16px}
             .hero-buttons .btn,.hero-buttons .btn-outline{width:100%;text-align:center}
             .section-title{font-size:28px}
-            .featured-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
+            .steps-grid{grid-template-columns:1fr 1fr}
             .admin-access{bottom:10px;right:10px;padding:5px 10px 5px 8px}
             .admin-access .text{font-size:9px;display:none}
             #topBtn{bottom:65px}
@@ -152,7 +138,6 @@
             .logo i{font-size:20px}
             .hero h1{font-size:28px}
             .steps-grid{grid-template-columns:1fr}
-            .featured-grid{grid-template-columns:1fr}
             .admin-access{bottom:8px;right:8px;padding:4px 8px 4px 6px}
             .admin-access .icon{font-size:11px}
             #topBtn{bottom:55px;width:45px;height:45px;font-size:18px}
@@ -222,40 +207,6 @@
                     <h3>WhatsApp Delivery</h3>
                     <p>Confirm via WhatsApp and receive your order</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURED PRODUCTS -->
-    <section class="featured-section">
-        <div class="container">
-            <h2 class="section-title">Featured Products</h2>
-            <p class="section-subtitle">A taste of the galaxy</p>
-            <div class="featured-grid">
-                <div class="featured-card">
-                    <div class="image">🪵</div>
-                    <div class="info">
-                        <h3>Galaxy Resin Board</h3>
-                        <div class="price">$120+</div>
-                    </div>
-                </div>
-                <div class="featured-card">
-                    <div class="image">🌊</div>
-                    <div class="info">
-                        <h3>Death Star River</h3>
-                        <div class="price">$50+</div>
-                    </div>
-                </div>
-                <div class="featured-card">
-                    <div class="image">🚀</div>
-                    <div class="info">
-                        <h3>Falcon Escape</h3>
-                        <div class="price">$50+</div>
-                    </div>
-                </div>
-            </div>
-            <div class="view-all-wrap">
-                <a href="products.html" class="view-all-btn"><i class="fa-solid fa-eye"></i> View All Products</a>
             </div>
         </div>
     </section>
