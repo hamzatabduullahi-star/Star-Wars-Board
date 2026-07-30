@@ -1,6 +1,6 @@
 /* ===================================
    STAR WARS GALAXY CREATIONS
-   MAIN JAVASCRIPT - WORKING VERSION
+   SIMPLIFIED CART SYSTEM - GUARANTEED TO WORK
 =================================== */
 
 // ===================================
@@ -16,12 +16,32 @@ const products = [
 ];
 
 // ===================================
-// CART SYSTEM
+// LOAD CART
 // ===================================
-let cart = JSON.parse(localStorage.getItem('starWarsCart')) || [];
+let cart = [];
 
+// Try to load cart from localStorage
+try {
+    const saved = localStorage.getItem('starWarsCart');
+    if (saved) {
+        cart = JSON.parse(saved);
+        console.log('📦 Cart loaded:', cart);
+    }
+} catch (e) {
+    console.log('📦 No saved cart found, starting fresh');
+    cart = [];
+}
+
+// ===================================
+// SAVE CART
+// ===================================
 function saveCart() {
-    localStorage.setItem('starWarsCart', JSON.stringify(cart));
+    try {
+        localStorage.setItem('starWarsCart', JSON.stringify(cart));
+        console.log('💾 Cart saved:', cart);
+    } catch (e) {
+        console.error('❌ Failed to save cart:', e);
+    }
     updateCartUI();
 }
 
@@ -29,17 +49,23 @@ function saveCart() {
 // ADD TO CART
 // ===================================
 function addToCart(productId) {
-    console.log('🛒 Adding product:', productId);
+    console.log('🛒 Adding product ID:', productId);
     
+    // Find the product
     const product = products.find(p => p.id === productId);
     if (!product) {
         console.error('❌ Product not found!');
+        alert('Product not found!');
         return;
     }
 
+    console.log('📦 Product found:', product.name);
+
+    // Check if already in cart
     const existing = cart.find(item => item.id === productId);
     if (existing) {
         existing.quantity += 1;
+        console.log('➕ Quantity increased to:', existing.quantity);
     } else {
         cart.push({
             id: product.id,
@@ -48,10 +74,10 @@ function addToCart(productId) {
             emoji: product.emoji || '🪵',
             quantity: 1
         });
+        console.log('🆕 New item added to cart');
     }
 
     saveCart();
-    console.log('✅ Cart after add:', cart);
     
     // Show notification
     showNotification(product);
@@ -87,67 +113,59 @@ function updateQuantity(productId, change) {
 }
 
 // ===================================
-// ✅ PREMIUM NOTIFICATION (GUARANTEED TO WORK)
+// SHOW NOTIFICATION
 // ===================================
 function showNotification(product) {
-    // Remove any existing notification
-    const existing = document.querySelector('.cart-notification');
-    if (existing) existing.remove();
+    console.log('🔔 Showing notification for:', product.name);
+    
+    // Remove old notification
+    const old = document.querySelector('.cart-notification');
+    if (old) old.remove();
 
-    // Create the notification
+    // Create notification
     const notif = document.createElement('div');
     notif.className = 'cart-notification';
     notif.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 14px; flex: 1;">
-            <span style="font-size: 28px;">${product.emoji || '✅'}</span>
+        <div style="display:flex;align-items:center;gap:12px;flex:1;">
+            <span style="font-size:28px;">${product.emoji}</span>
             <div>
-                <div style="font-weight: 600; color: white; font-size: 16px;">${product.name}</div>
-                <div style="color: #aaa; font-size: 13px;">Added to cart ✨</div>
+                <div style="font-weight:600;color:white;font-size:15px;">${product.name}</div>
+                <div style="color:#aaa;font-size:12px;">Added to cart! ✨</div>
             </div>
         </div>
-        <button onclick="this.parentElement.remove()" style="
-            background: none;
-            border: none;
-            color: #666;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 0 8px;
-            transition: 0.3s;
-            font-family: 'Poppins', sans-serif;
-        ">✕</button>
+        <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;font-size:20px;cursor:pointer;padding:0 8px;">✕</button>
     `;
 
-    // Apply styles
-    Object.assign(notif.style, {
-        position: 'fixed',
-        top: '100px',
-        right: '20px',
-        maxWidth: '400px',
-        minWidth: '280px',
-        background: 'rgba(11, 14, 20, 0.95)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid #d4af37',
-        borderRadius: '14px',
-        padding: '16px 20px',
-        color: '#ffffff',
-        zIndex: '999999',
-        boxShadow: '0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(212,175,55,0.15)',
-        fontFamily: "'Poppins', sans-serif",
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '12px',
-        transform: 'translateX(120%)',
-        opacity: '0',
-        transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-        pointerEvents: 'none',
-        borderLeft: '4px solid #d4af37'
-    });
+    // Style the notification
+    notif.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        max-width: 380px;
+        min-width: 250px;
+        background: #0a0f1a;
+        backdrop-filter: blur(16px);
+        border: 1px solid #d4af37;
+        border-radius: 14px;
+        padding: 16px 20px;
+        color: white;
+        z-index: 999999;
+        box-shadow: 0 12px 50px rgba(0,0,0,0.9), 0 0 40px rgba(212,175,55,0.15);
+        font-family: 'Poppins', Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        transform: translateX(120%);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        pointer-events: none;
+        border-left: 4px solid #d4af37;
+    `;
 
     document.body.appendChild(notif);
 
-    // Trigger slide in
+    // Slide in
     setTimeout(() => {
         notif.style.transform = 'translateX(0)';
         notif.style.opacity = '1';
@@ -165,54 +183,46 @@ function showNotification(product) {
 }
 
 // ===================================
-// SIMPLE NOTIFICATION (for remove)
+// SIMPLE NOTIFICATION
 // ===================================
 function showSimpleNotification(message) {
-    const existing = document.querySelector('.cart-notification');
-    if (existing) existing.remove();
+    const old = document.querySelector('.cart-notification');
+    if (old) old.remove();
 
     const notif = document.createElement('div');
     notif.className = 'cart-notification';
     notif.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
-            <span style="font-size: 20px;">${message.includes('removed') ? '🗑️' : '✅'}</span>
-            <span style="font-weight: 500;">${message}</span>
+        <div style="display:flex;align-items:center;gap:12px;flex:1;">
+            <span style="font-size:20px;">${message.includes('removed') ? '🗑️' : '✅'}</span>
+            <span style="font-weight:500;">${message}</span>
         </div>
-        <button onclick="this.parentElement.remove()" style="
-            background: none;
-            border: none;
-            color: #666;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 0 6px;
-        ">✕</button>
+        <button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;font-size:18px;cursor:pointer;padding:0 6px;">✕</button>
     `;
 
-    Object.assign(notif.style, {
-        position: 'fixed',
-        top: '100px',
-        right: '20px',
-        maxWidth: '400px',
-        background: 'rgba(11, 14, 20, 0.95)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid #d4af37',
-        borderRadius: '14px',
-        padding: '14px 20px',
-        color: '#ffffff',
-        zIndex: '999999',
-        boxShadow: '0 12px 50px rgba(0,0,0,0.9)',
-        fontFamily: "'Poppins', sans-serif",
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '12px',
-        transform: 'translateX(120%)',
-        opacity: '0',
-        transition: 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-        pointerEvents: 'none',
-        borderLeft: '4px solid #d4af37'
-    });
+    notif.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        max-width: 380px;
+        background: #0a0f1a;
+        backdrop-filter: blur(16px);
+        border: 1px solid #d4af37;
+        border-radius: 14px;
+        padding: 14px 20px;
+        color: white;
+        z-index: 999999;
+        box-shadow: 0 12px 50px rgba(0,0,0,0.9);
+        font-family: 'Poppins', Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        transform: translateX(120%);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        pointer-events: none;
+        border-left: 4px solid #d4af37;
+    `;
 
     document.body.appendChild(notif);
 
@@ -235,9 +245,11 @@ function showSimpleNotification(message) {
 // UPDATE CART UI
 // ===================================
 function updateCartUI() {
+    console.log('🔄 Updating cart UI...');
+    
     // Update cart badge
-    const countElements = document.querySelectorAll('.cart-count');
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const countElements = document.querySelectorAll('.cart-count');
     
     countElements.forEach(el => {
         el.textContent = totalItems;
@@ -252,18 +264,21 @@ function updateCartUI() {
             el.style.justifyContent = 'center';
             el.style.fontSize = '11px';
             el.style.fontWeight = '700';
+            el.style.position = 'absolute';
+            el.style.top = '-8px';
+            el.style.right = '-12px';
         } else {
             el.style.display = 'none';
         }
     });
 
-    // Cart page specific
+    // Cart page
     const cartContainer = document.getElementById('cart-items');
+    if (!cartContainer) return;
+
     const emptyMsg = document.getElementById('empty-cart');
     const summary = document.getElementById('cartSummary');
     const table = document.getElementById('cartTable');
-
-    if (!cartContainer) return;
 
     if (cart.length === 0) {
         cartContainer.innerHTML = '';
@@ -280,22 +295,22 @@ function updateCartUI() {
     cartContainer.innerHTML = cart.map(item => `
         <tr>
             <td>
-                <div class="cart-product-info">
-                    <span style="font-size: 30px;">${item.emoji || '🪵'}</span>
-                    <span style="font-weight: 500;">${item.name}</span>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <span style="font-size:30px;">${item.emoji || '🪵'}</span>
+                    <span style="font-weight:500;">${item.name}</span>
                 </div>
             </td>
             <td>£${item.price.toFixed(2)}</td>
             <td>
-                <div class="qty-controls">
-                    <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>−</button>
-                    <span class="qty-number">${item.quantity}</span>
-                    <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''} style="width:34px;height:34px;border:none;background:#d4af37;color:#000;cursor:pointer;font-size:18px;font-weight:700;border-radius:8px;transition:0.3s;">−</button>
+                    <span style="font-size:18px;font-weight:700;min-width:30px;text-align:center;color:white;">${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)" style="width:34px;height:34px;border:none;background:#d4af37;color:#000;cursor:pointer;font-size:18px;font-weight:700;border-radius:8px;transition:0.3s;">+</button>
                 </div>
             </td>
             <td>£${(item.price * item.quantity).toFixed(2)}</td>
             <td>
-                <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                <button onclick="removeFromCart(${item.id})" style="background:rgba(211,47,47,0.15);color:#d32f2f;border:1px solid rgba(211,47,47,0.3);padding:8px 16px;border-radius:8px;cursor:pointer;transition:0.3s;font-weight:600;font-size:13px;">
                     <i class="fa-solid fa-trash"></i> Remove
                 </button>
             </td>
@@ -310,10 +325,39 @@ function updateCartUI() {
 }
 
 // ===================================
-// EVENT LISTENERS
+// SETUP BUTTONS
+// ===================================
+function setupButtons() {
+    console.log('🔧 Setting up Add to Cart buttons...');
+    
+    const buttons = document.querySelectorAll('.add-to-cart-btn');
+    console.log(`🔍 Found ${buttons.length} buttons`);
+
+    buttons.forEach((btn, index) => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const productId = parseInt(this.dataset.productId);
+            console.log(`🛒 Button ${index + 1} clicked - Product ID:`, productId);
+            
+            if (productId) {
+                addToCart(productId);
+            } else {
+                console.error('❌ No product ID on this button');
+                alert('Error: Product ID not found. Please check the button data-product-id attribute.');
+            }
+        });
+    });
+}
+
+// ===================================
+// DOM READY
 // ===================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Star Wars Galaxy Creations - Loaded!');
+    console.log('🚀 Website loaded!');
+
+    // Setup cart buttons
+    setupButtons();
 
     // Mobile menu
     const menuToggle = document.getElementById('menuToggle');
@@ -343,43 +387,19 @@ document.addEventListener('DOMContentLoaded', function() {
         topBtn.style.display = 'none';
     }
 
-    // ✅ ADD TO CART BUTTONS - DIRECT EVENT BINDING
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const productId = parseInt(this.dataset.productId);
-            console.log('🛒 Button clicked for product ID:', productId);
-            if (productId) {
-                addToCart(productId);
-            } else {
-                console.error('❌ No product ID found!');
-            }
-        });
-    });
-
-    // Close menu on link click
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (nav && nav.classList.contains('active')) {
-                nav.classList.remove('active');
-                const icon = menuToggle?.querySelector('i');
-                if (icon) icon.className = 'fa-solid fa-bars';
-            }
-        });
-    });
-
-    // Update cart on load
+    // Update UI
     updateCartUI();
+    
+    console.log('✅ System ready!');
+    console.log(`📦 ${cart.length} items in cart`);
 });
 
 // ===================================
-// EXPOSE FUNCTIONS TO GLOBAL SCOPE
+// EXPOSE FUNCTIONS
 // ===================================
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateQuantity = updateQuantity;
 window.showNotification = showNotification;
 
-console.log('✅ Cart system ready!');
-console.log(`📦 ${cart.length} items in cart`);
+console.log('✅ All functions exposed to window');
