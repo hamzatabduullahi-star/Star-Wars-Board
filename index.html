@@ -20,12 +20,15 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg-dark);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -40,6 +43,12 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0.6;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.75; }
     }
 
     .container {
@@ -64,6 +73,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
+      position: relative;
     }
 
     .logo {
@@ -119,6 +129,7 @@
       border: none;
       color: var(--gold);
       font-size: 1.5rem;
+      cursor: pointer;
     }
 
     .hero {
@@ -151,12 +162,16 @@
       font-weight: 600;
     }
 
+    .btn:hover { background: var(--gold-hover); }
+
     .btn-outline {
       background: transparent;
       border: 1px solid var(--gold);
       color: var(--gold);
       margin-left: 0.75rem;
     }
+
+    .btn-outline:hover { background: var(--bg-panel); }
 
     .section { padding: 4rem 0; }
 
@@ -228,6 +243,9 @@
         flex-direction: column;
         padding: 1.25rem;
         gap: 1rem;
+        border: 1px solid var(--border);
+        border-top: none;
+        z-index: 99;
       }
       nav.open { display: flex; }
       .btn-outline {
@@ -243,7 +261,7 @@
   <header>
     <div class="container header-inner">
       <a href="index.html" class="logo">Star Wars <span>Galaxy Creations</span></a>
-      <button class="menu-toggle" id="menuToggle">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <nav id="mainNav">
         <a href="index.html" class="active">Home</a>
         <a href="products.html">Shop</a>
@@ -312,6 +330,17 @@
     </div>
   </footer>
 
+  <script>
+    // Mobile menu toggle (safe to keep even if script.js also has cart/product logic)
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    if (menuToggle && mainNav) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
