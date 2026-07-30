@@ -15,9 +15,7 @@
         ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:20px;box-shadow:0 0 20px var(--gold-glow)}
         .container{width:90%;max-width:1300px;margin:auto}
 
-        /* ===================================
-           PREMIUM HEADER
-        =================================== */
+        /* HEADER */
         header{position:fixed;top:0;left:0;width:100%;background:rgba(5,7,13,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:999;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)1;box-shadow:0 4px 40px rgba(0,0,0,0.6),0 0 30px rgba(212,175,55,0.05)}
         .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
         .logo{font-size:28px;font-weight:800;color:var(--gold);text-decoration:none;text-shadow:0 0 30px var(--gold-glow),0 0 60px rgba(212,175,55,0.1);display:flex;align-items:center;gap:10px;letter-spacing:1px}
@@ -39,18 +37,12 @@
         .menu-toggle{display:none;font-size:28px;color:white;background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;transition:.3s}
         .menu-toggle:hover{background:rgba(212,175,55,0.1)}
 
-        /* ===================================
-           CHECKOUT PAGE
-        =================================== */
+        /* CHECKOUT PAGE */
         .checkout-page{padding-top:140px;min-height:70vh}
         .section-title{font-size:42px;text-align:center;margin-bottom:15px;color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
         .section-subtitle{text-align:center;color:var(--text-muted);margin-bottom:40px}
-
         .checkout-grid{display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:start}
 
-        /* ===================================
-           CHECKOUT FORM
-        =================================== */
         .checkout-card{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:var(--shadow);transition:.4s}
         .checkout-card:hover{border-color:var(--gold);box-shadow:0 8px 40px rgba(212,175,55,0.08)}
         .checkout-card h3{color:var(--gold);font-size:18px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
@@ -63,26 +55,22 @@
         .form-group input:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .form-group input::placeholder,.form-group textarea::placeholder{color:#666}
         .form-group textarea{resize:vertical;min-height:80px}
-
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 
-        /* ===================================
-           PAYMENT METHODS
-        =================================== */
+        /* PAYMENT METHODS - UPDATED */
         .payment-option{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:10px;border:1px solid transparent;transition:.3s;cursor:pointer}
         .payment-option:hover{background:rgba(212,175,55,0.06);border-color:var(--border)}
         .payment-option input[type="radio"]{width:18px;height:18px;accent-color:var(--gold);cursor:pointer;flex-shrink:0}
         .payment-option label{margin:0;cursor:pointer;color:var(--text);font-weight:500;font-size:14px;flex:1}
-        .payment-option .pay-icon{font-size:22px;color:var(--gold);opacity:0.6;width:30px;text-align:center}
+        .payment-option .pay-icon{font-size:20px;color:var(--gold);opacity:0.6;width:30px;text-align:center}
 
-        /* ===================================
-           ORDER SUMMARY
-        =================================== */
         .order-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
         .order-item:last-child{border-bottom:none}
-        .order-item .item-left{display:flex;align-items:center;gap:10px}
+        .order-item .item-left{display:flex;align-items:center;gap:10px;flex:1}
         .order-item .item-left .emoji{font-size:24px}
+        .order-item .item-left .details{flex:1}
         .order-item .item-left .name{color:var(--white);font-weight:500;font-size:14px}
+        .order-item .item-left .size-info{color:var(--text-muted);font-size:12px}
         .order-item .item-left .qty{color:var(--text-muted);font-size:12px}
         .order-item .item-price{color:var(--gold);font-weight:600;font-size:14px}
 
@@ -97,20 +85,15 @@
 
         .whatsapp-note{text-align:center;margin-top:12px;color:var(--text-muted);font-size:13px}
         .whatsapp-note i{color:#25D366;margin-right:6px;font-size:16px}
-
         .secure-badge{text-align:center;margin-top:15px;color:var(--text-muted);font-size:13px}
         .secure-badge i{color:var(--gold);margin-right:6px}
 
-        /* Empty checkout */
         .empty-checkout{text-align:center;padding:40px 20px}
         .empty-checkout i{font-size:50px;color:var(--gold);opacity:0.3;display:block;margin-bottom:15px}
         .empty-checkout p{color:var(--text-muted)}
         .empty-checkout .btn-shop{display:inline-block;margin-top:15px;padding:12px 30px;background:var(--gold);color:#000;border-radius:50px;text-decoration:none;font-weight:700;transition:.3s;box-shadow:0 0 30px var(--gold-glow)}
         .empty-checkout .btn-shop:hover{background:var(--gold2);transform:translateY(-3px)}
 
-        /* ===================================
-           FOOTER
-        =================================== */
         footer{margin-top:80px;padding:60px 0;background:rgba(0,0,0,0.9);text-align:center;border-top:1px solid var(--border)}
         footer h2{color:var(--gold);margin-bottom:20px;text-shadow:0 0 30px var(--gold-glow)}
         footer p{color:var(--text-muted);margin-top:10px}
@@ -118,12 +101,9 @@
         .social-icons a{width:50px;height:50px;background:var(--bg-card);border-radius:50%;display:flex;justify-content:center;align-items:center;text-decoration:none;color:white;font-size:20px;transition:.3s;border:1px solid var(--border)}
         .social-icons a:hover{background:var(--gold);color:black;box-shadow:0 0 30px var(--gold-glow);transform:translateY(-5px)}
 
-        #topBtn{position:fixed;right:25px;bottom:25px;width:55px;height:55px;border:none;border-radius:50%;background:var(--gold);color:#000;font-size:22px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,0.3);transition:.35s;z-index:999}
+        #topBtn{position:fixed;right:25px;bottom:80px;width:55px;height:55px;border:none;border-radius:50%;background:var(--gold);color:#000;font-size:22px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,0.3);transition:.35s;z-index:999}
         #topBtn:hover{transform:translateY(-6px);background:var(--gold2);box-shadow:0 10px 40px rgba(212,175,55,0.5)}
 
-        /* ===================================
-           RESPONSIVE
-        =================================== */
         @media(max-width:992px){.checkout-grid{grid-template-columns:1fr}}
         @media(max-width:768px){
             .menu-toggle{display:block}
@@ -138,6 +118,7 @@
             .section-title{font-size:28px}
             .checkout-card{padding:20px}
             .form-row{grid-template-columns:1fr}
+            #topBtn{bottom:65px}
         }
         @media(max-width:480px){
             .logo{font-size:18px;gap:6px}
@@ -145,14 +126,13 @@
             .checkout-card{padding:16px}
             .order-total.grand{font-size:18px}
             .place-order-btn{font-size:16px;padding:14px}
+            #topBtn{bottom:55px;width:45px;height:45px;font-size:18px}
         }
     </style>
 </head>
 <body>
 
-    <!-- ===================================
-         HEADER
-    =================================== -->
+    <!-- HEADER -->
     <header>
         <div class="container header-inner">
             <a href="index.html" class="logo">
@@ -170,15 +150,13 @@
                 <a href="cart.html" class="cart-btn">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-label">Cart</span>
-                    <span class="cart-count show" id="cartCount">0</span>
+                    <span class="cart-count" id="cartCount">0</span>
                 </a>
             </nav>
         </div>
     </header>
 
-    <!-- ===================================
-         CHECKOUT PAGE
-    =================================== -->
+    <!-- CHECKOUT PAGE -->
     <section class="section checkout-page">
         <div class="container">
             <h1 class="section-title"><i class="fa-solid fa-lock" style="color:var(--gold);"></i> Secure Checkout</h1>
@@ -193,24 +171,20 @@
                             <label>Full Name <span class="required">*</span></label>
                             <input type="text" id="fullname" placeholder="Enter your full name" required>
                         </div>
-
                         <div class="form-group">
                             <label>Email Address <span class="required">*</span></label>
                             <input type="email" id="email" placeholder="Enter your email" required>
                         </div>
-
                         <div class="form-group">
                             <label>Phone Number <span class="required">*</span></label>
                             <input type="tel" id="phone" placeholder="Enter your phone number" required>
                         </div>
 
                         <h3 style="margin-top:25px;"><i class="fa-solid fa-location-dot"></i> Shipping Address</h3>
-
                         <div class="form-group">
                             <label>Country <span class="required">*</span></label>
                             <input type="text" id="country" placeholder="Country" required>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label>State / Province <span class="required">*</span></label>
@@ -221,12 +195,10 @@
                                 <input type="text" id="city" placeholder="City" required>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label>Street Address <span class="required">*</span></label>
                             <textarea id="address" placeholder="House number, street name..." rows="3" required></textarea>
                         </div>
-
                         <div class="form-group">
                             <label>ZIP / Postal Code</label>
                             <input type="text" id="zip" placeholder="ZIP Code">
@@ -234,28 +206,55 @@
 
                         <h3 style="margin-top:25px;"><i class="fa-solid fa-credit-card"></i> Payment Method</h3>
 
+                        <!-- PayPal -->
                         <div class="payment-option">
                             <input type="radio" name="payment" value="PayPal" id="paypal" required>
                             <label for="paypal">PayPal</label>
                             <span class="pay-icon"><i class="fa-brands fa-paypal"></i></span>
                         </div>
 
+                        <!-- Cash App -->
                         <div class="payment-option">
                             <input type="radio" name="payment" value="Cash App" id="cashapp">
                             <label for="cashapp">Cash App</label>
                             <span class="pay-icon"><i class="fa-solid fa-dollar-sign"></i></span>
                         </div>
 
+                        <!-- Bank Transfer -->
                         <div class="payment-option">
                             <input type="radio" name="payment" value="Bank Transfer" id="bank">
                             <label for="bank">Bank Transfer</label>
                             <span class="pay-icon"><i class="fa-solid fa-building-columns"></i></span>
                         </div>
 
+                        <!-- Email Payment Instructions -->
                         <div class="payment-option">
                             <input type="radio" name="payment" value="Email Payment Instructions" id="emailpay">
                             <label for="emailpay">Email Payment Instructions</label>
                             <span class="pay-icon"><i class="fa-solid fa-envelope"></i></span>
+                        </div>
+
+                        <!-- ===== NEW PAYMENT METHODS ===== -->
+
+                        <!-- Bitcoin -->
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="Bitcoin" id="bitcoin">
+                            <label for="bitcoin">Bitcoin (BTC)</label>
+                            <span class="pay-icon"><i class="fa-brands fa-bitcoin"></i></span>
+                        </div>
+
+                        <!-- Chime -->
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="Chime" id="chime">
+                            <label for="chime">Chime</label>
+                            <span class="pay-icon"><i class="fa-solid fa-bolt"></i></span>
+                        </div>
+
+                        <!-- Apple Pay -->
+                        <div class="payment-option">
+                            <input type="radio" name="payment" value="Apple Pay" id="applepay">
+                            <label for="applepay">Apple Pay</label>
+                            <span class="pay-icon"><i class="fa-brands fa-apple"></i></span>
                         </div>
 
                         <button type="submit" class="place-order-btn">
@@ -265,7 +264,6 @@
                         <div class="whatsapp-note">
                             <i class="fa-brands fa-whatsapp"></i> Order will be sent to +1 (516) 288-4763
                         </div>
-
                         <div class="secure-badge">
                             <i class="fa-solid fa-shield-halved"></i> Secure Checkout • Your order details are protected.
                         </div>
@@ -275,37 +273,29 @@
                 <!-- RIGHT: Order Summary -->
                 <div class="checkout-card" id="orderSummary">
                     <h3><i class="fa-solid fa-receipt"></i> Your Order</h3>
-                    <div id="orderItems">
-                        <!-- Rendered by JavaScript -->
-                    </div>
-
+                    <div id="orderItems"></div>
                     <hr class="order-divider">
-
                     <div class="order-total">
                         <span>Subtotal</span>
-                        <span id="checkoutSubtotal">£0.00</span>
+                        <span id="checkoutSubtotal">$0.00</span>
                     </div>
                     <div class="order-total" style="color:var(--text-muted);font-size:13px;">
                         <span>Shipping</span>
                         <span>Calculated at checkout</span>
                     </div>
-
                     <div class="order-total grand">
                         <span>Total</span>
-                        <span id="checkoutTotal">£0.00</span>
+                        <span id="checkoutTotal">$0.00</span>
                     </div>
-
                     <p style="margin-top:12px;color:var(--text-muted);font-size:13px;text-align:center;">
-                        <i class="fa-solid fa-truck" style="color:var(--gold);"></i> Free shipping on orders over £100
+                        <i class="fa-solid fa-truck" style="color:var(--gold);"></i> Free shipping on orders over $100
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===================================
-         FOOTER
-    =================================== -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <h2>Star Wars Galaxy Creations</h2>
@@ -322,14 +312,11 @@
 
     <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
-    <!-- ===================================
-         JAVASCRIPT - WHATSAPP INTEGRATION
-    =================================== -->
     <script>
         // ============================================
-        // WHATSAPP NUMBER (YOUR BUSINESS NUMBER)
+        // WHATSAPP NUMBER
         // ============================================
-        const WHATSAPP_NUMBER = '15162884763'; // +1 (516) 288-4763
+        const WHATSAPP_NUMBER = '15162884763';
 
         // ============================================
         // CART SYSTEM
@@ -346,8 +333,8 @@
 
             if (cart.length === 0) {
                 container.innerHTML = '<div class="empty-checkout"><i class="fa-solid fa-cart-plus"></i><p>Your cart is empty.</p><a href="products.html" class="btn-shop"><i class="fa-solid fa-shop"></i> Continue Shopping</a></div>';
-                if (subtotalEl) subtotalEl.textContent = '£0.00';
-                if (totalEl) totalEl.textContent = '£0.00';
+                if (subtotalEl) subtotalEl.textContent = '$0.00';
+                if (totalEl) totalEl.textContent = '$0.00';
                 return;
             }
 
@@ -361,15 +348,19 @@
                 html += '<div class="order-item">' +
                     '<div class="item-left">' +
                         '<span class="emoji">' + (item.emoji || '🪵') + '</span>' +
-                        '<div><div class="name">' + item.name + '</div><div class="qty">Qty: ' + item.quantity + '</div></div>' +
+                        '<div class="details">' +
+                            '<div class="name">' + item.name + '</div>' +
+                            '<div class="size-info">📐 Size: ' + (item.size || 'Standard') + '</div>' +
+                            '<div class="qty">Qty: ' + item.quantity + '</div>' +
+                        '</div>' +
                     '</div>' +
-                    '<div class="item-price">£' + itemTotal.toFixed(2) + '</div>' +
+                    '<div class="item-price">$' + itemTotal.toFixed(2) + '</div>' +
                 '</div>';
             }
 
             container.innerHTML = html;
-            if (subtotalEl) subtotalEl.textContent = '£' + subtotal.toFixed(2);
-            if (totalEl) totalEl.textContent = '£' + subtotal.toFixed(2);
+            if (subtotalEl) subtotalEl.textContent = '$' + subtotal.toFixed(2);
+            if (totalEl) totalEl.textContent = '$' + subtotal.toFixed(2);
         }
 
         function updateCartBadge() {
@@ -378,8 +369,7 @@
             var countElements = document.querySelectorAll('.cart-count');
             for (var j = 0; j < countElements.length; j++) {
                 countElements[j].textContent = totalItems;
-                if (totalItems > 0) { countElements[j].classList.add('show'); } 
-                else { countElements[j].classList.remove('show'); }
+                countElements[j].style.display = totalItems > 0 ? 'flex' : 'none';
             }
         }
 
@@ -387,7 +377,6 @@
         // SEND ORDER TO WHATSAPP
         // ============================================
         function sendOrderToWhatsApp(orderData) {
-            // Build the message
             var message = '🛒 *NEW ORDER - Star Wars Galaxy Creations*%0A%0A';
             
             message += '👤 *Customer Details*%0A';
@@ -405,22 +394,18 @@
             message += '📦 *Order Items*%0A';
             for (var i = 0; i < orderData.items.length; i++) {
                 var item = orderData.items[i];
-                message += '• ' + (item.emoji || '🪵') + ' ' + item.name + ' x' + item.quantity + ' = £' + (item.price * item.quantity).toFixed(2) + '%0A';
+                message += '• ' + (item.emoji || '🪵') + ' ' + item.name + '%0A';
+                message += '  📐 Size: ' + (item.size || 'Standard') + '%0A';
+                message += '  Qty: ' + item.quantity + ' × $' + item.price.toFixed(2) + ' = $' + (item.price * item.quantity).toFixed(2) + '%0A';
             }
             
             message += '%0A💳 *Payment Method*: ' + orderData.payment + '%0A';
-            message += '💰 *Total Amount*: £' + orderData.total.toFixed(2) + '%0A%0A';
-            
+            message += '💰 *Total Amount*: $' + orderData.total.toFixed(2) + '%0A%0A';
             message += '📅 Order placed: ' + new Date().toLocaleString() + '%0A%0A';
             message += '✨ *May the Force be with you!* ✨';
 
-            // WhatsApp URL
             var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + message;
-            
-            // Open WhatsApp
             window.open(url, '_blank');
-            
-            // Clear cart after order
             localStorage.setItem('starWarsCart', JSON.stringify([]));
         }
 
@@ -431,7 +416,6 @@
             updateCheckoutUI();
             updateCartBadge();
 
-            // Mobile menu
             var menuToggle = document.getElementById('menuToggle');
             var nav = document.getElementById('mainNav');
             if (menuToggle && nav) {
@@ -442,7 +426,6 @@
                 });
             }
 
-            // Back to top
             var topBtn = document.getElementById('topBtn');
             if (topBtn) {
                 window.addEventListener('scroll', function() {
@@ -451,19 +434,6 @@
                 topBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
 
-            // Close menu on link click
-            var navLinks = document.querySelectorAll('nav a');
-            for (var p = 0; p < navLinks.length; p++) {
-                navLinks[p].addEventListener('click', function() {
-                    if (nav && nav.classList.contains('active')) {
-                        nav.classList.remove('active');
-                        var icon = menuToggle ? menuToggle.querySelector('i') : null;
-                        if (icon) icon.className = 'fa-solid fa-bars';
-                    }
-                });
-            }
-
-            // Checkout form - WhatsApp submission
             var form = document.getElementById('checkoutForm');
             if (form) {
                 form.addEventListener('submit', function(e) {
@@ -480,7 +450,6 @@
                         return;
                     }
 
-                    // Get customer info
                     var fullname = document.getElementById('fullname').value.trim();
                     var email = document.getElementById('email').value.trim();
                     var phone = document.getElementById('phone').value.trim();
@@ -495,11 +464,9 @@
                         return;
                     }
 
-                    // Calculate total
                     var total = 0;
                     for (var k = 0; k < cart.length; k++) { total += cart[k].price * cart[k].quantity; }
 
-                    // Build order data
                     var orderData = {
                         fullname: fullname,
                         email: email,
@@ -514,7 +481,6 @@
                         total: total
                     };
 
-                    // Send to WhatsApp
                     sendOrderToWhatsApp(orderData);
                 });
             }
