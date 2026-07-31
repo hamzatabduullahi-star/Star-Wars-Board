@@ -10,12 +10,114 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-        :root{--bg-primary:#05070d;--bg-card:rgba(17,24,39,0.85);--gold:#d4af37;--gold2:#f6d365;--gold-glow:rgba(212,175,55,0.25);--white:#ffffff;--text:#d1d5db;--text-muted:#8892a0;--border:rgba(255,255,255,0.08);--shadow:0 8px 32px rgba(0,0,0,0.6)}
+        
+        :root{
+            --bg-primary:#05070d;
+            --bg-card:rgba(17,24,39,0.85);
+            --gold:#d4af37;
+            --gold2:#f6d365;
+            --gold-glow:rgba(212,175,55,0.25);
+            --white:#ffffff;
+            --text:#d1d5db;
+            --text-muted:#8892a0;
+            --border:rgba(255,255,255,0.08);
+            --shadow:0 8px 32px rgba(0,0,0,0.6)
+        }
+
         body{font-family:'Poppins',sans-serif;background:var(--bg-primary);color:var(--white);overflow-x:hidden;min-height:100vh;background-image:radial-gradient(ellipse at 20% 50%,rgba(40,60,120,0.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(80,40,80,0.2) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(20,60,100,0.15) 0%,transparent 50%),url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.4"><circle cx="20" cy="30" r="1.5" fill="white"/><circle cx="50" cy="10" r="1" fill="white"/><circle cx="80" cy="50" r="2" fill="white"/><circle cx="120" cy="20" r="1.2" fill="white"/><circle cx="160" cy="40" r="1.8" fill="white"/><circle cx="180" cy="80" r="1" fill="white"/><circle cx="10" cy="80" r="2.2" fill="white"/><circle cx="40" cy="100" r="1.5" fill="white"/><circle cx="70" cy="130" r="1" fill="white"/><circle cx="100" cy="160" r="2" fill="white"/><circle cx="130" cy="180" r="1.3" fill="white"/><circle cx="170" cy="150" r="1.7" fill="white"/><circle cx="190" cy="120" r="1" fill="white"/><circle cx="30" cy="170" r="1.5" fill="white"/><circle cx="90" cy="90" r="1.2" fill="white"/><circle cx="150" cy="100" r="2.5" fill="white"/><circle cx="60" cy="60" r="0.8" fill="white"/><circle cx="110" cy="110" r="1.1" fill="white"/></svg>');background-size:cover,cover,cover,300px 300px;background-blend-mode:normal,normal,normal,overlay}
         ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:20px;box-shadow:0 0 20px var(--gold-glow)}
         .container{width:90%;max-width:1300px;margin:auto}
 
-        /* HEADER */
+        /* ===================================
+           LIGHT MODE
+        =================================== */
+        body.light-mode {
+            --bg-primary: #f0f2f5;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --white: #111111;
+            --text: #333333;
+            --text-muted: #666666;
+            --border: rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        body.light-mode header {
+            background: rgba(255, 255, 255, 0.92);
+        }
+        body.light-mode .logo span {
+            color: #111;
+        }
+        body.light-mode nav a {
+            color: rgba(0, 0, 0, 0.7);
+        }
+        body.light-mode nav a:hover {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.08);
+        }
+        body.light-mode nav a.active {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.12);
+        }
+        body.light-mode .cart-btn {
+            color: rgba(0, 0, 0, 0.8);
+        }
+        body.light-mode .step {
+            background: rgba(255, 255, 255, 0.85);
+        }
+        body.light-mode .step p {
+            color: #555;
+        }
+        body.light-mode footer {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        body.light-mode footer p {
+            color: #555;
+        }
+        body.light-mode .social-icons a {
+            background: #f0f0f0;
+            color: #333;
+        }
+        body.light-mode .social-icons a:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* ===================================
+           THEME TOGGLE
+        =================================== */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 5px 12px 5px 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+        .theme-toggle:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        .theme-toggle .icon {
+            font-size: 16px;
+        }
+        .theme-toggle .label {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+        .theme-toggle:hover .label {
+            opacity: 1;
+        }
+
+        /* ===================================
+           HEADER
+        =================================== */
         header{position:fixed;top:0;left:0;width:100%;background:rgba(5,7,13,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:999;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)1;box-shadow:0 4px 40px rgba(0,0,0,0.6),0 0 30px rgba(212,175,55,0.05)}
         .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
         .logo{font-size:28px;font-weight:800;color:var(--gold);text-decoration:none;text-shadow:0 0 30px var(--gold-glow),0 0 60px rgba(212,175,55,0.1);display:flex;align-items:center;gap:10px;letter-spacing:1px}
@@ -23,7 +125,7 @@
         .logo span{color:white;font-weight:300}
         .logo .star{color:var(--gold);animation:pulseStar 2s ease-in-out infinite}
         @keyframes pulseStar{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.9)}}
-        nav{display:flex;align-items:center;gap:8px}
+        nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
         nav a{text-decoration:none;color:rgba(255,255,255,0.7);font-weight:500;font-size:15px;padding:8px 16px;border-radius:8px;transition:.3s;position:relative;letter-spacing:0.5px}
         nav a:hover{color:white;background:rgba(212,175,55,0.1)}
         nav a.active{color:var(--gold);background:rgba(212,175,55,0.12);box-shadow:0 0 20px rgba(212,175,55,0.05)}
@@ -37,55 +139,88 @@
         .menu-toggle{display:none;font-size:28px;color:white;background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;transition:.3s}
         .menu-toggle:hover{background:rgba(212,175,55,0.1)}
 
-        /* ADMIN ACCESS - BOTTOM-RIGHT */
-        .admin-access {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(5, 7, 13, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 6px 12px 6px 10px;
-            transition: 0.3s;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 11px;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .admin-access:hover {
-            border-color: var(--gold);
+        /* ===================================
+           HERO WITH SLIDING TEXT
+        =================================== */
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:100px;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url("images/banner.jpg");background-size:cover;background-position:center;background-blend-mode:overlay;border-bottom:1px solid var(--border)}
+        .hero-content{max-width:800px;overflow:hidden}
+
+        /* SLIDING TITLE */
+        .sliding-title {
+            display: inline-block;
+            white-space: nowrap;
+            animation: slideText 10s linear infinite;
+            font-size: 65px;
+            font-weight: 800;
             color: var(--gold);
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
-            transform: translateY(-2px);
-        }
-        .admin-access .icon {
-            font-size: 13px;
-            transition: 0.3s;
-        }
-        .admin-access:hover .icon {
-            transform: scale(1.1);
-        }
-        .admin-access .text {
-            font-size: 10px;
-            font-weight: 500;
-            opacity: 0.5;
-        }
-        .admin-access:hover .text {
-            opacity: 1;
+            text-shadow: 0 0 60px var(--gold-glow);
         }
 
-        /* HERO */
-        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:100px;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url("images/banner.jpg");background-size:cover;background-position:center;background-blend-mode:overlay;border-bottom:1px solid var(--border)}
-        .hero-content{max-width:800px}
-        .hero h1{font-size:65px;font-weight:800;margin-bottom:20px;color:var(--gold);text-shadow:0 0 60px var(--gold-glow)}
-        .hero h1 .highlight{color:white}
+        @keyframes slideText {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            10% {
+                transform: translateX(0%);
+                opacity: 1;
+            }
+            45% {
+                transform: translateX(0%);
+                opacity: 1;
+            }
+            55% {
+                transform: translateX(0%);
+                opacity: 1;
+            }
+            90% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        .sliding-subtitle {
+            display: inline-block;
+            white-space: nowrap;
+            animation: slideText2 12s linear infinite;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 0 30px rgba(0,0,0,0.5);
+            margin-top: 10px;
+        }
+
+        @keyframes slideText2 {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            15% {
+                transform: translateX(0%);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(0%);
+                opacity: 1;
+            }
+            60% {
+                transform: translateX(0%);
+                opacity: 1;
+            }
+            85% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
         .hero p{font-size:20px;line-height:1.8;color:var(--text);margin-bottom:35px}
         .hero-buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
         .btn{display:inline-block;padding:15px 35px;background:var(--gold);color:#000;border-radius:50px;text-decoration:none;font-weight:700;transition:.4s;box-shadow:0 0 25px var(--gold-glow)}
@@ -93,7 +228,9 @@
         .btn-outline{display:inline-block;padding:15px 35px;border:2px solid var(--gold);border-radius:50px;text-decoration:none;color:white;transition:.4s}
         .btn-outline:hover{background:var(--gold);color:#000;box-shadow:0 0 30px var(--gold-glow)}
 
-        /* HOW IT WORKS */
+        /* ===================================
+           HOW IT WORKS
+        =================================== */
         .section{padding:100px 0}
         .section-title{font-size:42px;text-align:center;margin-bottom:15px;color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
         .section-subtitle{text-align:center;color:var(--text-muted);margin-bottom:60px}
@@ -104,7 +241,9 @@
         .step h3{color:var(--white);margin-bottom:10px}
         .step p{color:var(--text-muted);font-size:14px;line-height:1.7}
 
-        /* FOOTER */
+        /* ===================================
+           FOOTER
+        =================================== */
         footer{margin-top:0;padding:60px 0;background:rgba(0,0,0,0.9);text-align:center;border-top:1px solid var(--border)}
         footer h2{color:var(--gold);margin-bottom:20px;text-shadow:0 0 30px var(--gold-glow)}
         footer p{color:var(--text-muted);margin-top:10px}
@@ -115,6 +254,9 @@
         #topBtn{position:fixed;right:25px;bottom:80px;width:55px;height:55px;border:none;border-radius:50%;background:var(--gold);color:#000;font-size:22px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,0.3);transition:.35s;z-index:999}
         #topBtn:hover{transform:translateY(-6px);background:var(--gold2);box-shadow:0 10px 40px rgba(212,175,55,0.5)}
 
+        /* ===================================
+           RESPONSIVE
+        =================================== */
         @media(max-width:768px){
             .menu-toggle{display:block}
             nav{display:none;width:100%;flex-direction:column;background:rgba(5,7,13,0.98);margin-top:10px;padding:20px;border-radius:15px;backdrop-filter:blur(20px);border:1px solid var(--border);gap:5px}
@@ -122,6 +264,7 @@
             nav a{width:100%;padding:12px 16px}
             nav a.active::before{display:none}
             .cart-btn{width:100%;justify-content:center;padding:12px 16px;margin-top:5px}
+            .theme-toggle{width:100%;justify-content:center;margin:5px 0 0}
             .logo{font-size:22px}
             .logo i{font-size:24px}
             .hero h1{font-size:36px}
@@ -129,18 +272,18 @@
             .hero-buttons .btn,.hero-buttons .btn-outline{width:100%;text-align:center}
             .section-title{font-size:28px}
             .steps-grid{grid-template-columns:1fr 1fr}
-            .admin-access{bottom:10px;right:10px;padding:5px 10px 5px 8px}
-            .admin-access .text{font-size:9px;display:none}
             #topBtn{bottom:65px}
+            .sliding-title{font-size:36px}
+            .sliding-subtitle{font-size:20px}
         }
         @media(max-width:480px){
             .logo{font-size:18px;gap:6px}
             .logo i{font-size:20px}
             .hero h1{font-size:28px}
             .steps-grid{grid-template-columns:1fr}
-            .admin-access{bottom:8px;right:8px;padding:4px 8px 4px 6px}
-            .admin-access .icon{font-size:11px}
             #topBtn{bottom:55px;width:45px;height:45px;font-size:18px}
+            .sliding-title{font-size:28px}
+            .sliding-subtitle{font-size:18px}
         }
     </style>
 </head>
@@ -165,14 +308,26 @@
                     <span class="cart-label">Cart</span>
                     <span class="cart-count" id="cartCount">0</span>
                 </a>
+                <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                    <span class="icon">🌙</span>
+                    <span class="label" id="themeLabel">Dark</span>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- ===================================
+         HERO WITH SLIDING TEXT
+    =================================== -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>Bring the <span class="highlight">Galaxy</span> Home</h1>
+            <!-- SLIDING TEXT -->
+            <div style="margin-bottom:10px;">
+                <span class="sliding-title">✨ Star Wars Galaxy</span>
+            </div>
+            <div style="margin-bottom:20px;">
+                <span class="sliding-subtitle">🌟 Bring the Galaxy Home</span>
+            </div>
             <p>Handcrafted Star Wars-inspired products for fans and collectors. Premium cutting boards, custom jackets, unique lights, and decorative wreaths.</p>
             <div class="hero-buttons">
                 <a href="products.html" class="btn"><i class="fa-solid fa-shop"></i> Shop Now</a>
@@ -181,7 +336,9 @@
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
+    <!-- ===================================
+         HOW IT WORKS
+    =================================== -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
@@ -211,7 +368,9 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ===================================
+         FOOTER
+    =================================== -->
     <footer>
         <div class="container">
             <h2>Star Wars Galaxy Creations</h2>
@@ -227,41 +386,90 @@
         </div>
     </footer>
 
+    <!-- ===================================
+         BACK TO TOP
+    =================================== -->
     <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
-    <!-- ADMIN ACCESS - BOTTOM-RIGHT -->
-    <a href="admin.html" class="admin-access" aria-label="Admin Panel">
-        <span class="icon">🔐</span>
-        <span class="text">Admin</span>
-        <span class="icon">🔏</span>
+    <!-- ===================================
+         HIDDEN ADMIN ACCESS
+    =================================== -->
+    <a href="admin.html" class="admin-access" style="position:fixed;bottom:15px;right:15px;z-index:9999;display:flex;align-items:center;gap:6px;background:rgba(5,7,13,0.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);border-radius:20px;padding:6px 12px 6px 10px;transition:.3s;text-decoration:none;color:rgba(255,255,255,0.3);font-size:11px;font-family:'Poppins',sans-serif;letter-spacing:0.5px;box-shadow:0 2px 10px rgba(0,0,0,0.3);">
+        <span class="icon" style="font-size:13px;">🔐</span>
+        <span class="text" style="font-size:10px;font-weight:500;opacity:0.5;">Admin</span>
+        <span class="icon" style="font-size:13px;">🔏</span>
     </a>
 
     <script>
-        function updateCartBadge() {
-            var cart = [];
-            try { var saved = localStorage.getItem('starWarsCart'); if (saved) cart = JSON.parse(saved); } catch(e) {}
-            var totalItems = 0;
-            for (var i = 0; i < cart.length; i++) { totalItems += cart[i].quantity; }
-            var countElements = document.querySelectorAll('.cart-count');
-            for (var j = 0; j < countElements.length; j++) {
-                countElements[j].textContent = totalItems;
-                if (totalItems > 0) { countElements[j].classList.add('show'); } 
-                else { countElements[j].classList.remove('show'); }
+        // ============================================
+        // DARK / LIGHT MODE TOGGLE
+        // ============================================
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle .icon');
+            const label = document.getElementById('themeLabel');
+
+            body.classList.toggle('light-mode');
+
+            if (body.classList.contains('light-mode')) {
+                if (icon) icon.textContent = '☀️';
+                if (label) label.textContent = 'Light';
+                localStorage.setItem('theme', 'light');
+            } else {
+                if (icon) icon.textContent = '🌙';
+                if (label) label.textContent = 'Dark';
+                localStorage.setItem('theme', 'dark');
             }
         }
 
+        // Load saved theme
         document.addEventListener('DOMContentLoaded', function() {
-            var menuToggle = document.getElementById('menuToggle');
-            var nav = document.getElementById('mainNav');
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle .icon');
+            const label = document.getElementById('themeLabel');
+
+            if (savedTheme === 'light') {
+                body.classList.add('light-mode');
+                if (icon) icon.textContent = '☀️';
+                if (label) label.textContent = 'Light';
+            } else {
+                body.classList.remove('light-mode');
+                if (icon) icon.textContent = '🌙';
+                if (label) label.textContent = 'Dark';
+            }
+        });
+
+        // ============================================
+        // CART BADGE
+        // ============================================
+        function updateCartBadge() {
+            let cart = [];
+            try { const saved = localStorage.getItem('starWarsCart'); if (saved) cart = JSON.parse(saved); } catch(e) {}
+            let totalItems = 0;
+            for (let i = 0; i < cart.length; i++) { totalItems += cart[i].quantity; }
+            const countElements = document.querySelectorAll('.cart-count');
+            countElements.forEach(el => {
+                el.textContent = totalItems;
+                el.style.display = totalItems > 0 ? 'flex' : 'none';
+            });
+        }
+
+        // ============================================
+        // MOBILE MENU & BACK TO TOP
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const nav = document.getElementById('mainNav');
             if (menuToggle && nav) {
                 menuToggle.addEventListener('click', function() {
                     nav.classList.toggle('active');
-                    var icon = menuToggle.querySelector('i');
+                    const icon = menuToggle.querySelector('i');
                     if (icon) { icon.className = nav.classList.contains('active') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; }
                 });
             }
 
-            var topBtn = document.getElementById('topBtn');
+            const topBtn = document.getElementById('topBtn');
             if (topBtn) {
                 window.addEventListener('scroll', function() {
                     topBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
@@ -269,22 +477,19 @@
                 topBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
 
-            var navLinks = document.querySelectorAll('nav a');
-            for (var p = 0; p < navLinks.length; p++) {
-                navLinks[p].addEventListener('click', function() {
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
                     if (nav && nav.classList.contains('active')) {
                         nav.classList.remove('active');
-                        var icon = menuToggle ? menuToggle.querySelector('i') : null;
+                        const icon = menuToggle ? menuToggle.querySelector('i') : null;
                         if (icon) icon.className = 'fa-solid fa-bars';
                     }
                 });
-            }
+            });
 
             updateCartBadge();
         });
-
-        console.log('🚀 Star Wars Galaxy Creations - Homepage Loaded!');
-        console.log('🔐 Admin Panel: Click the padlock at bottom-right');
     </script>
 </body>
 </html>
