@@ -42,19 +42,18 @@
         .theme-toggle:hover .label{opacity:1}
 
         /* ===================================
-           HEADER WITH SLIDING LOGO
+           HEADER WITH SLIDING LOGO - FAST
         =================================== */
         header{position:fixed;top:0;left:0;width:100%;background:rgba(5,7,13,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:999;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)1;box-shadow:0 4px 40px rgba(0,0,0,0.6),0 0 30px rgba(212,175,55,0.05)}
         .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
 
-        /* SLIDING LOGO IN HEADER */
-        .logo-slide{display:inline-block;animation:slideLogo 8s ease-in-out infinite;font-size:28px;font-weight:800;color:var(--gold);text-decoration:none;text-shadow:0 0 30px var(--gold-glow),0 0 60px rgba(212,175,55,0.1);white-space:nowrap}
+        .logo-slide{display:inline-block;animation:slideLogo 6s ease-in-out infinite;font-size:28px;font-weight:800;color:var(--gold);text-decoration:none;text-shadow:0 0 30px var(--gold-glow),0 0 60px rgba(212,175,55,0.1);white-space:nowrap}
         .logo-slide i{font-size:30px;color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
         .logo-slide span{color:white;font-weight:300}
         .logo-slide .star{color:var(--gold);animation:pulseStar 2s ease-in-out infinite}
         @keyframes pulseStar{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.9)}}
-        
-        /* HEADER LOGO SLIDING ANIMATION */
+
+        /* FASTER HEADER LOGO ANIMATION */
         @keyframes slideLogo{
             0%{transform:translateX(0%);opacity:1}
             20%{transform:translateX(0%);opacity:1}
@@ -79,37 +78,37 @@
         .menu-toggle:hover{background:rgba(212,175,55,0.1)}
 
         /* ===================================
-           HERO WITH SLIDING TEXT - ONE AFTER ANOTHER
+           HERO SLIDING TEXT - FASTER (8 seconds total)
         =================================== */
         .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:100px;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url("images/banner.jpg");background-size:cover;background-position:center;background-blend-mode:overlay;border-bottom:1px solid var(--border)}
-        .hero-content{max-width:800px;overflow:hidden;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+        .hero-content{max-width:800px;overflow:hidden;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 
-        /* SLIDE 1: Star Wars Galaxy */
-        .slide1{display:inline-block;white-space:nowrap;animation:slideText1 14s ease-in-out infinite;font-size:65px;font-weight:800;color:var(--gold);text-shadow:0 0 60px var(--gold-glow)}
+        /* SLIDE 1: Star Wars Galaxy - FASTER */
+        .slide1{display:inline-block;white-space:nowrap;animation:slideText1 8s ease-in-out infinite;font-size:65px;font-weight:800;color:var(--gold);text-shadow:0 0 60px var(--gold-glow)}
         @keyframes slideText1{
             0%{transform:translateX(100%);opacity:0}
-            8%{transform:translateX(0%);opacity:1}
-            40%{transform:translateX(0%);opacity:1}
-            48%{transform:translateX(-100%);opacity:0}
+            10%{transform:translateX(0%);opacity:1}
+            35%{transform:translateX(0%);opacity:1}
+            45%{transform:translateX(-100%);opacity:0}
             50%{transform:translateX(-100%);opacity:0}
             100%{transform:translateX(-100%);opacity:0}
         }
 
-        /* SLIDE 2: Bring the Galaxy Home */
-        .slide2{display:inline-block;white-space:nowrap;animation:slideText2 14s ease-in-out infinite;font-size:32px;font-weight:700;color:var(--white);text-shadow:0 0 30px rgba(0,0,0,0.5);margin-top:10px}
+        /* SLIDE 2: Bring the Galaxy Home - FASTER */
+        .slide2{display:inline-block;white-space:nowrap;animation:slideText2 8s ease-in-out infinite;font-size:32px;font-weight:700;color:var(--white);text-shadow:0 0 30px rgba(0,0,0,0.5);margin-top:10px}
         @keyframes slideText2{
             0%{transform:translateX(100%);opacity:0}
             50%{transform:translateX(100%);opacity:0}
-            55%{transform:translateX(0%);opacity:1}
-            85%{transform:translateX(0%);opacity:1}
+            58%{transform:translateX(0%);opacity:1}
+            83%{transform:translateX(0%);opacity:1}
             93%{transform:translateX(-100%);opacity:0}
             100%{transform:translateX(-100%);opacity:0}
         }
 
-        .hero p{font-size:20px;line-height:1.8;color:var(--text);margin-bottom:35px;opacity:0;animation:fadeIn 1s ease forwards 12s}
+        .hero p{font-size:20px;line-height:1.8;color:var(--text);margin-bottom:35px;opacity:0;animation:fadeIn 1s ease forwards 7s}
         @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
 
-        .hero-buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeIn 1s ease forwards 12.5s}
+        .hero-buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeIn 1s ease forwards 7.5s}
         .btn{display:inline-block;padding:15px 35px;background:var(--gold);color:#000;border-radius:50px;text-decoration:none;font-weight:700;transition:.4s;box-shadow:0 0 25px var(--gold-glow)}
         .btn:hover{background:var(--gold2);transform:translateY(-5px);box-shadow:0 0 40px var(--gold-glow)}
         .btn-outline{display:inline-block;padding:15px 35px;border:2px solid var(--gold);border-radius:50px;text-decoration:none;color:white;transition:.4s}
@@ -161,7 +160,7 @@
             .section-title{font-size:28px}
             .steps-grid{grid-template-columns:1fr 1fr}
             #topBtn{bottom:65px}
-            .hero-content{min-height:180px}
+            .hero-content{min-height:160px}
         }
         @media(max-width:480px){
             .logo-slide{font-size:18px;gap:6px}
@@ -170,7 +169,7 @@
             .slide2{font-size:18px}
             .steps-grid{grid-template-columns:1fr}
             #topBtn{bottom:55px;width:45px;height:45px;font-size:18px}
-            .hero-content{min-height:150px}
+            .hero-content{min-height:130px}
         }
     </style>
 </head>
@@ -207,16 +206,12 @@
     </header>
 
     <!-- ===================================
-         HERO WITH SLIDING TEXT - ONE AFTER ANOTHER
+         HERO WITH SLIDING TEXT - FASTER
     =================================== -->
     <section class="hero">
         <div class="container hero-content">
-            <!-- SLIDE 1: Star Wars Galaxy (shows first) -->
             <div class="slide1">✨ Star Wars Galaxy</div>
-
-            <!-- SLIDE 2: Bring the Galaxy Home (shows after) -->
             <div class="slide2">🌟 Bring the Galaxy Home</div>
-
             <p>Handcrafted Star Wars-inspired products for fans and collectors. Premium cutting boards, custom jackets, unique lights, and decorative wreaths.</p>
             <div class="hero-buttons">
                 <a href="products.html" class="btn"><i class="fa-solid fa-shop"></i> Shop Now</a>
