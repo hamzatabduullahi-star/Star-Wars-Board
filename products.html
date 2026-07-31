@@ -17,14 +17,13 @@
 
         /* HEADER */
         header{position:fixed;top:0;left:0;width:100%;background:rgba(5,7,13,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:999;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)1;box-shadow:0 4px 40px rgba(0,0,0,0.6),0 0 30px rgba(212,175,55,0.05)}
-        .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0;flex-wrap:wrap;gap:10px}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
         .logo{font-size:28px;font-weight:800;color:var(--gold);text-decoration:none;text-shadow:0 0 30px var(--gold-glow),0 0 60px rgba(212,175,55,0.1);display:flex;align-items:center;gap:10px;letter-spacing:1px}
         .logo i{font-size:30px;color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
         .logo span{color:white;font-weight:300}
         .logo .star{color:var(--gold);animation:pulseStar 2s ease-in-out infinite}
         @keyframes pulseStar{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.9)}}
-        
-        nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        nav{display:flex;align-items:center;gap:8px}
         nav a{text-decoration:none;color:rgba(255,255,255,0.7);font-weight:500;font-size:15px;padding:8px 16px;border-radius:8px;transition:.3s;position:relative;letter-spacing:0.5px}
         nav a:hover{color:white;background:rgba(212,175,55,0.1)}
         nav a.active{color:var(--gold);background:rgba(212,175,55,0.12);box-shadow:0 0 20px rgba(212,175,55,0.05)}
@@ -38,16 +37,8 @@
         .menu-toggle{display:none;font-size:28px;color:white;background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;transition:.3s}
         .menu-toggle:hover{background:rgba(212,175,55,0.1)}
 
-        /* ===================================
-           CURRENCY SWITCHER
-        =================================== */
-        .currency-switcher{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:30px;padding:4px 6px;margin-left:5px}
-        .currency-switcher button{background:none;border:none;color:var(--text-muted);padding:4px 10px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:.3s;font-family:'Poppins',sans-serif}
-        .currency-switcher button:hover{color:white}
-        .currency-switcher button.active{background:var(--gold);color:#000;box-shadow:0 0 20px var(--gold-glow)}
-
         /* PRODUCTS PAGE */
-        .products-page{padding-top:150px;min-height:70vh}
+        .products-page{padding-top:140px;min-height:70vh}
         .section-title{font-size:42px;text-align:center;margin-bottom:15px;color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
         .section-subtitle{text-align:center;color:var(--text-muted);margin-bottom:40px}
         .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-top:40px}
@@ -55,7 +46,7 @@
         .product-card{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:.4s;box-shadow:var(--shadow)}
         .product-card:hover{transform:translateY(-10px);border-color:var(--gold);box-shadow:0 15px 45px rgba(212,175,55,0.15)}
 
-        .product-image{height:240px;background:linear-gradient(145deg,#1a1a2e,#0f0f1a);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+        .product-image{height:250px;background:linear-gradient(145deg,#1a1a2e,#0f0f1a);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
         .product-image img{width:100%;height:100%;object-fit:cover}
         .product-image .badge{position:absolute;top:15px;right:15px;background:var(--gold);color:#000;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;z-index:2}
 
@@ -91,7 +82,7 @@
         .social-icons a{width:50px;height:50px;background:var(--bg-card);border-radius:50%;display:flex;justify-content:center;align-items:center;text-decoration:none;color:white;font-size:20px;transition:.3s;border:1px solid var(--border)}
         .social-icons a:hover{background:var(--gold);color:black;box-shadow:0 0 30px var(--gold-glow);transform:translateY(-5px)}
 
-        #topBtn{position:fixed;right:25px;bottom:25px;width:55px;height:55px;border:none;border-radius:50%;background:var(--gold);color:#000;font-size:22px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,0.3);transition:.35s;z-index:999}
+        #topBtn{position:fixed;right:25px;bottom:80px;width:55px;height:55px;border:none;border-radius:50%;background:var(--gold);color:#000;font-size:22px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,0.3);transition:.35s;z-index:999}
         #topBtn:hover{transform:translateY(-6px);background:var(--gold2);box-shadow:0 10px 40px rgba(212,175,55,0.5)}
 
         @media(max-width:768px){
@@ -101,24 +92,23 @@
             nav a{width:100%;padding:12px 16px}
             nav a.active::before{display:none}
             .cart-btn{width:100%;justify-content:center;padding:12px 16px;margin-top:5px}
-            .currency-switcher{width:100%;justify-content:center;margin:5px 0 0}
             .logo{font-size:22px}
             .logo i{font-size:24px}
-            .products-page{padding-top:170px}
+            .products-page{padding-top:130px}
             .product-image{height:200px}
             .products-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
             .section-title{font-size:28px}
             .size-options{gap:4px}
             .size-option{padding:4px 8px;font-size:11px}
-            .header-inner{gap:5px}
+            #topBtn{bottom:65px}
         }
         @media(max-width:480px){
             .logo{font-size:18px;gap:6px}
             .logo i{font-size:20px}
             .filters{gap:8px}
             .filter-btn{padding:8px 16px;font-size:.8rem}
-            .products-page{padding-top:190px}
-            .currency-switcher button{padding:3px 8px;font-size:11px}
+            .product-image{height:180px}
+            #topBtn{bottom:55px;width:45px;height:45px;font-size:18px}
         }
     </style>
 </head>
@@ -144,12 +134,6 @@
                     <span class="cart-label">Cart</span>
                     <span class="cart-count" id="cartCount">0</span>
                 </a>
-                <!-- CURRENCY SWITCHER -->
-                <div class="currency-switcher" id="currencySwitcher">
-                    <button class="active" data-currency="USD" data-symbol="$">$</button>
-                    <button data-currency="GBP" data-symbol="£">£</button>
-                    <button data-currency="EUR" data-symbol="€">€</button>
-                </div>
             </nav>
         </div>
     </header>
@@ -171,11 +155,11 @@
             <div class="products-grid" id="productsGrid">
 
                 <!-- ==========================================
-                     PRODUCT 1: Galaxy Resin Board
+                     PRODUCT 1: Galaxy Resin Board (No Image Yet)
                 ========================================== -->
                 <div class="product-card" data-category="board">
                     <div class="product-image">
-                        <img src="images/board1.jpg" alt="Galaxy Resin Board" onerror="this.style.display='none'">
+                        <span class="product-emoji" style="font-size:60px;">🪵</span>
                         <span class="badge">Bestseller</span>
                     </div>
                     <div class="product-info">
@@ -185,24 +169,24 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_1" value="12x12" data-price="120" checked><span class="size-label">12x12</span><span class="size-price" data-usd="120" data-gbp="95" data-eur="110">$120</span></label>
-                                <label class="size-option"><input type="radio" name="size_1" value="12x18" data-price="150"><span class="size-label">12x18</span><span class="size-price" data-usd="150" data-gbp="118" data-eur="137">$150</span></label>
-                                <label class="size-option"><input type="radio" name="size_1" value="18x24" data-price="180"><span class="size-label">18x24</span><span class="size-price" data-usd="180" data-gbp="142" data-eur="165">$180</span></label>
+                                <label class="size-option"><input type="radio" name="size_1" value="12x12" data-price="120" checked><span class="size-label">12x12</span><span class="size-price">$120</span></label>
+                                <label class="size-option"><input type="radio" name="size_1" value="12x18" data-price="150"><span class="size-label">12x18</span><span class="size-price">$150</span></label>
+                                <label class="size-option"><input type="radio" name="size_1" value="18x24" data-price="180"><span class="size-label">18x24</span><span class="size-price">$180</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_1">$120</div>
-                        <button class="add-to-cart-btn" data-product-id="1" data-name="Galaxy Resin Board" data-emoji="🌌" data-base-price="120">
+                        <button class="add-to-cart-btn" data-product-id="1" data-name="Galaxy Resin Board" data-emoji="🌌">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 2: Death Star Board
+                     PRODUCT 2: Death Star Board (No Image Yet)
                 ========================================== -->
                 <div class="product-card" data-category="board">
                     <div class="product-image">
-                        <img src="images/board2.jpg" alt="Death Star Board" onerror="this.style.display='none'">
+                        <span class="product-emoji" style="font-size:60px;">🛸</span>
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -212,24 +196,24 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_2" value="12x12" data-price="95" checked><span class="size-label">12x12</span><span class="size-price" data-usd="95" data-gbp="75" data-eur="87">$95</span></label>
-                                <label class="size-option"><input type="radio" name="size_2" value="12x18" data-price="125"><span class="size-label">12x18</span><span class="size-price" data-usd="125" data-gbp="99" data-eur="114">$125</span></label>
-                                <label class="size-option"><input type="radio" name="size_2" value="18x24" data-price="155"><span class="size-label">18x24</span><span class="size-price" data-usd="155" data-gbp="122" data-eur="142">$155</span></label>
+                                <label class="size-option"><input type="radio" name="size_2" value="12x12" data-price="95" checked><span class="size-label">12x12</span><span class="size-price">$95</span></label>
+                                <label class="size-option"><input type="radio" name="size_2" value="12x18" data-price="125"><span class="size-label">12x18</span><span class="size-price">$125</span></label>
+                                <label class="size-option"><input type="radio" name="size_2" value="18x24" data-price="155"><span class="size-label">18x24</span><span class="size-price">$155</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_2">$95</div>
-                        <button class="add-to-cart-btn" data-product-id="2" data-name="Death Star Board" data-emoji="🛸" data-base-price="95">
+                        <button class="add-to-cart-btn" data-product-id="2" data-name="Death Star Board" data-emoji="🛸">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 3: Lightsaber Cutting Board
+                     PRODUCT 3: Lightsaber Cutting Board (No Image Yet)
                 ========================================== -->
                 <div class="product-card" data-category="serving">
                     <div class="product-image">
-                        <img src="images/board3.jpg" alt="Lightsaber Cutting Board" onerror="this.style.display='none'">
+                        <span class="product-emoji" style="font-size:60px;">⚡</span>
                         <span class="badge">Premium</span>
                     </div>
                     <div class="product-info">
@@ -239,24 +223,24 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_3" value="12x12" data-price="140" checked><span class="size-label">12x12</span><span class="size-price" data-usd="140" data-gbp="110" data-eur="128">$140</span></label>
-                                <label class="size-option"><input type="radio" name="size_3" value="12x18" data-price="170"><span class="size-label">12x18</span><span class="size-price" data-usd="170" data-gbp="134" data-eur="155">$170</span></label>
-                                <label class="size-option"><input type="radio" name="size_3" value="18x24" data-price="210"><span class="size-label">18x24</span><span class="size-price" data-usd="210" data-gbp="165" data-eur="192">$210</span></label>
+                                <label class="size-option"><input type="radio" name="size_3" value="12x12" data-price="140" checked><span class="size-label">12x12</span><span class="size-price">$140</span></label>
+                                <label class="size-option"><input type="radio" name="size_3" value="12x18" data-price="170"><span class="size-label">12x18</span><span class="size-price">$170</span></label>
+                                <label class="size-option"><input type="radio" name="size_3" value="18x24" data-price="210"><span class="size-label">18x24</span><span class="size-price">$210</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_3">$140</div>
-                        <button class="add-to-cart-btn" data-product-id="3" data-name="Lightsaber Cutting Board" data-emoji="⚡" data-base-price="140">
+                        <button class="add-to-cart-btn" data-product-id="3" data-name="Lightsaber Cutting Board" data-emoji="⚡">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 4: Custom Order
+                     PRODUCT 4: Custom Order (No Image Yet)
                 ========================================== -->
                 <div class="product-card" data-category="custom">
                     <div class="product-image">
-                        <img src="images/custom.jpg" alt="Custom Order" onerror="this.style.display='none'">
+                        <span class="product-emoji" style="font-size:60px;">🎨</span>
                         <span class="badge">Custom</span>
                     </div>
                     <div class="product-info">
@@ -266,24 +250,24 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_4" value="Small" data-price="150" checked><span class="size-label">Small</span><span class="size-price" data-usd="150" data-gbp="118" data-eur="137">$150</span></label>
-                                <label class="size-option"><input type="radio" name="size_4" value="Medium" data-price="200"><span class="size-label">Medium</span><span class="size-price" data-usd="200" data-gbp="158" data-eur="183">$200</span></label>
-                                <label class="size-option"><input type="radio" name="size_4" value="Large" data-price="250"><span class="size-label">Large</span><span class="size-price" data-usd="250" data-gbp="197" data-eur="229">$250</span></label>
+                                <label class="size-option"><input type="radio" name="size_4" value="Small" data-price="150" checked><span class="size-label">Small</span><span class="size-price">$150</span></label>
+                                <label class="size-option"><input type="radio" name="size_4" value="Medium" data-price="200"><span class="size-label">Medium</span><span class="size-price">$200</span></label>
+                                <label class="size-option"><input type="radio" name="size_4" value="Large" data-price="250"><span class="size-label">Large</span><span class="size-price">$250</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_4">From $150</div>
-                        <button class="add-to-cart-btn custom-btn" data-product-id="4" data-name="Custom Order" data-emoji="🎨" data-base-price="150">
+                        <button class="add-to-cart-btn custom-btn" data-product-id="4" data-name="Custom Order" data-emoji="🎨">
                             <i class="fa-solid fa-pencil"></i> Request Custom
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 5: Millennium Falcon Board
+                     PRODUCT 5: Millennium Falcon Board (No Image Yet)
                 ========================================== -->
                 <div class="product-card" data-category="board">
                     <div class="product-image">
-                        <img src="images/falcon.jpg" alt="Millennium Falcon Board" onerror="this.style.display='none'">
+                        <span class="product-emoji" style="font-size:60px;">🌌</span>
                         <span class="badge">Limited</span>
                     </div>
                     <div class="product-info">
@@ -293,24 +277,24 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_5" value="12x12" data-price="165" checked><span class="size-label">12x12</span><span class="size-price" data-usd="165" data-gbp="130" data-eur="151">$165</span></label>
-                                <label class="size-option"><input type="radio" name="size_5" value="12x18" data-price="195"><span class="size-label">12x18</span><span class="size-price" data-usd="195" data-gbp="154" data-eur="178">$195</span></label>
-                                <label class="size-option"><input type="radio" name="size_5" value="18x24" data-price="235"><span class="size-label">18x24</span><span class="size-price" data-usd="235" data-gbp="185" data-eur="215">$235</span></label>
+                                <label class="size-option"><input type="radio" name="size_5" value="12x12" data-price="165" checked><span class="size-label">12x12</span><span class="size-price">$165</span></label>
+                                <label class="size-option"><input type="radio" name="size_5" value="12x18" data-price="195"><span class="size-label">12x18</span><span class="size-price">$195</span></label>
+                                <label class="size-option"><input type="radio" name="size_5" value="18x24" data-price="235"><span class="size-label">18x24</span><span class="size-price">$235</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_5">$165</div>
-                        <button class="add-to-cart-btn" data-product-id="5" data-name="Millennium Falcon Board" data-emoji="🌌" data-base-price="165">
+                        <button class="add-to-cart-btn" data-product-id="5" data-name="Millennium Falcon Board" data-emoji="🌌">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 6: Jedi Master Serving Set
+                     PRODUCT 6: Jedi Master Serving Set (No Image Yet)
                 ========================================== -->
                 <div class="product-card" data-category="serving">
                     <div class="product-image">
-                        <img src="images/jedi.jpg" alt="Jedi Master Serving Set" onerror="this.style.display='none'">
+                        <span class="product-emoji" style="font-size:60px;">🌟</span>
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -320,24 +304,24 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_6" value="12x12" data-price="110" checked><span class="size-label">12x12</span><span class="size-price" data-usd="110" data-gbp="87" data-eur="100">$110</span></label>
-                                <label class="size-option"><input type="radio" name="size_6" value="12x18" data-price="140"><span class="size-label">12x18</span><span class="size-price" data-usd="140" data-gbp="110" data-eur="128">$140</span></label>
-                                <label class="size-option"><input type="radio" name="size_6" value="18x24" data-price="180"><span class="size-label">18x24</span><span class="size-price" data-usd="180" data-gbp="142" data-eur="165">$180</span></label>
+                                <label class="size-option"><input type="radio" name="size_6" value="12x12" data-price="110" checked><span class="size-label">12x12</span><span class="size-price">$110</span></label>
+                                <label class="size-option"><input type="radio" name="size_6" value="12x18" data-price="140"><span class="size-label">12x18</span><span class="size-price">$140</span></label>
+                                <label class="size-option"><input type="radio" name="size_6" value="18x24" data-price="180"><span class="size-label">18x24</span><span class="size-price">$180</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_6">$110</div>
-                        <button class="add-to-cart-btn" data-product-id="6" data-name="Jedi Master Serving Set" data-emoji="🌟" data-base-price="110">
+                        <button class="add-to-cart-btn" data-product-id="6" data-name="Jedi Master Serving Set" data-emoji="🌟">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 7: Death Star River  (NEW)
+                     PRODUCT 7: Death Star River ✅ WITH IMAGE
                 ========================================== -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="images/deathstar_river.jpg" alt="Death Star River" onerror="this.style.display='none'">
+                        <img src="images/Death_Star_River.JPG" alt="Death Star River">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -347,26 +331,26 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_7" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price" data-usd="50" data-gbp="39" data-eur="46">$50</span></label>
-                                <label class="size-option"><input type="radio" name="size_7" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price" data-usd="80" data-gbp="63" data-eur="73">$80</span></label>
-                                <label class="size-option"><input type="radio" name="size_7" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price" data-usd="130" data-gbp="102" data-eur="119">$130</span></label>
-                                <label class="size-option"><input type="radio" name="size_7" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price" data-usd="185" data-gbp="146" data-eur="169">$185</span></label>
-                                <label class="size-option"><input type="radio" name="size_7" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price" data-usd="230" data-gbp="181" data-eur="210">$230</span></label>
+                                <label class="size-option"><input type="radio" name="size_7" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price">$50</span></label>
+                                <label class="size-option"><input type="radio" name="size_7" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price">$80</span></label>
+                                <label class="size-option"><input type="radio" name="size_7" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price">$130</span></label>
+                                <label class="size-option"><input type="radio" name="size_7" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price">$185</span></label>
+                                <label class="size-option"><input type="radio" name="size_7" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price">$230</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_7">$50</div>
-                        <button class="add-to-cart-btn" data-product-id="7" data-name="Death Star River" data-emoji="🌊" data-base-price="50">
+                        <button class="add-to-cart-btn" data-product-id="7" data-name="Death Star River" data-emoji="🌊">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 8: Falcon Escape  (NEW)
+                     PRODUCT 8: Falcon Escape ✅ WITH IMAGE
                 ========================================== -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="images/falcon_escape.jpg" alt="Falcon Escape" onerror="this.style.display='none'">
+                        <img src="images/Falcon_Escape.JPG" alt="Falcon Escape">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -376,26 +360,26 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_8" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price" data-usd="50" data-gbp="39" data-eur="46">$50</span></label>
-                                <label class="size-option"><input type="radio" name="size_8" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price" data-usd="80" data-gbp="63" data-eur="73">$80</span></label>
-                                <label class="size-option"><input type="radio" name="size_8" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price" data-usd="130" data-gbp="102" data-eur="119">$130</span></label>
-                                <label class="size-option"><input type="radio" name="size_8" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price" data-usd="185" data-gbp="146" data-eur="169">$185</span></label>
-                                <label class="size-option"><input type="radio" name="size_8" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price" data-usd="230" data-gbp="181" data-eur="210">$230</span></label>
+                                <label class="size-option"><input type="radio" name="size_8" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price">$50</span></label>
+                                <label class="size-option"><input type="radio" name="size_8" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price">$80</span></label>
+                                <label class="size-option"><input type="radio" name="size_8" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price">$130</span></label>
+                                <label class="size-option"><input type="radio" name="size_8" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price">$185</span></label>
+                                <label class="size-option"><input type="radio" name="size_8" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price">$230</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_8">$50</div>
-                        <button class="add-to-cart-btn" data-product-id="8" data-name="Falcon Escape" data-emoji="🚀" data-base-price="50">
+                        <button class="add-to-cart-btn" data-product-id="8" data-name="Falcon Escape" data-emoji="🚀">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 9: Falcon Pursuit  (NEW)
+                     PRODUCT 9: Falcon Pursuit ✅ WITH IMAGE
                 ========================================== -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="images/falcon_pursuit.jpg" alt="Falcon Pursuit" onerror="this.style.display='none'">
+                        <img src="images/Falcon_Pursuit.JPG" alt="Falcon Pursuit">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -405,26 +389,26 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_9" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price" data-usd="50" data-gbp="39" data-eur="46">$50</span></label>
-                                <label class="size-option"><input type="radio" name="size_9" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price" data-usd="80" data-gbp="63" data-eur="73">$80</span></label>
-                                <label class="size-option"><input type="radio" name="size_9" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price" data-usd="130" data-gbp="102" data-eur="119">$130</span></label>
-                                <label class="size-option"><input type="radio" name="size_9" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price" data-usd="185" data-gbp="146" data-eur="169">$185</span></label>
-                                <label class="size-option"><input type="radio" name="size_9" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price" data-usd="230" data-gbp="181" data-eur="210">$230</span></label>
+                                <label class="size-option"><input type="radio" name="size_9" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price">$50</span></label>
+                                <label class="size-option"><input type="radio" name="size_9" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price">$80</span></label>
+                                <label class="size-option"><input type="radio" name="size_9" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price">$130</span></label>
+                                <label class="size-option"><input type="radio" name="size_9" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price">$185</span></label>
+                                <label class="size-option"><input type="radio" name="size_9" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price">$230</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_9">$50</div>
-                        <button class="add-to-cart-btn" data-product-id="9" data-name="Falcon Pursuit" data-emoji="🏃" data-base-price="50">
+                        <button class="add-to-cart-btn" data-product-id="9" data-name="Falcon Pursuit" data-emoji="🏃">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 10: Rebel Skirmish  (NEW)
+                     PRODUCT 10: Rebel Skirmish ✅ WITH IMAGE
                 ========================================== -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="images/rebel_skirmish.jpg" alt="Rebel Skirmish" onerror="this.style.display='none'">
+                        <img src="images/Rebel_Skirmish.JPG" alt="Rebel Skirmish">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -434,26 +418,26 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_10" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price" data-usd="50" data-gbp="39" data-eur="46">$50</span></label>
-                                <label class="size-option"><input type="radio" name="size_10" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price" data-usd="80" data-gbp="63" data-eur="73">$80</span></label>
-                                <label class="size-option"><input type="radio" name="size_10" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price" data-usd="130" data-gbp="102" data-eur="119">$130</span></label>
-                                <label class="size-option"><input type="radio" name="size_10" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price" data-usd="185" data-gbp="146" data-eur="169">$185</span></label>
-                                <label class="size-option"><input type="radio" name="size_10" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price" data-usd="230" data-gbp="181" data-eur="210">$230</span></label>
+                                <label class="size-option"><input type="radio" name="size_10" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price">$50</span></label>
+                                <label class="size-option"><input type="radio" name="size_10" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price">$80</span></label>
+                                <label class="size-option"><input type="radio" name="size_10" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price">$130</span></label>
+                                <label class="size-option"><input type="radio" name="size_10" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price">$185</span></label>
+                                <label class="size-option"><input type="radio" name="size_10" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price">$230</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_10">$50</div>
-                        <button class="add-to-cart-btn" data-product-id="10" data-name="Rebel Skirmish" data-emoji="⚔️" data-base-price="50">
+                        <button class="add-to-cart-btn" data-product-id="10" data-name="Rebel Skirmish" data-emoji="⚔️">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
                 </div>
 
                 <!-- ==========================================
-                     PRODUCT 11: Imperial Blue Fleet  (NEW)
+                     PRODUCT 11: Imperial Blue Fleet ✅ WITH IMAGE
                 ========================================== -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="images/imperial_blue.jpg" alt="Imperial Blue Fleet" onerror="this.style.display='none'">
+                        <img src="images/Imperial_Blue_Fleet.JPG" alt="Imperial Blue Fleet">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -463,15 +447,15 @@
                         <div class="size-selector">
                             <label>Select Size:</label>
                             <div class="size-options">
-                                <label class="size-option"><input type="radio" name="size_11" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price" data-usd="50" data-gbp="39" data-eur="46">$50</span></label>
-                                <label class="size-option"><input type="radio" name="size_11" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price" data-usd="80" data-gbp="63" data-eur="73">$80</span></label>
-                                <label class="size-option"><input type="radio" name="size_11" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price" data-usd="130" data-gbp="102" data-eur="119">$130</span></label>
-                                <label class="size-option"><input type="radio" name="size_11" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price" data-usd="185" data-gbp="146" data-eur="169">$185</span></label>
-                                <label class="size-option"><input type="radio" name="size_11" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price" data-usd="230" data-gbp="181" data-eur="210">$230</span></label>
+                                <label class="size-option"><input type="radio" name="size_11" value="10x8" data-price="50" checked><span class="size-label">10x8</span><span class="size-price">$50</span></label>
+                                <label class="size-option"><input type="radio" name="size_11" value="12x9" data-price="80"><span class="size-label">12x9</span><span class="size-price">$80</span></label>
+                                <label class="size-option"><input type="radio" name="size_11" value="14x11" data-price="130"><span class="size-label">14x11</span><span class="size-price">$130</span></label>
+                                <label class="size-option"><input type="radio" name="size_11" value="16x12" data-price="185"><span class="size-label">16x12</span><span class="size-price">$185</span></label>
+                                <label class="size-option"><input type="radio" name="size_11" value="18x12" data-price="230"><span class="size-label">18x12</span><span class="size-price">$230</span></label>
                             </div>
                         </div>
                         <div class="price" id="price_11">$50</div>
-                        <button class="add-to-cart-btn" data-product-id="11" data-name="Imperial Blue Fleet" data-emoji="🚢" data-base-price="50">
+                        <button class="add-to-cart-btn" data-product-id="11" data-name="Imperial Blue Fleet" data-emoji="🚢">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
                     </div>
@@ -500,99 +484,26 @@
 
     <script>
         // ============================================
-        // CURRENCY CONVERTER
-        // ============================================
-        let currentCurrency = 'USD';
-        let currentSymbol = '$';
-
-        // Exchange rates (relative to USD)
-        const rates = {
-            USD: 1,
-            GBP: 0.79,
-            EUR: 0.92
-        };
-
-        const symbols = {
-            USD: '$',
-            GBP: '£',
-            EUR: '€'
-        };
-
-        function updatePrices(currency) {
-            currentCurrency = currency;
-            currentSymbol = symbols[currency];
-            
-            // Update all price displays
-            document.querySelectorAll('.size-price').forEach(function(el) {
-                var usdPrice = parseFloat(el.dataset.usd);
-                if (usdPrice) {
-                    var converted = usdPrice * rates[currency];
-                    el.textContent = currentSymbol + converted.toFixed(0);
-                }
-            });
-
-            // Update main price displays
-            document.querySelectorAll('.price').forEach(function(el) {
-                var card = el.closest('.product-card');
-                var checkedRadio = card.querySelector('.size-selector input[type="radio"]:checked');
-                if (checkedRadio) {
-                    var usdPrice = parseFloat(checkedRadio.dataset.price);
-                    if (usdPrice) {
-                        var converted = usdPrice * rates[currency];
-                        var productId = card.querySelector('.add-to-cart-btn').dataset.productId;
-                        if (productId == 4) {
-                            el.textContent = 'From ' + currentSymbol + converted.toFixed(0);
-                        } else {
-                            el.textContent = currentSymbol + converted.toFixed(0);
-                        }
-                    }
-                }
-            });
-
-            // Update currency buttons
-            document.querySelectorAll('.currency-switcher button').forEach(function(btn) {
-                btn.classList.toggle('active', btn.dataset.currency === currency);
-            });
-
-            // Save preference
-            localStorage.setItem('preferredCurrency', currency);
-        }
-
-        // Currency switcher click handler
-        document.querySelectorAll('.currency-switcher button').forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                updatePrices(this.dataset.currency);
-            });
-        });
-
-        // Load saved currency preference
-        var savedCurrency = localStorage.getItem('preferredCurrency');
-        if (savedCurrency && rates[savedCurrency]) {
-            updatePrices(savedCurrency);
-        }
-
-        // ============================================
         // SIZE SELECTOR - UPDATE PRICE
         // ============================================
         document.querySelectorAll('.size-selector input[type="radio"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
                 var productCard = this.closest('.product-card');
                 var priceDisplay = productCard.querySelector('.price');
-                var usdPrice = parseFloat(this.dataset.price);
+                var price = this.dataset.price;
                 var btn = productCard.querySelector('.add-to-cart-btn');
                 
-                if (priceDisplay && usdPrice) {
-                    var converted = usdPrice * rates[currentCurrency];
+                if (priceDisplay) {
                     var productId = btn.dataset.productId;
                     if (productId == 4) {
-                        priceDisplay.textContent = 'From ' + currentSymbol + converted.toFixed(0);
+                        priceDisplay.textContent = 'From $' + price;
                     } else {
-                        priceDisplay.textContent = currentSymbol + converted.toFixed(0);
+                        priceDisplay.textContent = '$' + price;
                     }
                 }
                 
                 btn.dataset.selectedSize = this.value;
-                btn.dataset.selectedPrice = usdPrice;
+                btn.dataset.selectedPrice = price;
             });
         });
 
@@ -602,7 +513,7 @@
             var btn = card.querySelector('.add-to-cart-btn');
             if (checkedRadio && btn) {
                 btn.dataset.selectedSize = checkedRadio.value;
-                btn.dataset.selectedPrice = parseFloat(checkedRadio.dataset.price);
+                btn.dataset.selectedPrice = checkedRadio.dataset.price;
             }
         });
 
@@ -617,10 +528,8 @@
             updateCartUI();
         }
 
-        function addToCart(productId, name, emoji, size, priceUSD) {
+        function addToCart(productId, name, emoji, size, price) {
             var itemKey = productId + '_' + size;
-            var priceInCurrency = priceUSD * rates[currentCurrency];
-            
             var existing = cart.find(function(item) { return item.key === itemKey; });
             
             if (existing) {
@@ -632,23 +541,22 @@
                     name: name,
                     emoji: emoji || '🪵',
                     size: size,
-                    price: priceInCurrency,
-                    currency: currentSymbol,
+                    price: parseFloat(price),
                     quantity: 1
                 });
             }
             
             saveCart();
-            showNotification(name + ' (' + size + ') - ' + currentSymbol + (priceUSD * rates[currentCurrency]).toFixed(0));
+            showNotification(name + ' (' + size + ')');
         }
 
-        function showNotification(message) {
+        function showNotification(name) {
             var old = document.querySelector('.cart-notification');
             if (old) old.remove();
             
             var notif = document.createElement('div');
             notif.className = 'cart-notification';
-            notif.innerHTML = '<div style="display:flex;align-items:center;gap:12px;flex:1;"><span style="font-size:24px;">✅</span><div><div style="font-weight:600;color:white;font-size:15px;">' + message + '</div><div style="color:#aaa;font-size:12px;">Added to cart! ✨</div></div></div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;font-size:20px;cursor:pointer;padding:0 8px;">✕</button>';
+            notif.innerHTML = '<div style="display:flex;align-items:center;gap:12px;flex:1;"><span style="font-size:24px;">✅</span><div><div style="font-weight:600;color:white;font-size:15px;">' + name + '</div><div style="color:#aaa;font-size:12px;">Added to cart! ✨</div></div></div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;font-size:20px;cursor:pointer;padding:0 8px;">✕</button>';
             notif.style.cssText = 'position:fixed;top:100px;right:20px;max-width:380px;min-width:250px;background:#0a0f1a;backdrop-filter:blur(16px);border:1px solid #d4af37;border-radius:14px;padding:16px 20px;color:white;z-index:999999;box-shadow:0 12px 50px rgba(0,0,0,0.9),0 0 40px rgba(212,175,55,0.15);font-family:Poppins,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateX(120%);opacity:0;transition:all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);pointer-events:none;border-left:4px solid #d4af37';
             document.body.appendChild(notif);
             
@@ -677,19 +585,19 @@
                 var name = this.dataset.name;
                 var emoji = this.dataset.emoji;
                 var size = this.dataset.selectedSize || 'Default';
-                var priceUSD = parseFloat(this.dataset.selectedPrice);
+                var price = this.dataset.selectedPrice;
                 
-                if (!priceUSD) {
+                if (!price) {
                     var card = this.closest('.product-card');
                     var checkedRadio = card.querySelector('.size-selector input[type="radio"]:checked');
                     if (checkedRadio) {
                         size = checkedRadio.value;
-                        priceUSD = parseFloat(checkedRadio.dataset.price);
+                        price = checkedRadio.dataset.price;
                     }
                 }
                 
-                if (productId && name && priceUSD) {
-                    addToCart(productId, name, emoji, size, priceUSD);
+                if (productId && name && price) {
+                    addToCart(productId, name, emoji, size, price);
                 } else {
                     alert('Please select a size first!');
                 }
@@ -759,9 +667,6 @@
             }
             saveCart();
         };
-
-        console.log('💰 Currency Switcher Ready!');
-        console.log('💱 Current Currency:', currentCurrency);
     </script>
 </body>
 </html>
