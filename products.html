@@ -291,7 +291,7 @@
                 <!-- PRODUCT 7: Death Star River -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="product-photos/Death_Star_River.JPG" alt="Death Star River">
+                        <img src="Death_Star_River.JPG" alt="Death Star River">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -318,7 +318,7 @@
                 <!-- PRODUCT 8: Falcon Escape -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="product-photos/Falcon_Escape.JPG" alt="Falcon Escape">
+                        <img src="Falcon_Escape.JPG" alt="Falcon Escape">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -345,7 +345,7 @@
                 <!-- PRODUCT 9: Falcon Pursuit -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="product-photos/Falcon_Pursuit.JPG" alt="Falcon Pursuit">
+                        <img src="Falcon_Pursuit.JPG" alt="Falcon Pursuit">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -372,7 +372,7 @@
                 <!-- PRODUCT 10: Rebel Skirmish -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="product-photos/Rebel_Skirmish.JPG" alt="Rebel Skirmish">
+                        <img src="Rebel_Skirmish.JPG" alt="Rebel Skirmish">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -399,7 +399,7 @@
                 <!-- PRODUCT 11: Imperial Blue Fleet -->
                 <div class="product-card" data-category="new">
                     <div class="product-image">
-                        <img src="product-photos/Imperial_Blue_Fleet.JPG" alt="Imperial Blue Fleet">
+                        <img src="Imperial_Blue_Fleet.JPG" alt="Imperial Blue Fleet">
                         <span class="badge">New</span>
                     </div>
                     <div class="product-info">
@@ -444,16 +444,12 @@
     <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
     <script>
-        // ============================================
-        // SIZE SELECTOR - UPDATE PRICE
-        // ============================================
         document.querySelectorAll('.size-selector input[type="radio"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
                 var productCard = this.closest('.product-card');
                 var priceDisplay = productCard.querySelector('.price');
                 var price = this.dataset.price;
                 var btn = productCard.querySelector('.add-to-cart-btn');
-                
                 if (priceDisplay) {
                     var productId = btn.dataset.productId;
                     if (productId == 4) {
@@ -462,13 +458,11 @@
                         priceDisplay.textContent = '$' + price;
                     }
                 }
-                
                 btn.dataset.selectedSize = this.value;
                 btn.dataset.selectedPrice = price;
             });
         });
 
-        // Set default selected size on each product
         document.querySelectorAll('.product-card').forEach(function(card) {
             var checkedRadio = card.querySelector('.size-selector input[type="radio"]:checked');
             var btn = card.querySelector('.add-to-cart-btn');
@@ -478,9 +472,6 @@
             }
         });
 
-        // ============================================
-        // CART SYSTEM
-        // ============================================
         let cart = [];
         try { const saved = localStorage.getItem('starWarsCart'); if (saved) cart = JSON.parse(saved); } catch(e) {}
 
@@ -492,7 +483,6 @@
         function addToCart(productId, name, emoji, size, price) {
             var itemKey = productId + '_' + size;
             var existing = cart.find(function(item) { return item.key === itemKey; });
-            
             if (existing) {
                 existing.quantity += 1;
             } else {
@@ -506,7 +496,6 @@
                     quantity: 1
                 });
             }
-            
             saveCart();
             showNotification(name + ' (' + size + ')');
         }
@@ -514,13 +503,11 @@
         function showNotification(name) {
             var old = document.querySelector('.cart-notification');
             if (old) old.remove();
-            
             var notif = document.createElement('div');
             notif.className = 'cart-notification';
             notif.innerHTML = '<div style="display:flex;align-items:center;gap:12px;flex:1;"><span style="font-size:24px;">✅</span><div><div style="font-weight:600;color:white;font-size:15px;">' + name + '</div><div style="color:#aaa;font-size:12px;">Added to cart! ✨</div></div></div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;font-size:20px;cursor:pointer;padding:0 8px;">✕</button>';
             notif.style.cssText = 'position:fixed;top:100px;right:20px;max-width:380px;min-width:250px;background:#0a0f1a;backdrop-filter:blur(16px);border:1px solid #d4af37;border-radius:14px;padding:16px 20px;color:white;z-index:999999;box-shadow:0 12px 50px rgba(0,0,0,0.9),0 0 40px rgba(212,175,55,0.15);font-family:Poppins,Arial,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateX(120%);opacity:0;transition:all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);pointer-events:none;border-left:4px solid #d4af37';
             document.body.appendChild(notif);
-            
             setTimeout(function() { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; notif.style.pointerEvents = 'auto'; }, 50);
             setTimeout(function() { notif.style.transform = 'translateX(120%)'; notif.style.opacity = '0'; setTimeout(function() { if (notif.parentElement) notif.remove(); }, 500); }, 4000);
         }
@@ -535,19 +522,14 @@
             }
         }
 
-        // ============================================
-        // SETUP ADD TO CART BUTTONS
-        // ============================================
         document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 var productId = parseInt(this.dataset.productId);
                 var name = this.dataset.name;
                 var emoji = this.dataset.emoji;
                 var size = this.dataset.selectedSize || 'Default';
                 var price = this.dataset.selectedPrice;
-                
                 if (!price) {
                     var card = this.closest('.product-card');
                     var checkedRadio = card.querySelector('.size-selector input[type="radio"]:checked');
@@ -556,7 +538,6 @@
                         price = checkedRadio.dataset.price;
                     }
                 }
-                
                 if (productId && name && price) {
                     addToCart(productId, name, emoji, size, price);
                 } else {
@@ -565,14 +546,10 @@
             });
         });
 
-        // ============================================
-        // FILTERS
-        // ============================================
         document.querySelectorAll('.filter-btn').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
                 this.classList.add('active');
-                
                 var filter = this.dataset.filter;
                 document.querySelectorAll('.product-card').forEach(function(card) {
                     if (filter === 'all' || card.dataset.category === filter) {
@@ -584,9 +561,6 @@
             });
         });
 
-        // ============================================
-        // MOBILE MENU
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
             var menuToggle = document.getElementById('menuToggle');
             var nav = document.getElementById('mainNav');
@@ -597,7 +571,6 @@
                     if (icon) { icon.className = nav.classList.contains('active') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; }
                 });
             }
-
             var topBtn = document.getElementById('topBtn');
             if (topBtn) {
                 window.addEventListener('scroll', function() {
@@ -605,7 +578,6 @@
                 });
                 topBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
-
             updateCartUI();
         });
 
