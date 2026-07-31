@@ -42,7 +42,7 @@
         .theme-toggle:hover .label{opacity:1}
 
         /* ===================================
-           HEADER WITH SLIDING LOGO - FAST
+           HEADER
         =================================== */
         header{position:fixed;top:0;left:0;width:100%;background:rgba(5,7,13,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:999;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)1;box-shadow:0 4px 40px rgba(0,0,0,0.6),0 0 30px rgba(212,175,55,0.05)}
         .header-inner{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
@@ -52,8 +52,6 @@
         .logo-slide span{color:white;font-weight:300}
         .logo-slide .star{color:var(--gold);animation:pulseStar 2s ease-in-out infinite}
         @keyframes pulseStar{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.9)}}
-
-        /* FASTER HEADER LOGO ANIMATION */
         @keyframes slideLogo{
             0%{transform:translateX(0%);opacity:1}
             20%{transform:translateX(0%);opacity:1}
@@ -78,7 +76,7 @@
         .menu-toggle:hover{background:rgba(212,175,55,0.1)}
 
         /* ===================================
-           HERO SLIDING TEXT - FASTER (8 seconds total)
+           HERO - FASTER FADE IN
         =================================== */
         .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:100px;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url("images/banner.jpg");background-size:cover;background-position:center;background-blend-mode:overlay;border-bottom:1px solid var(--border)}
         .hero-content{max-width:800px;overflow:hidden;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -105,10 +103,11 @@
             100%{transform:translateX(-100%);opacity:0}
         }
 
-        .hero p{font-size:20px;line-height:1.8;color:var(--text);margin-bottom:35px;opacity:0;animation:fadeIn 1s ease forwards 7s}
+        /* FASTER FADE IN - APPEARS QUICKLY */
+        .hero p{font-size:20px;line-height:1.8;color:var(--text);margin-bottom:35px;opacity:0;animation:fadeIn 0.8s ease forwards 2s}
+        .hero-buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeIn 0.8s ease forwards 2.5s}
         @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
 
-        .hero-buttons{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeIn 1s ease forwards 7.5s}
         .btn{display:inline-block;padding:15px 35px;background:var(--gold);color:#000;border-radius:50px;text-decoration:none;font-weight:700;transition:.4s;box-shadow:0 0 25px var(--gold-glow)}
         .btn:hover{background:var(--gold2);transform:translateY(-5px);box-shadow:0 0 40px var(--gold-glow)}
         .btn-outline{display:inline-block;padding:15px 35px;border:2px solid var(--gold);border-radius:50px;text-decoration:none;color:white;transition:.4s}
@@ -176,7 +175,7 @@
 <body>
 
     <!-- ===================================
-         HEADER WITH SLIDING LOGO
+         HEADER
     =================================== -->
     <header>
         <div class="container header-inner">
@@ -206,7 +205,7 @@
     </header>
 
     <!-- ===================================
-         HERO WITH SLIDING TEXT - FASTER
+         HERO
     =================================== -->
     <section class="hero">
         <div class="container hero-content">
